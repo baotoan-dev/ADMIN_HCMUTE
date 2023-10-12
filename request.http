@@ -1,0 +1,38 @@
+POST http://localhost:5000/api/v1/signup
+Content-Type: application/json
+
+{
+    "email": "truong1@gmail.com",
+    "password": "12345678",
+    "name": "Nguyen The Truong"
+}
+
+###
+POST http://localhost:5000/api/v1/signin/local
+Content-Type: application/json
+
+{
+    "email": "truong@gmail.com",
+    "password": "12345678"
+}
+
+###
+GET http://localhost:5000/api/v1/accounts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydW9uZ0BnbWFpbC5jb20iLCJpYXQiOjE2Njc4Mzc2ODcsImV4cCI6MTY2NzgzNzcxN30.54KaVdllD-QaHHy8K8FBr9ZftDaKdUFGSQuhI9DRCAM
+
+###
+POST http://localhost:5000/api/v1/reset-access-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydW9uZ0BnbWFpbC5jb20iLCJpYXQiOjE2Njc4Mzc4MTgsImV4cCI6MTY5OTM5NTQxOH0._HvNx9wluZqd9XPkWpNB2pcSMVIKN62zkE4Nfdz8N3Q"
+}
+
+###
+POST http://localhost:5000/api/v1/signout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydW9uZ0BnbWFpbC5jb20iLCJpYXQiOjE2Njc4Mzc5NDcsImV4cCI6MTY2NzgzNzk3N30.4-1Gion482PW6wkwf4R1MN1Dp73s7UTJifpEO7uAGas
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRydW9uZ0BnbWFpbC5jb20iLCJpYXQiOjE2Njc4Mzc4MTgsImV4cCI6MTY5OTM5NTQxOH0._HvNx9wluZqd9XPkWpNB2pcSMVIKN62zkE4Nfdz8N3Q"
+}

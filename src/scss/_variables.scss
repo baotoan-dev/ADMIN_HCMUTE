@@ -1,0 +1,55 @@
+$font-family: ProximaNova, sans-serif;
+
+// Media points
+$max-mobile-width: 37.5rem; // 600px
+$max-tablet-width: 64rem; // 1024px
+
+// Text color
+$light-mode-text-color: #212121;
+$dark-mode-text-color: #eee;
+$primary-color: #007fff;
+
+// Background color
+$light-mode-sidebar-bg: #fff;
+$dark-mode-sidebar-bg: #0a1929;
+
+$light-mode-content-bg: #fff;
+$dark-mode-content-bg: #0a1929;
+
+$light-mode-popup-bg: #fff;
+$dark-mode-popup-bg: #0a1929;
+
+$light-mode-navbar-bg: rgba(255, 255, 255, 0.8);
+$dark-mode-navbar-bg: rgba(10, 25, 41, 0.8);
+
+// Border
+$light-mode-border: 0.063rem solid #eeeeee;
+$dark-mode-border: 0.063rem solid #4c4613;
+
+// Box shadow
+$box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+  0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+
+// Color
+$warning-color: #ff8f00;
+$success-color: #2e7d32;
+$error-color: #c62828;
+
+// Width
+$sidebar-width: 16rem;
+$theme-setting-width: 24rem;
+
+// Button
+// Background-color
+$light-mode-button-background-color: transparent;
+$dark-mode-button-background-color: transparent;
+
+$light-mode-button-hover-background-color: #fafafa;
+$dark-mode-button-hover-background-color: rgba(19, 47, 76, 0.4);
+
+// Border
+$light-mode-button-border-color: 0.063rem solid #eeeeee;
+$dark-mode-button-border-color: 0.063rem solid #132f4c;
+
+$light-mode-button-hover-border-color: 0.063rem solid #e0e0e0;
+$dark-mode-button-hover-border-color: 0.063rem solid #173a5e;

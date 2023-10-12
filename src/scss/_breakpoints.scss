@@ -1,0 +1,19 @@
+@use "./variables" as *;
+
+@mixin mobile {
+  @media only screen and (max-width: $max-mobile-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (max-width: $max-tablet-width) {
+    @content;
+  }
+}
+
+// xs, extra-small: 0px
+// sm, small: 600px
+// md, medium: 900px
+// lg, large: 1200px
+// xl, extra-large: 1536px

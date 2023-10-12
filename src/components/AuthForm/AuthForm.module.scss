@@ -1,0 +1,15 @@
+@import "scss";
+
+.wrapper {
+  width: 400px;
+  height: fit-content;
+  padding: 2rem;
+  margin: 80px 0 0;
+  background-color: #001e3c;
+  border-radius: 8px;
+  box-shadow: $box-shadow;
+  @include mobile {
+    width: 100%;
+    margin: 80px 1rem 0;
+  }
+}

@@ -1,0 +1,117 @@
+@use "./scss/" as *;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Custom scrollbar
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(216, 216, 216) transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.375rem;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 2.5rem;
+}
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+html {
+  font-family: $font-family !important;
+  font-size: 1rem;
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.4;
+  text-rendering: optimizeSpeed;
+  overflow: overlay;
+}
+
+// FONTS EMBEDED
+@font-face {
+  font-family: ProximaNova;
+  src: url("/assets/fonts/Proxima-Nova-Regular.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: url("/assets/fonts/Proxima-Nova-Semibold.woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: url("/assets/fonts/Proxima-Nova-Bold.woff2");
+  font-weight: 700;
+}
+
+a {
+  font-family: $font-family;
+  text-decoration: none;
+  color: unset;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input {
+  font-family: $font-family;
+}
+
+// Custom
+.page {
+  padding-top: 80px;
+}
+
+/* Hiển thị dấu 3 chấm */
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// MUI X - Grid
+.MuiDataGrid-menuList {
+  .MuiMenuItem-root {
+    font-size: 1rem;
+  }
+}
+
+.MuiPopover-root {
+  .MuiMenuItem-root {
+    font-size: 1rem;
+  }
+}
+
+// Modal
+.ReactModal__Overlay {
+  z-index: 999;
+}
+
+.ReactModal__Content {
+  width: 32%;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+.hover-underline {
+  text-decoration: underline;
+}

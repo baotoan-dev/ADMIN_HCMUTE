@@ -1,0 +1,52 @@
+@import "scss/";
+
+.wrapper {
+  width: 24.063rem;
+  background-color: $light-mode-popup-bg;
+  border-radius: 0.5rem;
+  padding: 0 2rem 2rem;
+  max-height: 37.5rem;
+  &.dark {
+    background-color: $dark-mode-popup-bg;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  color: $light-mode-text-color;
+  padding: 1rem 0;
+  border-bottom: $light-mode-border;
+  img {
+    width: 2.5rem;
+    border-radius: 999rem;
+    margin-right: 1rem;
+  }
+  &.dark {
+    color: $dark-mode-text-color;
+    border-bottom: $dark-mode-border;
+  }
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.sub-title {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.time {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.button {
+  margin-top: 1rem;
+}

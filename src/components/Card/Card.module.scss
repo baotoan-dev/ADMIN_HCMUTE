@@ -1,0 +1,27 @@
+@import "scss";
+
+.icon {
+  display: flex;
+  align-items: center;
+  color: $dark-mode-text-color;
+  background: linear-gradient(
+    143.11deg,
+    #0057ff 8.66%,
+    #7a5cff 53.84%,
+    #b61cff 97.17%
+  );
+  padding: 6px;
+  border-radius: 10px;
+  margin-right: 12px;
+}
+
+.trend {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 2px 8px;
+  span,
+  svg {
+    font-weight: 500;
+  }
+}
