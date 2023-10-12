@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState} from "react";
 import {
   Box,
   Typography,
@@ -23,10 +22,7 @@ const Item = styled(Box)(({ theme }) => ({
 
 const AdminLanguageManagerPage = () => {
   usePermission();
-  const navigate = useNavigate();
   const theme = useTheme();
-  const params = useParams();
-  const role = localStorage.getItem("role");
   const [dataLanguage, setDataLanguage] = useState();
   const [updateLanguage, setUpdateLanguage] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("Vietnamese");

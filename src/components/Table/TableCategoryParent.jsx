@@ -1,18 +1,11 @@
 import { forwardRef } from "react";
 import {
     DataGrid,
-    GridToolbar,
-    GridToolbarContainer,
-    GridToolbarFilterButton,
     GridToolbarQuickFilter,
     GridToolbarExport,
-    gridPageCountSelector,
-    gridPageSelector,
-    useGridApiContext,
-    useGridSelector,
 } from "@mui/x-data-grid";
-import { Pagination, Box, Typography } from "@mui/material";
-import { useTheme, styled } from "@mui/material/styles";
+import {  Box, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { axios } from "configs";
 import { toast } from "react-toastify";
 
@@ -86,22 +79,6 @@ function CustomToolbar() {
     );
 }
 
-// Custom pagination
-function CustomPagination() {
-    const apiRef = useGridApiContext();
-    const page = useGridSelector(apiRef, gridPageSelector);
-    const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-    return (
-        <Pagination
-            color="primary"
-            count={pageCount}
-            page={page + 1}
-            onChange={(event, value) => apiRef.current.setPage(value - 1)}
-        />
-    );
-}
-
 // CSS GRID
 const CssDataGrid = styled(DataGrid)(({ theme }) => ({
     backgroundColor: theme.palette.background.content,
@@ -125,7 +102,6 @@ const TableCategoryParent = forwardRef((props, ref) => {
         showCheckbox = true,
         selectionModel,
         onSelectionModelChange,
-        handleRefreshDelete,
         handleCheck
     } = props;
 
@@ -133,13 +109,13 @@ const TableCategoryParent = forwardRef((props, ref) => {
         let res; 
         if (params.field === 'status') {
             if (params.row.status === 1) {
-                res = await axios.put(`/v3/parent/${params.row.id}`, 
+                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`, 
                 {
                     status: 0,
                 });
               }
               else {
-                res = await axios.put(`/v3/parent/${params.row.id}`, 
+                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`, 
                 {
                     status: 1,
                 });
@@ -162,7 +138,7 @@ const TableCategoryParent = forwardRef((props, ref) => {
             if (e.keyCode === 13) {
                 const { id, value, field } = params;
                 try {
-                    const res = await axios.put(`/v3/parent/${id}`, {
+                    const res = await axios.put(`http://localhost:1902/api/v3/parent/${id}`, {
                       [field]: value,
                     });
                 if (res && res.status === 200) {

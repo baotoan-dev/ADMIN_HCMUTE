@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Skeleton, Typography, Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { toast } from "react-toastify";
-import imageCompression from "browser-image-compression";
 
 import { axios } from "configs";
-import { createPostValidation, validatePostImages } from "validations";
 import { usePermission } from "hooks";
-import { Table, LineChart } from "components";
 import searchSuggestColumn from "configs/table/searchSuggestColumn";
 import TableSuggestSearch from "components/Table/TableSuggestSearch";
 
@@ -24,7 +20,7 @@ const AdminSuggestManagerPage = () => {
   const fetchSuggests = async () => {
     let res;
 
-    res = await axios.get(`/v3/suggest-search`);
+    res = await axios.get(`http://localhost:1902/api/v3/suggest-search`);
  
     setSuggests(res.data);
 

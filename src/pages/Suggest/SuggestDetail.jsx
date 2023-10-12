@@ -1,13 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Button,
   Typography,
-  Stack,
-  Skeleton,
-  IconButton,
-  Tooltip,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
@@ -15,17 +11,10 @@ import { TextField } from "components";
 import { axios } from "configs";
 import {
   ConfirmDialog,
-  Table,
-  PostBasicInformation,
-  PostCategories,
-  ImageList,
 } from "components";
 import { usePermission } from "hooks";
-import { MenuItem, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import TableCategory from "../../components/Table/TableCategory"
-import categoryChildColumns from "configs/table/categoryChildColumns";
-import { AddIcon } from "components/Icons";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -47,10 +36,9 @@ const SuggestDetailPage = () => {
   const [keyword, setKeyword] = useState('')
   const [order, setOrder] = useState(0)
 
-  const navigate = useNavigate();
   // GET POST DATA
   const fetchSuggestData = async (id) => {
-    const res = await axios.get(`/v3/suggest-search/${id}`);
+    const res = await axios.get(`http://localhost:1902/api/v3/suggest-search/${id}`);
     if (res.statusCode === 200) {
       const data  = res.data;
       setSuggestData(data);
@@ -80,7 +68,7 @@ const SuggestDetailPage = () => {
 
     // GET RESPONSE
     try {
-      const res = await axios.put(`/v3/suggest-search/update/${id}`, {
+      const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
         keyword : keyword, order : order
       });
       if (res && res.statusCode === 200) {
@@ -96,7 +84,7 @@ const SuggestDetailPage = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`/v3/suggest-search/update/${id}`, {
+    const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
       status: 0
     });
     if (res && res.statusCode === 200) {
@@ -111,7 +99,7 @@ const SuggestDetailPage = () => {
     setShowEnableApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`/v3/suggest-search/update/${id}`, {
+    const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
       status: 1
     });
     if (res && res.statusCode === 200) {
@@ -121,11 +109,6 @@ const SuggestDetailPage = () => {
       return toast.error("Có lỗi xảy ra, vui lòng thử lại");
     }
   };
-
-  const handleRefreshDelete = () => {
-    setCheckRefresh(!checkRefresh);
-  }
-
   const handleOnchangeOrder = (e) => {
       setOrder(e.target.value)
     

@@ -1,13 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Box,
   Button,
   Typography,
-  Stack,
-  Skeleton,
   IconButton,
-  Tooltip,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
@@ -15,13 +12,9 @@ import { TextField } from "components";
 import { axios } from "configs";
 import {
   ConfirmDialog,
-  Table,
-  PostBasicInformation,
-  PostCategories,
-  ImageList,
 } from "components";
 import { usePermission } from "hooks";
-import { MenuItem, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { MenuItem, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import TableCategory from "../../components/Table/TableCategory"
 import categoryChildColumns from "configs/table/categoryChildColumns";
@@ -55,10 +48,9 @@ const CategoryDetail = () => {
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
-  const navigate = useNavigate();
   // GET POST DATA
   const fetchCategoryData = async (id) => {
-    const res = await axios.get(`/v3/parent/${id}`);
+    const res = await axios.get(`http://localhost:1902/api/v3/parent/${id}`);
     if (res.status === 200) {
       const data  = res.data;
       setCategoryData(data);
@@ -80,7 +72,7 @@ const CategoryDetail = () => {
 
   const fetchCategories = async () => {
     let res;
-    res = await axios.get(`/v3/children/by-parent/${id}`);
+    res = await axios.get(`http://localhost:1902/api/v3/children/by-parent/${id}`);
     setCategories(res.data);
     setIsLoadingCategories(false);
   };
@@ -120,7 +112,7 @@ const CategoryDetail = () => {
 
     // GET RESPONSE
     try {
-      await axios.put(`/v3/parent/${id}`, data);
+      await axios.put(`http://localhost:1902/api/v3/parent/${id}`, data);
       setCheckRefresh(!checkRefresh)
       return toast.success("Cập nhật danh mục thành công");
     } catch (error) {
@@ -146,7 +138,7 @@ const CategoryDetail = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`/v3/parent/${id}`, {
+    const res = await axios.put(`http://localhost:1902/api/v3/parent/${id}`, {
       status: 0
     });
     if (res && res.status === 200) {
@@ -182,17 +174,6 @@ const CategoryDetail = () => {
       <Typography variant="h3" style={{marginBottom: '1rem'}} color={theme.palette.color.main}>
           Chi tiết danh mục
       </Typography>
-      {/* {(role === "1") && (
-        <Button
-          sx={{ marginTop: "-1rem" }}
-          variant="outlined"
-          onClick={() => {
-            navigate(`/admin/see-all-child-category/${id}`);
-          }}
-        >
-          Xem tất cả
-        </Button>
-      )} */}
 
       {role === "1" && categoryData?.status === 1 && (
         <Button

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Skeleton, Typography, Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { axios } from "configs";
@@ -16,9 +16,7 @@ const AllChildCategoryPage = () => {
 
   const idParent = +params.id;
   const theme = useTheme();
-  const [modifyLimit, setModifyLimit] = useState(10)
   const [checkData, setCheckData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [checkSearch, setCheckSearch] = useState(false);
@@ -26,7 +24,7 @@ const AllChildCategoryPage = () => {
   const fetchCategories = async () => {
     let res;
 
-    res = await axios.get(`/v3/children/by-parent/${idParent}`);
+    res = await axios.get(`http://localhost:1902/api/v3/children/by-parent/${idParent}`);
  
     setCategories(res.data);
 

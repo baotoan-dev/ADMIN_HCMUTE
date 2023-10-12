@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
@@ -36,7 +35,7 @@ const SendMailPage = () => {
         .filter((data) => data !== "")
         .map((line) => ({ to: line.trim() }));
 
-      const res = await axios.post(`/v3/admin/send-mail`, emailArray);
+      const res = await axios.post(`http://localhost:1902/api/v3/admin/send-mail`, emailArray);
       if (res.statusCode === 200) {
         return toast.update(toastId, {
           render: "Gửi mail thành công",

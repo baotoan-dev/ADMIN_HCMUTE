@@ -1,13 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
   Typography,
-  Stack,
-  Skeleton,
-  IconButton,
-  Tooltip,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
@@ -15,13 +11,9 @@ import { TextField } from "components";
 import { axios } from "configs";
 import {
   ConfirmDialog,
-  Table,
-  PostBasicInformation,
-  PostCategories,
-  ImageList,
 } from "components";
 import { usePermission } from "hooks";
-import { MenuItem, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const Item = styled(Box)(({ theme }) => ({
@@ -44,7 +36,7 @@ const ChildCategoryDetailPage = () => {
   const navigate = useNavigate();
   // GET POST DATA
   const fetchCategoryData = async (id) => {
-    const res = await axios.get(`/v3/children/${id}`);
+    const res = await axios.get(`http://localhost:1902/api/v3/children/${id}`);
     if (res.status === 200) {
       const data  = res.data;
       setParentId(data.parentCategoryId)
@@ -64,7 +56,7 @@ const ChildCategoryDetailPage = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.post(`/v3/children/disable/${id}`);
+    const res = await axios.post(`http://localhost:1902/api/v3/children/disable/${id}`);
     if (res && res.status === 200) {
       setCheckRefresh(!checkRefresh);
       return toast.success("Ẩn danh mục thành công");
@@ -77,7 +69,7 @@ const ChildCategoryDetailPage = () => {
     setShowEnableApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.post(`/v3/children/enable/${id}`);
+    const res = await axios.post(`http://localhost:1902/api/v3/children/enable/${id}`);
     if (res && res.status === 200) {
       setCheckRefresh(!checkRefresh);
       return toast.success("Hiện danh mục thành công");

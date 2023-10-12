@@ -107,7 +107,7 @@ const AdminCommunityCreatePage = () => {
     // Fetch api
     try {
       await axios.post(
-        "/v3/communications/by-admin",
+        "http://localhost:1902/api/v3/communications/by-admin",
         communitySubmit,
         {
           headers: {
