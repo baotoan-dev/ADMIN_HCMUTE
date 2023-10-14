@@ -7,8 +7,6 @@ import {
   MultiAccountsIcon,
   Category,
   SearchSuggestIcon,
-  Languages,
-  Communities,
 } from "components/Icons";
 
 import { FiCreditCard } from "react-icons/fi";
@@ -20,7 +18,8 @@ import avatar4 from "./avatar4.jpg";
 import { EmailOutlined } from "@mui/icons-material";
 import LanguageIcon from '@mui/icons-material/Language';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-
+import RedeemIcon from '@mui/icons-material/Redeem';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 export const normalAdminTabs = [
   {
@@ -92,12 +91,12 @@ export const superAdminTabs = [
       {
         path: "/admin/category-manager",
         name: "Danh mục",
-        icon: <Category />,
+        icon: <RedeemIcon />,
       },
       {
         path: "/admin/search-suggest",
         name: "Từ khoá gợi ý",
-        icon: <SearchSuggestIcon />,
+        icon: <TravelExploreIcon />,
       },
       {
         path: "/admin/language-manager",
@@ -238,18 +237,18 @@ export const userProfileData = [
     iconColor: "#03C9D7",
     iconBg: "#E5FAFB",
   },
-  {
-    icon: <BsShield />,
-    title: "My Inbox",
-    desc: "Messages & Emails",
-    iconColor: "rgb(0, 194, 146)",
-    iconBg: "rgb(235, 250, 242)",
-  },
-  {
-    icon: <FiCreditCard />,
-    title: "My Tasks",
-    desc: "To-do and Daily Tasks",
-    iconColor: "rgb(255, 244, 229)",
-    iconBg: "rgb(254, 201, 15)",
-  },
+  // {
+  //   icon: <BsShield />,
+  //   title: "My Inbox",
+  //   desc: "Messages & Emails",
+  //   iconColor: "rgb(0, 194, 146)",
+  //   iconBg: "rgb(235, 250, 242)",
+  // },
+  // {
+  //   icon: <FiCreditCard />,
+  //   title: "My Tasks",
+  //   desc: "To-do and Daily Tasks",
+  //   iconColor: "rgb(255, 244, 229)",
+  //   iconBg: "rgb(254, 201, 15)",
+  // },
 ];

@@ -69,7 +69,7 @@ const Banner = () => {
   };
 
   return (
-    <>
+    <Box sx={{ padding: '10px'}}>
       <Typography variant="h2" color={theme.palette.color.main}>
         Danh sách bìa
       </Typography>
@@ -230,7 +230,7 @@ const Banner = () => {
         title="Update banners"
         text="Are you sure?"
       />
-    </>
+    </Box>
   );
 };
 

@@ -8,7 +8,7 @@ const AuthLayout = ({ children }) => {
         width: "100vw",
         height: "100vh",
         justifyContent: "center",
-        backgroundColor: "#0a1929",
+        backgroundColor: "#3D2B1F",
       }}
     >
       {children}

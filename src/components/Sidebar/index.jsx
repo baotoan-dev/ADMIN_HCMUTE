@@ -76,8 +76,6 @@ const Sidebar = () => {
       >
         <Box className={cx("logo")}>
           <Logo />
-          {/* <Link to="/admin" style={{ height: "36px" }}>
-                    </Link> */}
 
           <Box
             sx={{
@@ -97,17 +95,18 @@ const Sidebar = () => {
                 lineHeight: 1.4,
               }}
             >
-              Hi Jobs
+              JobRunners
             </Typography>
             <Typography
               sx={{
                 color: theme.palette.color.primary,
-                fontSize: "14px",
+                fontSize: "10px",
                 fontWeight: 500,
                 lineHeight: 1.4,
+                textAlign: "center",
               }}
             >
-              v1
+              HCMUTE
             </Typography>
           </Box>
         </Box>
@@ -120,6 +119,7 @@ const Sidebar = () => {
             {link.links.map((link) => (
               <>
                 <ListItemButton
+                  key={link.name}
                   sx={{
                     "&.Mui-selected": {
                       backgroundColor: theme.palette.background.active,
@@ -163,6 +163,7 @@ const Sidebar = () => {
                       <List component="div" disablePadding>
                         {link.subLinks.map((subLink) => (
                           <ListItemButton
+                            key={subLink.name}
                             sx={{
                               "&.Mui-selected": {
                                 backgroundColor: theme.palette.background.active,

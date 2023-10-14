@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import { axios } from "configs";
 import { ConfirmDialog } from "components";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -49,6 +50,20 @@ const AdminLanguageManagerPage = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `http://localhost:1902/api/v3/site/languages?lang=vi`
+      );
+
+      if (res && res.data) {
+        setDataLanguage(res.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleUpdateLanguage = async (newValue) => {
     setUpdateLanguage(false);
 
@@ -61,7 +76,6 @@ const AdminLanguageManagerPage = () => {
     setSelectedLanguage(newValue);
 
     if (res && res.data) {
-      console.log(res);
       setDataLanguage(res.data);
     }
   };

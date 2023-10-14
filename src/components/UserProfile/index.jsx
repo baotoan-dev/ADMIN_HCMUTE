@@ -3,19 +3,57 @@ import classNames from "classnames/bind";
 import { Box, Button } from "@mui/material";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
-
-import { axios } from "configs";
 import styles from "./UserProfile.module.scss";
 import avatar from "data/avatar2.jpg";
-import { userProfileData } from "data/dummy";
+import { useEffect } from "react";
+import { axios } from "configs";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfile } from "../../redux/slice/profileSlice";
 
 const cx = classNames.bind(styles);
 
 const UserProfile = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const profiles = useSelector((state) => state.profile.profile);
+  const dispatch = useDispatch();
 
-  // Handle sign out
+  useEffect(() => {
+    // Kiểm tra xem profiles đã có dữ liệu hay chưa
+    if (!profiles || !profiles.name) {
+      // Kiểm tra xem có dữ liệu trong localStorage hay không
+      const storedProfileData = sessionStorage.getItem("userProfile");
+      if (storedProfileData) {
+        const profileData = JSON.parse(storedProfileData);
+        dispatch(setProfile(profileData));
+      } else {
+        // Fetch access token from the session
+        const accessToken = sessionStorage.getItem("access-token");
+
+        const fetchData = async () => {
+          const url = "http://localhost:1902/api/v3/profiles/me";
+          try {
+            const res = await axios.get(url, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            });
+            if (res && res.status === 200) {
+              const profileData = res.data;
+              dispatch(setProfile(profileData));
+              // Lưu dữ liệu vào localStorage
+              sessionStorage.setItem("userProfile", JSON.stringify(profileData));
+            }
+          } catch (error) {
+            console.error("Error fetching user profile data:", error);
+          }
+        };
+
+        fetchData();
+      }
+    }
+  }, [profiles, dispatch]);
+
   const handleSignout = async () => {
     try {
       const refreshToken = localStorage.getItem("refresh-token");
@@ -27,81 +65,41 @@ const UserProfile = () => {
         await axios.post(url, data);
         toast.success("Nice! Sign out successfully");
 
-        // Clear sessiong storage
+        // Clear session storage and localStorage
         sessionStorage.clear();
         localStorage.clear();
 
-        // Navigate to sign in page
+        // Navigate to sign-in page
         setTimeout(() => {
-          return navigate("/admin/auth");
+          navigate("/admin/auth");
         }, 1000);
       }
     } catch (error) {
-      return toast.error("Oops! An error occurred");
+      toast.error("Oops! An error occurred");
     }
   };
 
   return (
-    <Box
-      className={cx("wrapper")}
-      sx={{ backgroundColor: theme.palette.background.main }}
-    >
-      <Box
-        className={cx("info")}
-        sx={{
-          borderBottom: theme.palette.border,
-        }}
-      >
-        <img src={avatar} alt="" />
-        <Box
-          className={cx("content")}
-          sx={{
-            color: theme.palette.color.main,
-          }}
-        >
-          <p className={cx("name")}>Michael Roberts</p>
-          <p className={cx("role")}>Administrator</p>
-          <p className={cx("email")}>info@shop.com</p>
-        </Box>
-      </Box>
-
-      {userProfileData.map((section) => (
-        <section
-          key={section.title}
-          sx={{ borderBottom: theme.palette.border }}
-        >
-          <span
-            className={cx("icon")}
-            style={{
-              color: section.iconColor,
-              backgroundColor: section.iconBg,
-            }}
-          >
-            {section.icon}
-          </span>
-          <Box
-            className={cx("content")}
-            sx={{
-              color: theme.palette.color.main,
-            }}
-          >
-            <p className={cx("title")}>{section.title}</p>
-            <p className={cx("sub-title")}>{section.desc}</p>
+    <>
+      {profiles && (
+        <Box className={cx("wrapper")} sx={{ backgroundColor: theme.palette.background.main }}>
+          <Box className={cx("info")} sx={{ borderBottom: theme.palette.border }}>
+            <img src={avatar} alt="" />
+            <Box className={cx("content")} sx={{ color: theme.palette.color.main }}>
+              <p className={cx("name")}>{profiles?.name}</p>
+              <p className={cx("phone")}>{profiles?.phone}</p>
+              <p className={cx("email")}>{profiles?.email}</p>
+            </Box>
           </Box>
-        </section>
-      ))}
 
-      <Box>
-        <Button
-          variant="outlined"
-          color="primary"
-          fullWidth
-          onClick={handleSignout}
-        >
-          Sign out
-        </Button>
-      </Box>
-    </Box>
+          <Box>
+            <Button variant="outlined" color="primary" fullWidth onClick={handleSignout}>
+              Sign out
+            </Button>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

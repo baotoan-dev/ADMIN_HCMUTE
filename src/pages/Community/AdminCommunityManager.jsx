@@ -74,6 +74,7 @@ const AdminCommunityManagerPage = () => {
             sx={{
               width: "100%",
               height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
+              paddingLeft: "10px",
             }}
           >
             <Box

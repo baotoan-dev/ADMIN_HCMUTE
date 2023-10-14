@@ -107,7 +107,7 @@ const ThemePage = () => {
   };
 
   return (
-    <Box sx={{ color: theme.palette.color.main }}>
+    <Box sx={{ color: theme.palette.color.main, padding: '10px' }}>
       <Typography variant="h2">Danh sách chủ đề</Typography>
       <Button
         variant="outlined"

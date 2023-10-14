@@ -1,35 +1,35 @@
-import { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import {useState, useEffect} from 'react';
+import {Box} from '@mui/material';
+import {useTheme} from '@mui/material/styles';
 
-import { Card, AreaChart, PieChart } from "components";
-import { axios } from "configs";
-import { usePermission } from "hooks";
+import {Card, AreaChart, PieChart} from 'components';
+import {axios} from 'configs';
+import {usePermission} from 'hooks';
 
 const cards = [
   {
-    title: "Total Account",
-    link: "/admin/accounts",
+    title: 'Total Account',
+    link: '/admin/accounts',
   },
   {
-    title: "Today account",
-    link: "/admin/accounts?is_today=true",
+    title: 'Today account',
+    link: '/admin/accounts?is_today=true',
   },
   {
-    title: "Total Post",
-    link: "/admin/posts",
+    title: 'Total Post',
+    link: '/admin/posts',
   },
   {
-    title: "Today post",
-    link: "/admin/posts?is_today=true",
+    title: 'Today post',
+    link: '/admin/posts?is_today=true',
   },
   {
-    title: "Total pending post",
-    link: "/admin/posts?status=0",
+    title: 'Total pending post',
+    link: '/admin/posts?status=0',
   },
   {
-    title: "Today pending post",
-    link: "/admin/posts?is_today=true&status=0",
+    title: 'Today pending post',
+    link: '/admin/posts?is_today=true&status=0',
   },
 ];
 
@@ -39,10 +39,10 @@ const HomePage = () => {
   const theme = useTheme();
   const [cardsData, setCardsData] = useState([...cards]);
   const [statisticData, setStatisticData] = useState();
-  
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("/v1/home-admin/count");
+      const res = await axios.get('/v1/home-admin/count');
       if (res && res.success) {
         // SET CARDS DATA
         setCardsData((prevState) => {
@@ -69,13 +69,13 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", padding: "1rem" }}>
+    <Box sx={{width: '100%', padding: '1rem'}}>
       {/* Cards */}
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "1.25rem -0.75rem",
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: '1.25rem -0.75rem',
         }}
       >
         {cardsData.map((card) => (
@@ -83,11 +83,11 @@ const HomePage = () => {
             key={card.title}
             sx={{
               width: {
-                xs: "50%",
-                md: "33.33%",
+                xs: '50%',
+                md: '33.33%',
               },
-              marginBottom: "1.25rem",
-              padding: "0 0.75rem",
+              marginBottom: '1.25rem',
+              padding: '0 0.75rem',
             }}
           >
             <Card data={card} />
@@ -99,20 +99,30 @@ const HomePage = () => {
       {/* Area */}
       {statisticData && (
         <>
-          <Box sx={{ marginBottom: "20px" }}>
-            <Box sx={{ display: "flex" }}>
+          <Box
+            sx={{
+              color: theme.palette.color.main,
+              fontSize: '2rem',
+              fontWeight: 600,
+              marginBottom: '20px',
+            }}
+          >
+            Thống kê
+          </Box>
+          <Box sx={{marginBottom: '20px'}}>
+            <Box sx={{display: 'flex'}}>
               <Box
                 sx={{
                   width: {
-                    xs: "100%",
-                    md: "50%",
+                    xs: '100%',
+                    md: '50%',
                   },
                 }}
               >
                 <Box
                   sx={{
                     color: theme.palette.color.main,
-                    fontSize: "1.5rem",
+                    fontSize: '1.5rem',
                     fontWeight: 600,
                   }}
                 >
@@ -123,15 +133,15 @@ const HomePage = () => {
               <Box
                 sx={{
                   width: {
-                    xs: "100%",
-                    md: "50%",
+                    xs: '100%',
+                    md: '50%',
                   },
                 }}
               >
                 <Box
                   sx={{
                     color: theme.palette.color.main,
-                    fontSize: "1.5rem",
+                    fontSize: '1.5rem',
                     fontWeight: 600,
                   }}
                 >
@@ -160,19 +170,19 @@ const HomePage = () => {
 
           {/* Pie */}
 
-          <Box sx={{ marginBottom: "20px" }}>
+          <Box sx={{marginBottom: '20px'}}>
             <Box
               sx={{
                 width: {
-                  xs: "100%",
-                  md: "50%",
+                  xs: '100%',
+                  md: '50%',
                 },
               }}
             >
               <Box
                 sx={{
                   color: theme.palette.color.main,
-                  fontSize: "1.5rem",
+                  fontSize: '1.5rem',
                   fontWeight: 600,
                 }}
               >

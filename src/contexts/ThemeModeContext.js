@@ -15,16 +15,16 @@ export const themeSettings = (mode) => {
               warning: "#ff8f00",
               error: "#c62828",
               active: "#0072e5",
-              border: "#132f4c",
+              border: "#4e4031",
             },
             background: {
-              main: "#0a1929",
+              main: "#3D2B1F",
               navbar: "rgba(10, 25, 41, 0.8)",
-              content: "#001e3c",
-              active: "#132f4c",
+              content: "#4e4031",
+              active: "#4e4031",
               hover: "rgba(19, 47, 76, 0.4)",
             },
-            border: "0.063rem solid #132f4c",
+            border: "0.063rem solid #4e4031",
             boxShadow:
               "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)",
           }
