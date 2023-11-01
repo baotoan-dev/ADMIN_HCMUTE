@@ -1,6 +1,10 @@
-import { Grid, Box} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { TextField } from "components";
+import JoditEditor from "jodit-react";
+import { useMemo } from "react";
+import { useCallback } from "react";
+import { useState } from "react";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -9,6 +13,65 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 const CreateCommunityInformations = ({ community, setCommunity }) => {
+  const [content, setContent] = useState("");
+  const [logs, setLogs] = useState([]);
+  const appendLog = useCallback(
+    (message) => {
+      setCommunity({
+        ...community,
+        content: message,
+      });
+    },
+    [logs, setLogs, community]
+  );
+  const themeMode = localStorage.getItem("theme-mode");
+
+  const config = useMemo(
+    () => ({
+      readonly: false,
+      minHeight: 600,
+      toolbar: true,
+      spellcheck: false,
+      toolbarAdaptive: false,
+      toolbarSticky: false,
+      toolbarButtonSize: "large",
+      askBeforePasteHTML: false,
+      askBeforePasteFromWord: false,
+      askBeforePasteFromExcel: false,
+      askBeforePaste: false,
+      showCharsCounter: false,
+      showWordsCounter: false,
+      showXPathInStatusbar: false,
+      showPlaceholder: false,
+      showWordsCounterInFooter: false,
+      showCharsCounterInFooter: false,
+      showTooltip: true,
+      showTooltipDelay: 0,
+      showTooltipOnSelection: false,
+      style: {
+        background: themeMode === 'light' ? '#ffff' : '#3D2B1F',
+        color: "#ffff",
+      },
+      theme: "dark",
+    }),
+    []
+  );
+
+  const onChange = () => (
+    (newContent) => {
+      appendLog(`${newContent}`);
+      setCommunity(newContent);
+    },
+    [appendLog]
+  );
+
+  const onBlur = useCallback(
+    (newContent) => {
+      appendLog(`${newContent}`);
+    },
+    [appendLog, setContent]
+  );
+
   return (
     <Grid container spacing={4}>
       {/* Title */}
@@ -29,7 +92,7 @@ const CreateCommunityInformations = ({ community, setCommunity }) => {
         </Item>
       </Grid>
 
-      <Grid item xs={12} lg={12}>
+      {/* <Grid item xs={12} lg={12}>
         <Item>
           <TextField
             label="Nội dung"
@@ -46,6 +109,16 @@ const CreateCommunityInformations = ({ community, setCommunity }) => {
             size="large"
           />
         </Item>
+      </Grid> */}
+
+      <Grid item xs={12} lg={12}>
+        <JoditEditor
+          value={community.content}
+          config={config}
+          tabIndex={1}
+          onBlur={onBlur}
+          onChange={onChange}
+        />
       </Grid>
     </Grid>
   );

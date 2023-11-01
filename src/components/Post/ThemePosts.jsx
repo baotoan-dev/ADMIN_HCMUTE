@@ -16,7 +16,6 @@ const ThemePosts = ({ posts = [], themeId, setPosts }) => {
     const fetchAllPosts = async () => {
       const res = await axios.get(`/v1/posts/by-admin`);
 
-      console.log(res);
       if (res && res.success) {
         setAllPosts(res.data);
       }

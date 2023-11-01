@@ -32,7 +32,6 @@ const UserDetail = ({ accountId }) => {
       if (accountId) {
         const res = await axios.get(`/v1/profiles/s?id=${accountId}`);
         if (res.success) {
-          console.log(res.data);
           setAccountData(res.data);
           const {
             id,

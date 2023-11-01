@@ -204,9 +204,6 @@ const CreatePostPage = () => {
             })
           );
 
-          // console.log("Original image ::: ", imagesUpload);
-          // console.log("Compressed image ::: ", compressedImages);
-
           setImages((prevState) => [
             ...prevState,
             ...compressedImages.map((image) => ({

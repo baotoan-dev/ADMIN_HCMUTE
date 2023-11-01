@@ -369,7 +369,6 @@ const CreatePostInformations = ({
               value={moment(post.startTime)}
               onChange={(e) =>
                 {
-                  console.log(e._d)
                 setPost((prevState) => ({
                   ...prevState,
                   startTime: new Date(e._d).getTime(),
