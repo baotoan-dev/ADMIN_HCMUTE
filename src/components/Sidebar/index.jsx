@@ -95,7 +95,7 @@ const Sidebar = () => {
                 lineHeight: 1.4,
               }}
             >
-              JobRunners
+              JOBS
             </Typography>
             <Typography
               sx={{

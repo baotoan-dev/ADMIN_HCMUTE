@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-
 import { axios } from "configs";
 import {
   ConfirmDialog,
@@ -188,7 +187,7 @@ const PostDetail = () => {
 
     // VALIDATION
     const validationRes = updatePostValidation(data);
-    
+
     if (validationRes.isError) {
       return toast.warn(validationRes.message);
     }
