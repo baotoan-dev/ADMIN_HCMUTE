@@ -109,13 +109,13 @@ const TableCategoryParent = forwardRef((props, ref) => {
         let res; 
         if (params.field === 'status') {
             if (params.row.status === 1) {
-                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`, 
+                res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/parent/${params.row.id}`, 
                 {
                     status: 0,
                 });
               }
               else {
-                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`, 
+                res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/parent/${params.row.id}`, 
                 {
                     status: 1,
                 });
@@ -138,7 +138,7 @@ const TableCategoryParent = forwardRef((props, ref) => {
             if (e.keyCode === 13) {
                 const { id, value, field } = params;
                 try {
-                    const res = await axios.put(`http://localhost:1902/api/v3/parent/${id}`, {
+                    const res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/parent/${id}`, {
                       [field]: value,
                     });
                 if (res && res.status === 200) {

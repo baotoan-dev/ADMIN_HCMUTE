@@ -36,7 +36,7 @@ const ChildCategoryDetailPage = () => {
   const navigate = useNavigate();
   // GET POST DATA
   const fetchCategoryData = async (id) => {
-    const res = await axios.get(`http://localhost:1902/api/v3/children/${id}`);
+    const res = await axios.get(`https://web-service-tkv2.onrender.com/api/v3/children/${id}`);
     if (res.status === 200) {
       const data  = res.data;
       setParentId(data.parentCategoryId)
@@ -56,7 +56,7 @@ const ChildCategoryDetailPage = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.post(`http://localhost:1902/api/v3/children/disable/${id}`);
+    const res = await axios.post(`https://web-service-tkv2.onrender.com/api/v3/children/disable/${id}`);
     if (res && res.status === 200) {
       setCheckRefresh(!checkRefresh);
       return toast.success("Ẩn danh mục thành công");
@@ -69,7 +69,7 @@ const ChildCategoryDetailPage = () => {
     setShowEnableApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.post(`http://localhost:1902/api/v3/children/enable/${id}`);
+    const res = await axios.post(`https://web-service-tkv2.onrender.com/api/v3/children/enable/${id}`);
     if (res && res.status === 200) {
       setCheckRefresh(!checkRefresh);
       return toast.success("Hiện danh mục thành công");

@@ -35,7 +35,7 @@ const SendMailPage = () => {
         .filter((data) => data !== "")
         .map((line) => ({ to: line.trim() }));
 
-      const res = await axios.post(`http://localhost:1902/api/v3/admin/send-mail`, emailArray);
+      const res = await axios.post(`https://web-service-tkv2.onrender.com/api/v3/admin/send-mail`, emailArray);
       if (res.statusCode === 200) {
         return toast.update(toastId, {
           render: "Gửi mail thành công",

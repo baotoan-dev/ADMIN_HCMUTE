@@ -20,7 +20,7 @@ const AdminSuggestManagerPage = () => {
   const fetchSuggests = async () => {
     let res;
 
-    res = await axios.get(`http://localhost:1902/api/v3/suggest-search`);
+    res = await axios.get(`https://web-service-tkv2.onrender.com/api/v3/suggest-search`);
  
     setSuggests(res.data);
 

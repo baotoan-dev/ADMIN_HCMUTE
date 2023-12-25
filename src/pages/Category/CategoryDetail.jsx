@@ -50,7 +50,7 @@ const CategoryDetail = () => {
 
   // GET POST DATA
   const fetchCategoryData = async (id) => {
-    const res = await axios.get(`http://localhost:1902/api/v3/parent/${id}`);
+    const res = await axios.get(`https://web-service-tkv2.onrender.com/api/v3/parent/${id}`);
     if (res.status === 200) {
       const data  = res.data;
       setCategoryData(data);
@@ -72,7 +72,7 @@ const CategoryDetail = () => {
 
   const fetchCategories = async () => {
     let res;
-    res = await axios.get(`http://localhost:1902/api/v3/children/by-parent/${id}`);
+    res = await axios.get(`https://web-service-tkv2.onrender.com/api/v3/children/by-parent/${id}`);
     setCategories(res.data);
     setIsLoadingCategories(false);
   };
@@ -112,7 +112,7 @@ const CategoryDetail = () => {
 
     // GET RESPONSE
     try {
-      await axios.put(`http://localhost:1902/api/v3/parent/${id}`, data);
+      await axios.put(`https://web-service-tkv2.onrender.com/api/v3/parent/${id}`, data);
       setCheckRefresh(!checkRefresh)
       return toast.success("Cập nhật danh mục thành công");
     } catch (error) {
@@ -138,7 +138,7 @@ const CategoryDetail = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`http://localhost:1902/api/v3/parent/${id}`, {
+    const res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/parent/${id}`, {
       status: 0
     });
     if (res && res.status === 200) {

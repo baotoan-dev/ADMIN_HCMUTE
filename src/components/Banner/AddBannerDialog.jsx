@@ -70,17 +70,6 @@ const AddBannerDialog = ({ open, setOpen, setBanners }) => {
   const [bannerType, setBannerType] = useState(1);
   const [version, setVersion] = useState(1);
 
-  // HANDLE CHANGE PHOTO URL SELECTED
-  const handleChangePhotoUrlSelected = (e) => {
-    setPhotoUrlSelected(e.target.value);
-    setPreviewPhoto(e.target.value);
-    setAddPhotoError(false);
-    if (photoUploadSelected) {
-      window.URL.revokeObjectURL(photoUploadSelected);
-      setPhotoUploadSelected(null);
-    }
-  };
-
   // HANDLE CHANGE PHOTO UPLOAD SELECTED
   const handleChangePhotoUploadSelected = (e) => {
     const file = e.target.files[0];
@@ -139,8 +128,6 @@ const AddBannerDialog = ({ open, setOpen, setBanners }) => {
         setPhotoUploadSelected(null);
         setPreviewPhoto(null);
         setBannerRedirectUrl("");
-
-        // console.log(photoUploadSelected);
 
         data = new FormData();
         data.append("images", photoUploadSelected);
@@ -231,18 +218,6 @@ const AddBannerDialog = ({ open, setOpen, setBanners }) => {
               ))}
             </TextField>
           </CssFormControl>
-
-          {/* TEXT FIELD TO ENTER URL */}
-          {/* {addPhotoTypeId === 0 && (
-            <CssFormControl>
-              <TextField
-                label="Photo url"
-                variant="outlined"
-                value={photoUrlSelected}
-                onChange={(e) => handleChangePhotoUrlSelected(e)}
-              />
-            </CssFormControl>
-          )} */}
 
           {/* FILE FIELD TO UPLOAD PHOTO */}
           {addPhotoTypeId === 1 && (

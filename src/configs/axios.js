@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create instance
 const instance = axios.create({
-  baseURL: "http://localhost:8888/api",
+  baseURL: "https://web-service-tk.onrender.com/api",
   timeout: 10000,
   headers: {
       "Content-Type": "application/json",

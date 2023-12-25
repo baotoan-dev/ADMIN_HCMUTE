@@ -36,7 +36,7 @@ const AdminCommunityManagerPage = () => {
       let res;
 
       res = await axios.get(
-        `http://localhost:1902/api/v3/communications/news?type=${selectedType}`
+        `https://web-service-tkv2.onrender.com/api/v3/communications/news?type=${selectedType}`
       );
 
       if (res && res.status === 200) {

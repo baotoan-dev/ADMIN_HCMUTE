@@ -283,7 +283,7 @@ const CreatePostPage = () => {
     // Fetch api
     try {
       // await axios.post("/v3/posts/by-worker", postSubmit, {
-      await axios.post("http://localhost:1902/api/v3/posts/by-worker", postSubmit, {
+      await axios.post("https://web-service-tkv2.onrender.com/api/v3/posts/by-worker", postSubmit, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

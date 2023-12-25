@@ -68,7 +68,7 @@ const CreateParentCategoryPage = () => {
 
     // GET RESPONSE
     try {
-      const res = await axios.post(`http://localhost:1902/api/v3/parent/add`, formData);
+      const res = await axios.post(`https://web-service-tkv2.onrender.com/api/v3/parent/add`, formData);
       if (res.status === 200){
         setNameCategories('')
         setNameEnCategories('')
