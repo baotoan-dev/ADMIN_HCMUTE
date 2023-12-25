@@ -1,5 +1,3 @@
-const validator = require("validator");
-
 const updateCommunityValidation = (community) => {
   if (!community.title.trim()) {
     return {

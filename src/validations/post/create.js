@@ -1,6 +1,4 @@
 
-const validator = require('validator');
-
 const createPostValidation = (post) => {
 
   if (post.title.trim() === "") {

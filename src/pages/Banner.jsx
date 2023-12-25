@@ -44,9 +44,6 @@ const Banner = () => {
     setCheckRemoveBanners(!checkRemoveBanner);
   }
 
-  const handleRemoveBannerFail = () => {
-    setCheckRemoveBanners(false);
-  }
   // HANDLE CLICK SAVE BUTTON => SUBMIT
   const handleClickSaveBtn = async () => {
     // HIDE CONFIRM DIALOG

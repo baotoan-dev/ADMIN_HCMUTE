@@ -1,6 +1,4 @@
 
-const validator = require('validator');
-
 const createCommunityValidation = (post) => {
 
   if (post.title.trim() === "") {
