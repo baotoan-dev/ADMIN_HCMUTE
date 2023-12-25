@@ -1,22 +1,19 @@
-const validator = require('validator');
-
 const updatePostValidation = (post) => {
-  console.log(post);
 
-  if (!post.title.trim()) {
+  if (!post.title) {
     return {
       isError: true,
       message: "Tiêu đề không hợp lệ",
       field: "title",
     };
   }
-  if (!post.url.trim()) {
-    return {
-      isError: true,
-      message: "URL không hợp lệ",
-      field: "url",
-    };
-  }
+  // if (!post.url) {
+  //   return {
+  //     isError: true,
+  //     message: "URL không hợp lệ",
+  //     field: "url",
+  //   };
+  // }
   if (!post.companyResourceId){
     return {
       isError: true,
@@ -149,7 +146,7 @@ const updatePostValidation = (post) => {
       field: "description",
     };
   }
-  if(post.description.trim() !== '' && post.description.length > 4000)
+  if(post.description !== '' && post.description.length > 4000)
   {
     return {
       isError: true,

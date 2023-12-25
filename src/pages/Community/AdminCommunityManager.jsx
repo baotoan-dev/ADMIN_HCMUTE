@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -19,10 +19,8 @@ import TableCommunity from "components/Table/TableCommunity";
 const AdminCommunityManagerPage = () => {
   usePermission();
   const theme = useTheme();
-  const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [checkData, setCheckData] = useState(false);
   const [selectedType, setSelectedType] = useState(1);
   const [updateLanguage, setUpdateLanguage] = useState(true);
 
@@ -40,13 +38,9 @@ const AdminCommunityManagerPage = () => {
       );
 
       if (res && res.status === 200) {
-        if (res?.data?.communications.lenght > 0) {
-          setCheckData(true);
-        }
         setPosts(res.data.communications);
         setIsLoading(false);
       } else {
-        setCheckData(false);
       }
     };
     getCommunitiesData();

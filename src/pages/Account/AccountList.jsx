@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Box, Typography, Stack, Skeleton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import { Table } from "components";
 import { axios } from "configs";
 import { accountListColumns } from "configs/table";
@@ -45,12 +44,12 @@ const AccountPage = () => {
         setAccounts(res.data);
         setIsLoading(false);
       }
-      else{
+      else {
         setCheckData(false)
       }
     };
     fetchAccountData();
-  }, [currentPage, modifyLimit]);
+  }, [currentPage, modifyLimit, isToday]);
 
   const prevPage = () => {
     setCurrentPage(currentPage - 1);
@@ -71,8 +70,8 @@ const AccountPage = () => {
         // GET ALL ACCOUNTS
         resSearch = await axios.get(`/v1/accounts/search?search=${search}`);
       }
-  
-     
+
+
       if (resSearch?.data?.length > 0) {
         setCheckData(true);
         setDataSearch(resSearch?.data)
@@ -131,7 +130,7 @@ const AccountPage = () => {
               prevPage={prevPage}
               nextPage={nextPage}
               currentPage={currentPage}
-              rows={checkSearch === true ? (dataSearch?.length > 0 ? dataSearch : []) : accounts} 
+              rows={checkSearch === true ? (dataSearch?.length > 0 ? dataSearch : []) : accounts}
               columns={accountListColumns}
               showCheckbox={false}
             />

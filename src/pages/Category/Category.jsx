@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Skeleton, Typography, Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import { axios } from "configs";
 import { usePermission } from "hooks";
 import categoryColumns from "configs/table/categoryColumns";
@@ -13,7 +12,6 @@ const CategoryPage = () => {
 
   const navigate = useNavigate();
   const theme = useTheme();
-  const [checkData, setCheckData] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [checkRefresh, setCheckRefresh] = useState(false);
@@ -25,9 +23,6 @@ const CategoryPage = () => {
  
     setCategories(res.data);
 
-    if (res?.data?.length > 0){
-      setCheckData(true);
-    }
     setIsLoadingCategories(false);
   };
 

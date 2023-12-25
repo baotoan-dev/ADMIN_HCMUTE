@@ -32,10 +32,7 @@ const PostDetail = () => {
   const params = useParams();
   const id = +params.id;
   const role = localStorage.getItem("role");
-  const [currentPage, setCurrentPage] = useState(1);
   const [postData, setPostData] = useState();
-  const [modifyLimit, setModifyLimit] = useState(10)
-  const [checkData, setCheckData] = useState(false);
   const [basicInformation, setBasicInformation] = useState(null);
   const [postCategories, setPostCategories] = useState([]);
   const [enabledImages, setEnabledImages] = useState([]);
@@ -120,17 +117,11 @@ const PostDetail = () => {
   // GET APPLICATIONS
   const fetchApplicationsOfPostData = async (id) => {
 
-    let limitNumber = +modifyLimit ? +modifyLimit : 10
-
     const res = await axios.get(`/v1/history/recruiter/${id}/applications`);
 
-    // const res = await axios.get(`/v1/history/recruiter/${id}/applications?page=${currentPage}&limit=${limitNumber}`);
     if (res.success) {
       setApplications(res.data.applications);
 
-      if (res?.data.applications.length > 0) {
-        setCheckData(true);
-      }
     }
   };
 
@@ -141,7 +132,7 @@ const PostDetail = () => {
       fetchPostData(id);
       fetchApplicationsOfPostData(id);
     }
-  }, [currentPage, modifyLimit]);
+  }, [id]);
 
   // HANDLE DISABLE PHOTO
   const handleDisableImage = useCallback((image) => {
@@ -166,10 +157,10 @@ const PostDetail = () => {
 
     const data = {
       id: id,
-      title: basicInformation.title.trim(),
-      companyName: basicInformation.company_name.trim(),
+      title: basicInformation.title ? basicInformation.title : '',
+      companyName: basicInformation.company_name ? basicInformation.company_name : '',
       wardId: basicInformation.ward_id,
-      address: basicInformation.address.trim(),
+      address: basicInformation.address ? basicInformation.address : '',
       phoneContact: basicInformation.phone_contact,
       isDatePeriod: basicInformation.is_date_period,
       isWorkingWeekend: basicInformation.is_working_weekend,
@@ -182,14 +173,14 @@ const PostDetail = () => {
       salaryMax: basicInformation.salary_max,
       salaryType: basicInformation.salary_type_id,
       moneyType: basicInformation.money_type,
-      description: basicInformation.description.trim(),
+      description: basicInformation.description ? basicInformation.description : '',
       categoryIds: postCategories.map((category) => category.child_category_id),
       enabledImageIds: enabledImages.map((image) => image.id),
       disabledImageIds: disabledImages.map((image) => image.id),
       jobTypeId: basicInformation.job_type.job_type_id,
       companyResourceId: basicInformation.resource.company_resource_id,
       url: basicInformation.resource.url,
-      email: basicInformation.email ? basicInformation.email.trim() : null,
+      email: basicInformation.email ? basicInformation.email : null,
       expiredDate: basicInformation.expired_date,
     };
 
@@ -237,22 +228,6 @@ const PostDetail = () => {
       return toast.error("Có lỗi xảy ra, vui lòng thử lại");
     }
   };
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-  }
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  }
-
-  const handleOnchangeLimit = (limit) => {
-    setModifyLimit(limit);
-  }
-
-  const handleSearchFilterParent = (search) => {
-    console.log(search);
-  }
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -367,12 +342,6 @@ const PostDetail = () => {
             </Typography>
             <Box height="400px">
               <Table
-                // handleOnchangeLimit={handleOnchangeLimit}
-                // handleSearchFilterParent={handleSearchFilterParent}
-                // checkData={checkData}
-                // prevPage={prevPage}
-                // currentPage={currentPage}
-                // nextPage={nextPage}
                 rows={applications}
                 columns={applicationsOfPostColumns}
                 showCheckbox={false}

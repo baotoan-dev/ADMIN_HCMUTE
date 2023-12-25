@@ -25,7 +25,6 @@ const AdminLanguageManagerPage = () => {
   usePermission();
   const theme = useTheme();
   const [dataLanguage, setDataLanguage] = useState();
-  const [updateLanguage, setUpdateLanguage] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("Vietnamese");
   const [showConfirmUpdate, setShowConfirmUpdate] = useState(false);
 
@@ -65,7 +64,6 @@ const AdminLanguageManagerPage = () => {
   }, []);
 
   const handleUpdateLanguage = async (newValue) => {
-    setUpdateLanguage(false);
 
     const res = await axios.get(
       newValue === "Vietnamese"

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import { UserDetail } from "components";
 import { usePermission } from "hooks";
 

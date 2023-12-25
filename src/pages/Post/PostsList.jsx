@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Box, Typography, Stack, Skeleton, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import { Table, ThemePosts, PendingPosts } from "components";
 import { axios } from "configs";
 import { postListColumns } from "configs/table";
@@ -68,7 +67,7 @@ const PostsListPage = () => {
       }
     };
     getPostsData();
-  }, [themeId, isToday, status, currentPage, modifyLimit]);
+  }, [themeId, isToday, status, currentPage, modifyLimit, isOwn]);
 
   const prevPage = () => {
     setCurrentPage(currentPage - 1);

@@ -46,7 +46,6 @@ const CategoryDetail = () => {
   const [showConfirmEnableModal, setShowEnableApprovalModal] = useState(false);
   const [checkRefresh, setCheckRefresh] = useState(false)
   const [categories, setCategories] = useState([]);
-  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
   // GET POST DATA
   const fetchCategoryData = async (id) => {
@@ -67,19 +66,18 @@ const CategoryDetail = () => {
     if (id) {
       fetchCategoryData(id);
     }
-  }, [checkRefresh]);
+  }, [checkRefresh, id]);
 
 
   const fetchCategories = async () => {
     let res;
     res = await axios.get(`https://web-service-tkv2.onrender.com/api/v3/children/by-parent/${id}`);
     setCategories(res.data);
-    setIsLoadingCategories(false);
   };
 
   useEffect(() => {
     fetchCategories();
-  }, [checkRefresh]);
+  }, [checkRefresh, id]);
 
 
   // HANDLE SUBMIT

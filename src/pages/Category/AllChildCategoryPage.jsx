@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Skeleton, Typography, Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { axios } from "configs";
@@ -11,12 +11,10 @@ import TableCategory from "../../components/Table/TableCategory"
 const AllChildCategoryPage = () => {
   usePermission();
 
-  const navigate = useNavigate();
   const params = useParams();
 
   const idParent = +params.id;
   const theme = useTheme();
-  const [checkData, setCheckData] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [checkSearch, setCheckSearch] = useState(false);
@@ -28,9 +26,6 @@ const AllChildCategoryPage = () => {
  
     setCategories(res.data);
 
-    if (res?.data?.length > 0){
-      setCheckData(true);
-    }
     setIsLoadingCategories(false);
   };
 

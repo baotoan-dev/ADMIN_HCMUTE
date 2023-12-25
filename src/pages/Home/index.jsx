@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Box} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
-
 import {Card, AreaChart, PieChart} from 'components';
 import {axios} from 'configs';
 import {usePermission} from 'hooks';
