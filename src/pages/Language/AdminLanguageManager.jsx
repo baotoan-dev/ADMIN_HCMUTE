@@ -52,7 +52,7 @@ const AdminLanguageManagerPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `https://web-service-tkv2.onrender.com/api/v3/site/languages?lang=vi`
+        `http://localhost:1902/api/v3/site/languages?lang=vi`
       );
 
       if (res && res.data) {
@@ -67,8 +67,8 @@ const AdminLanguageManagerPage = () => {
 
     const res = await axios.get(
       newValue === "Vietnamese"
-        ? `https://web-service-tkv2.onrender.com/api/v3/site/languages?lang=vi`
-        : `https://web-service-tkv2.onrender.com/api/v3/site/languages?lang=en`
+        ? `http://localhost:1902/api/v3/site/languages?lang=vi`
+        : `http://localhost:1902/api/v3/site/languages?lang=en`
     );
 
     setSelectedLanguage(newValue);
@@ -83,12 +83,12 @@ const AdminLanguageManagerPage = () => {
     setShowConfirmUpdate(true);
     if (selectedLanguage === "Vietnamese") {
       res = await axios.post(
-        `https://web-service-tkv2.onrender.com/api/v3/site?lang=vi`,
+        `http://localhost:1902/api/v3/site?lang=vi`,
         dataLanguage
       );
     } else {
       res = await axios.post(
-        `https://web-service-tkv2.onrender.com/api/v3/site?lang=en`,
+        `http://localhost:1902/api/v3/site?lang=en`,
         dataLanguage
       );
     }

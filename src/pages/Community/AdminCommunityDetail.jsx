@@ -88,7 +88,7 @@ const CommunityDetail = () => {
   // GET POST DATA
   const fetchPostData = async (id) => {
     const res = await axios.get(
-      `https://web-service-tkv2.onrender.com/api/v3/communications/detail/${id}`
+      `http://localhost:1902/api/v3/communications/detail/${id}`
     );
 
     if (res.status === 200) {
@@ -156,7 +156,7 @@ const CommunityDetail = () => {
     // GET RESPONSE
     try {
       await axios.put(
-        `https://web-service-tkv2.onrender.com/api/v3/communications/by-admin/${id}`,
+        `http://localhost:1902/api/v3/communications/by-admin/${id}`,
         communitySubmit,
         {
           headers: {

@@ -135,7 +135,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
             if (e.keyCode === 13) {
                 const { id, value, field } = params;
                 try {
-                    const res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/suggest-search/update/${id}`, {
+                    const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
                       [field]: value,
                     });
                 if (res && res.statusCode === 200) {
@@ -159,7 +159,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
             const {id, status} = params.row;
     
             if (status === 1) {
-                const res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/suggest-search/update/${id}`, {
+                const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
                     status: 0
                 })
                 if (res && res.statusCode === 200) {
@@ -172,7 +172,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
                 }
             }
             else {
-                const res = await axios.put(`https://web-service-tkv2.onrender.com/api/v3/suggest-search/update/${id}`, {
+                const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
                     status: 1
                 })
     

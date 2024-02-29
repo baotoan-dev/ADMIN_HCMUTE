@@ -13,14 +13,16 @@ const AccountDetailPage = () => {
   const { id } = useParams();
 
   return (
-    <>
+    <div style={{
+      padding: "1rem",
+    }}>
       <Typography variant="h2" p="2rem 0" color={theme.palette.color.main}>
         Chi tiết tài khoản
       </Typography>
       <>
         <UserDetail accountId={id} />
       </>
-    </>
+    </div>
   );
 };
 

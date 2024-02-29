@@ -31,7 +31,7 @@ const UserProfile = () => {
         const accessToken = sessionStorage.getItem("access-token");
 
         const fetchData = async () => {
-          const url = "https://web-service-tkv2.onrender.com/api/v3/profiles/me";
+          const url = "http://localhost:1902/api/v3/profiles/me";
           try {
             const res = await axios.get(url, {
               headers: {

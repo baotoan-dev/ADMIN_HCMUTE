@@ -104,7 +104,7 @@ const AdminCommunityCreatePage = () => {
     // Fetch api
     try {
       await axios.post(
-        "https://web-service-tkv2.onrender.com/api/v3/communications/by-admin",
+        "http://localhost:1902/api/v3/communications/by-admin",
         communitySubmit,
         {
           headers: {
