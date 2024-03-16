@@ -17,6 +17,7 @@ const Sidebar = () => {
   const [tabs, setTabs] = useState([]);
   const { sidebarRef, overlayRef } = useAppStateContext();
   const [navLinkActived, setNavLinkActived] = useState("home");
+  const [selectedLink, setSelectedLink] = useState(null);
 
   // USE EFFECT TO CHECK SHOW SIDEBAR WHEN RESIZE SCREEN WIDTH
   useEffect(() => {
@@ -42,6 +43,7 @@ const Sidebar = () => {
 
   // HANDLE ON CLICK LINK ITEM
   const handleOnClickLink = (name) => {
+    setSelectedLink(name === selectedLink ? null : name);
     setNavLinkActived(name);
     if (window.innerWidth < 1200) {
       sidebarRef.current.style.left = "-110%";
@@ -111,7 +113,7 @@ const Sidebar = () => {
           </Box>
         </Box>
       </Box>
-      
+
       <Box className={cx("links")}>
         {tabs && tabs.map((link) => (
           <Box className={cx("link-item")} key={link.title}>
@@ -149,6 +151,7 @@ const Sidebar = () => {
                             backgroundColor: theme.palette.background.hover,
                           },
                         }),
+                        selectedLink === link.name && "fadeInAnimation" // áp dụng animation nếu là liên kết được chọn
                       ]}
                       className={cx("nav-link")}
                     >
@@ -158,7 +161,7 @@ const Sidebar = () => {
                   </Link>
                 </ListItemButton>
                 {
-                  link.subLinks && (
+                  link.subLinks && selectedLink === link.name && (
                     <Collapse in={true} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding>
                         {link.subLinks.map((subLink) => (
@@ -169,20 +172,19 @@ const Sidebar = () => {
                                 backgroundColor: theme.palette.background.active,
                               },
                             }}
+                            className={selectedLink === link.name && "fadeInAnimation"} 
                           >
                             <Link
-
                               to={`${subLink.path}`}
                               key={subLink.name}
                               onClick={() => handleOnClickLink(subLink.name)}
                               style={{ width: "100%" }}
                             >
                               <Box
-
                                 sx={[
                                   {
                                     color:
-                                      navLinkActived === subLink.name 
+                                      navLinkActived === subLink.name
                                         ? theme.palette.color.active
                                         : theme.palette.color.main,
                                     backgroundColor:
@@ -212,8 +214,8 @@ const Sidebar = () => {
             ))}
           </Box>
         ))}
-      </Box>
     </Box>
+    </Box >
   );
 };
 

@@ -4,3 +4,4 @@ export { default as applicationsOfPostColumns } from "./applicationsOfPostColumn
 export { default as workerColumns } from "./workerColumns";
 export { default as workerDetailColumns } from "./workerDetailColumns";
 export { default as communityListColumns} from './communityListColumns'
+export { default as serviceColumns } from "./serviceColumns";

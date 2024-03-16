@@ -1,9 +1,9 @@
-import {useState, useEffect} from 'react';
-import {Box} from '@mui/material';
-import {useTheme} from '@mui/material/styles';
-import {Card, AreaChart, PieChart} from 'components';
-import {axios} from 'configs';
-import {usePermission} from 'hooks';
+import { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Card, AreaChart, PieChart } from 'components';
+import { axios } from 'configs';
+import { usePermission } from 'hooks';
 
 const cards = [
   {
@@ -68,7 +68,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box sx={{width: '100%', padding: '1rem'}}>
+    <Box sx={{ width: '100%', padding: '1rem' }}>
       {/* Cards */}
       <Box
         sx={{
@@ -82,7 +82,8 @@ const HomePage = () => {
             key={card.title}
             sx={{
               width: {
-                xs: '50%',
+                xs: '100%',
+                sm: '50%',
                 md: '33.33%',
               },
               marginBottom: '1.25rem',
@@ -108,8 +109,14 @@ const HomePage = () => {
           >
             Thống kê
           </Box>
-          <Box sx={{marginBottom: '20px'}}>
-            <Box sx={{display: 'flex'}}>
+          <Box sx={{ marginBottom: '20px' }}>
+            {/* nowrap */}
+            <Box sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              width: '100%',
+              gap: '20px',
+            }}>
               <Box
                 sx={{
                   width: {
@@ -169,7 +176,7 @@ const HomePage = () => {
 
           {/* Pie */}
 
-          <Box sx={{marginBottom: '20px'}}>
+          <Box sx={{ marginBottom: '20px' }}>
             <Box
               sx={{
                 width: {

@@ -29,6 +29,11 @@ const routes = {
   communityManager: "/admin/community-manager",
   communityDetail: "/admin/community-detail/:id",
   sendMail: "/admin/send-mail",
+  serviceManager: "/admin/service-manager",
+  createService: "/admin/service-manager/create",
+  detailService: "/admin/service-manager/:id",
+  companyManager: "/admin/company-manager",
+  companyDetail: "/admin/company-manager/:id",
 };
 
 export default routes;

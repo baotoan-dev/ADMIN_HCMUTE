@@ -32,6 +32,7 @@ const CustomImageList = ({ images, handleOnClick }) => {
                 <ImageListItemBar
                   sx={{ background: "transparent" }}
                   position="top"
+                  key={image.id}
                   actionIcon={
                     <IconButton
                       sx={{

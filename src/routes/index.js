@@ -30,8 +30,14 @@ import {
   AdminLanguageManagerPage,
   AdminCommunityManagerPage,
   AdminCommunityCreatePage,
-  AdminCommunityDetailPage
+  AdminCommunityDetailPage,
+  // Serivce Manager
+  AdminServiceManagerPage,
+  AdminServiceCreatePage,
+  ServiceDetailPage,
 } from "pages";
+import Company from "pages/Company";
+import CompanyDetail from "pages/Company/CompanyDetail";
 import SendMailPage from "pages/SendMail/SendMail";
 
 const publicRoutes = [
@@ -174,7 +180,33 @@ const publicRoutes = [
     path: routes.communityDetail,
     component: AdminCommunityDetailPage,
     layout: MainLayout
-  }
+  },
+  // Serivce Manager
+  {
+    path: routes.serviceManager,
+    component: AdminServiceManagerPage,
+    layout: MainLayout
+  },
+  {
+    path: routes.createService,
+    component: AdminServiceCreatePage,
+    layout: MainLayout
+  },
+  {
+    path: routes.detailService,
+    component: ServiceDetailPage,
+    layout: MainLayout
+  },
+  {
+    path: routes.companyManager,
+    component: Company,
+    layout: MainLayout
+  },
+  {
+    path: routes.companyDetail,
+    component: CompanyDetail,
+    layout: MainLayout
+  },
 ];
 
 export { publicRoutes };

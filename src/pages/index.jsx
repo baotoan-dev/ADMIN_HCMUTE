@@ -24,3 +24,9 @@ export { default as AdminLanguageManagerPage} from './Language/AdminLanguageMana
 export { default as AdminCommunityCreatePage} from './Community/AdminCommunityCreate'
 export { default as AdminCommunityManagerPage } from './Community/AdminCommunityManager'
 export { default as AdminCommunityDetailPage } from './Community/AdminCommunityDetail'
+
+// Service Manager
+export { default as AdminServiceManagerPage } from './ServiceManager/ServiceManager'
+export { default as AdminServiceCreatePage } from './ServiceManager/CreateService'
+export { default as ServiceDetailPage } from './ServiceManager/DetailServiceManager'
+

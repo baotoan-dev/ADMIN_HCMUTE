@@ -5,12 +5,9 @@ import {
   ThemeIcon,
   BannerIcon,
   MultiAccountsIcon,
-  Category,
-  SearchSuggestIcon,
 } from "components/Icons";
-
-import { FiCreditCard } from "react-icons/fi";
-import { BsCurrencyDollar, BsShield } from "react-icons/bs";
+import { MdCleaningServices } from "react-icons/md";
+import { BsCurrencyDollar } from "react-icons/bs";
 import avatar from "./avatar.jpg";
 import avatar2 from "./avatar2.jpg";
 import avatar3 from "./avatar3.png";
@@ -20,6 +17,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import RedeemIcon from '@mui/icons-material/Redeem';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import { FaBuilding } from 'react-icons/fa';
 
 export const normalAdminTabs = [
   {
@@ -107,6 +105,16 @@ export const superAdminTabs = [
         path: "/admin/community-manager",
         name: "Communities",
         icon: <ChatBubbleIcon />,
+      },
+      {
+        path: '/admin/service-manager',
+        name: 'Dịch vụ',
+        icon: <MdCleaningServices />,
+      },
+      {
+        path: '/admin/company-manager',
+        name: 'Công ty',
+        icon: <FaBuilding />,
       },
       {
         path: "/admin/send-mail",
