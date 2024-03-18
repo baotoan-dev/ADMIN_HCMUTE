@@ -1,5 +1,5 @@
 export const companyStatus = {
-  notVerify: 0,
+  verify: 0,
   accept: 1,
   block: 2,
 };

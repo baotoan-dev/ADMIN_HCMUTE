@@ -89,18 +89,24 @@ const CompanyDetail = () => {
 
   const handleUpdateStatus = async (status) => {
     try {
-      await axios.put(`/v3/companies/${id}/status`, { status });
-      toast.success("Successfully updated status");
+      const response = await axios.put(`http://localhost:1902/api/v3/companies/${id}/status`, { status });
+      
+      if (response.statusCode === 200) {
+        toast.success("Update status company successfully");
+      }
+
+      else {
+        toast.error("Update status company failed");
+      }
       setIsLoad(!isLoad);
     } catch (error) {
       throw error;
     }
   };
-  console.log(company);
   return (
     <>
       <Box color={theme.palette.color.main} margin={3}>
-        <Typography variant="h1">Company's information</Typography>
+        <Typography variant="h2">Company's information</Typography>
 
         <Box mt={3}>
           {/* Logo */}
@@ -141,18 +147,43 @@ const CompanyDetail = () => {
                 }}
               >
                 <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                  <Typography variant="h3">Status</Typography>
+                  <Typography variant="h3">Status: </Typography>
                   {
                     company.status === 0 ? (
-                      <Chip label="Not verify" color="error" />
+                      <Chip label="Not verify" color="warning" />
                     ) : company.status === 1 ? (
-                      <Chip label="Active" color="success" />
+                      <Chip label="Accept" color="success" />
                     ) : (
-                      <Chip label="Block" color="warning" />
+                      <Chip label="Block" color="error" />
                     )
                   }
                 </Box>
-                {company.status ? (
+                {company.status === 0 ? (
+                  <div style={{
+                    display: "flex",
+                    gap: "8px",
+                  }}>
+                    <Button
+                      variant="outlined"
+                      style={{
+                        backgroundColor: 'red'
+                      }}
+                      onClick={() => handleUpdateStatus(companyStatus.block)}
+                    >
+                      Block
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      style={{
+                        backgroundColor: 'green'
+                      }}
+                      onClick={() => handleUpdateStatus(companyStatus.verify)}
+                    >
+                      Verify
+                    </Button>
+                  </div>
+
+                ) : company.status === 1 ? (
                   <Button
                     variant="outlined"
                     onClick={() => handleUpdateStatus(companyStatus.block)}
@@ -164,7 +195,7 @@ const CompanyDetail = () => {
                     variant="outlined"
                     onClick={() => handleUpdateStatus(companyStatus.accept)}
                   >
-                    Accept
+                    Unclock
                   </Button>
                 )}
               </Box>

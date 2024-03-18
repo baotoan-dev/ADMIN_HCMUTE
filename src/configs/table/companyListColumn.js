@@ -6,7 +6,7 @@ const { default: routes } = require("configs/routes");
 const companyListColumn = [
   {
     field: "id",
-    headerName: "Id",
+    headerName: "ID",
     flex: 0.5,
     minWidth: 80,
     filterable: true,
@@ -63,11 +63,26 @@ const companyListColumn = [
     renderCell: (params) => {
       switch (params.row.status) {
         case 0:
-          return <Chip variant="outlined" color="primary" label="Pending" />;
+          return <Chip style={{
+            backgroundColor: "yellow",
+            color: "black",
+            borderColor: "yellow",
+            boxShadow: "0 0 0 1px black",
+          }} variant="outlined" color="primary" label="Not verify" />;
         case 1:
-          return <Chip variant="outlined" color="success" label="Accepted" />;
+          return <Chip variant="outlined" color="success" label="Accepted" style={{
+            backgroundColor: "green",
+            color: "white",
+            borderColor: "green",
+            boxShadow: "0 0 0 1px black",
+          }} />;
         default:
-          return <Chip variant="outlined" label="Not status" />;
+          return <Chip variant="outlined" label="Block" style={{
+            backgroundColor: "red",
+            color: "white",
+            borderColor: "red",
+            boxShadow: "0 0 0 1px black",
+          }} />;
       }
     },
   },
@@ -96,7 +111,7 @@ const companyListColumn = [
   },
   {
     field: "email",
-    headerName: "email",
+    headerName: "Email",
     flex: 1,
     minWidth: 300,
     filterable: true,

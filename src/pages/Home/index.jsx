@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Card, AreaChart, PieChart } from 'components';
 import { axios } from 'configs';
 import { usePermission } from 'hooks';
+import { ExperienceDistribution } from 'components/Chart/Barchart/bar';
 
 const cards = [
   {
@@ -134,7 +135,8 @@ const HomePage = () => {
                 >
                   Account per month
                 </Box>
-                <AreaChart data={statisticData.accountPerMonth} />
+                {/* <AreaChart data={statisticData.accountPerMonth} /> */}
+                <ExperienceDistribution />
               </Box>
               <Box
                 sx={{
