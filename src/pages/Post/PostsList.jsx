@@ -14,114 +14,42 @@ const PostsListPage = () => {
   const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [totalPages, setTotalPages] = useState(1);
-  const [modifyLimit, setModifyLimit] = useState(10)
-  const [checkData, setCheckData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const themeId = searchParams.get("themeId");
   const isToday = searchParams.get("is_today");
   const status = searchParams.get("status");
   const isOwn = searchParams.get("own");
-  const [dataSearch, setDataSearch] = useState('')
-  const [checkSearch, setCheckSearch] = useState(false);
   // GET POSTS LIST
   useEffect(() => {
     const getPostsData = async () => {
       let res;
-
-      let limitNumber = +modifyLimit ? +modifyLimit : 10
 
       if (themeId) {
         // GET POSTS BY THEME
         res = await axios.get(`/v1/posts/theme/all?tid=${themeId}`);
       } else if (isToday === "true" && status === "0") {
         // GET TODAY PENDING POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_today=true&status=0&page=${currentPage}&limit=${limitNumber}`);
+        res = await axios.get(`/v1/posts/by-admin?is_today=true&status=0`);
       } else if (isToday === "true") {
         // GET TODAY POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_today=true&page=${currentPage}&limit=${limitNumber}`);
+        res = await axios.get(`/v1/posts/by-admin?is_today=true`);
       } else if (status === "0") {
         // GET PENDING POSTS
-        res = await axios.get(`/v1/posts/by-admin?status=0&page=${currentPage}&limit=${limitNumber}`);
+        res = await axios.get(`/v1/posts/by-admin?status=0`);
       } else if (isOwn === "true") {
         // GET OWN POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_own=true&page=${currentPage}&limit=${limitNumber}`);
+        res = await axios.get(`/v1/posts/by-admin?is_own=true`);
       } else {
         // GET ALL POSTS
-        res = await axios.get(`/v1/posts/by-admin?page=${currentPage}&limit=${limitNumber}`);
+        res = await axios.get(`/v1/posts/by-admin`);
       }
 
       if (res && res.success) {
-        // setTotalPages(res.totalPosts);
-
-        if (res?.data?.length > 0)
-        {
-          setCheckData(true);
-        }
         setPosts(res.data);
         setIsLoading(false);
       }
-
-      else {
-        setCheckData(false);
-      }
     };
     getPostsData();
-  }, [themeId, isToday, status, currentPage, modifyLimit, isOwn]);
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-  }
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  }  
-
-  const handleSearchFilterParent = (async (search) => {
-    if (search !== '') {
-      let resSearch;
-      if (themeId) {
-        // GET POSTS BY THEME
-        // resSearch = await axios.get(`/v1/posts/theme/all?tid=${themeId}&page=${currentPage}&limit=${limitNumber}`);
-      } else if (isToday === "true" && status === "0") {
-        // GET TODAY PENDING POSTS
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&is_today=true&status=0`);
-      } else if (isToday === "true") {
-        // GET TODAY POSTS
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&is_today=true`);
-      } else if (status === "0") {
-        // GET PENDING POSTS
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&status=0`);
-      } else if (isOwn === "true") {
-        // GET OWN POSTS
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&is_own=true`);
-      } else {
-        // SEARCH ALL POSTS
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}`);
-      }
-
-      if (resSearch?.data?.length > 0) {
-        setCheckSearch(true)
-        setCheckData(true);
-        setDataSearch(resSearch?.data)
-      }
-      else {
-        setCheckSearch(true)
-        setDataSearch([])
-        setCheckData(true);
-     }
-    }
-
-    else
-    {
-      setDataSearch([])
-      setCheckSearch(false)
-    }
-  });
-
-  const handleOnchangeLimit = (limit) => {
-    setModifyLimit(limit);
-  }
+  }, [themeId, isToday, status, isOwn]);
 
   return (
     <div>
@@ -175,20 +103,10 @@ const PostsListPage = () => {
                       </Link>
                     </Box>
                   </Box>
-                 
+
                   <Table
-                    // totalPages={totalPages}
-                    checkAutoFocus={true}
-                    checkSearch={checkSearch}
-                    handleOnchangeLimit={handleOnchangeLimit}
-                    handleSearchFilterParent={handleSearchFilterParent}
-                    checkData={checkData}
-                    prevPage={prevPage}
-                    nextPage={nextPage}
-                    currentPage={currentPage}
-                    rows={checkSearch === true ? (dataSearch?.length > 0 ? dataSearch : []) : posts} 
                     columns={postListColumns}
-                    showCheckbox={false}
+                    rows={posts}
                   />
                 </Box>
               )}

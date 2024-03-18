@@ -34,19 +34,10 @@ const WorkerManager = () => {
     fetchWorkers();
   }, [currentPage, modifyLimit]);
 
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-  }
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  }
-
   const handleSearchFilterParent = (async (search) => {
     if (search) {
       let resSearch;
-      
+
       resSearch = await axios.get(`/v1/accounts/search?role=2&search=${search}`);
 
       if (resSearch?.data?.length > 0) {
@@ -60,15 +51,12 @@ const WorkerManager = () => {
         setCheckSearch(true)
       }
     }
-    else{
+    else {
       setDataSearch([])
       setCheckSearch(false)
     }
   });
 
-  const handleOnchangeLimit = (limit) => {
-    setModifyLimit(limit);
-  }
 
   return (
     <>
@@ -112,19 +100,7 @@ const WorkerManager = () => {
             </Box>
           </Box>
 
-          <Table 
-            checkAutoFocus={true}
-            checkSearch={checkSearch}
-            handleSearchFilterParent={handleSearchFilterParent}
-            handleOnchangeLimit={handleOnchangeLimit}
-            rows={checkSearch === true ? (dataSearch?.length > 0 ? dataSearch : []) : workers} 
-            checkData={checkData}
-            prevPage={prevPage}
-            nextPage={nextPage}
-            currentPage={currentPage}
-            columns={workerColumns} 
-            showCheckbox={false} 
-          />
+          <Table rows={workers} columns={workerColumns} showCheckbox={false} />
         </Box>
       )}
     </>

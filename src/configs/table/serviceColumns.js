@@ -72,9 +72,19 @@ const serviceColumns = [
     renderCell: (params) => {
       switch (params.row.status) {
         case 0:
-          return <Chip variant="outlined" color="primary" label="Disable" />;
+          return <Chip variant="outlined" color="primary" label="Disable" style={{
+            backgroundColor: "red",
+            color: "white",
+            border: 'none',
+            boxShadow: "0 0 0 0",
+          }} />;
         case 1:
-          return <Chip variant="outlined" color="success" label="Enable" />;
+          return <Chip variant="outlined" color="success" label="Enable" style={{
+            backgroundColor: "green",
+            color: "white",
+            border: 'none',
+            boxShadow: "0 0 0 0",
+          }} />;
         default:
       }
     },

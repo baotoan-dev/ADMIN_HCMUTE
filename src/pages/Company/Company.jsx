@@ -29,6 +29,7 @@ const Company = () => {
       <Box
         sx={{
           width: "100%",
+          padding: "1rem",
           height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
         }}
       >
