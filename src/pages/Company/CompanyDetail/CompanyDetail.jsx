@@ -90,7 +90,7 @@ const CompanyDetail = () => {
   const handleUpdateStatus = async (status) => {
     try {
       const response = await axios.put(`http://localhost:1902/api/v3/companies/${id}/status`, { status });
-      
+
       if (response.statusCode === 200) {
         toast.success("Update status company successfully");
       }
@@ -166,7 +166,10 @@ const CompanyDetail = () => {
                     <Button
                       variant="outlined"
                       style={{
-                        backgroundColor: 'red'
+                        backgroundColor: 'red',
+                        border: 'none',
+                        boxShadow: '0 1px 1px black',
+                        color: 'white'
                       }}
                       onClick={() => handleUpdateStatus(companyStatus.block)}
                     >
@@ -175,7 +178,10 @@ const CompanyDetail = () => {
                     <Button
                       variant="outlined"
                       style={{
-                        backgroundColor: 'green'
+                        backgroundColor: 'green',
+                        border: 'none',
+                        boxShadow: '0 1px 1px black',
+                        color: 'white'
                       }}
                       onClick={() => handleUpdateStatus(companyStatus.verify)}
                     >
@@ -186,6 +192,12 @@ const CompanyDetail = () => {
                 ) : company.status === 1 ? (
                   <Button
                     variant="outlined"
+                    style={{
+                      backgroundColor: 'red',
+                      border: 'none',
+                      boxShadow: '0 1px 1px black',
+                      color: 'white'
+                    }}
                     onClick={() => handleUpdateStatus(companyStatus.block)}
                   >
                     Block
@@ -193,7 +205,13 @@ const CompanyDetail = () => {
                 ) : (
                   <Button
                     variant="outlined"
-                    onClick={() => handleUpdateStatus(companyStatus.accept)}
+                    style={{
+                      backgroundColor: 'green',
+                      border: 'none',
+                      boxShadow: '0 1px 1px black',
+                      color: 'white'
+                    }}
+                    onClick={() => handleUpdateStatus(companyStatus.verify)}
                   >
                     Unclock
                   </Button>

@@ -49,13 +49,33 @@ const PostListColumns = [
     renderCell: (params) => {
       switch (params.row.status) {
         case 0:
-          return <Chip variant="outlined" color="primary" label="Pending" />;
+          return <Chip variant="outlined" color="primary" label="Pending" style={{
+            backgroundColor: 'warring',
+            border: 'none',
+            boxShadow: '0px 0px 1px 1px black',
+            color: 'black'
+          }} />;
         case 1:
-          return <Chip variant="outlined" color="success" label="Accepted" />;
+          return <Chip variant="outlined" color="success" label="Accepted" style={{
+            backgroundColor: 'green',
+            border: 'none',
+            boxShadow: '0px 0px 1px 1px black',
+            color: 'black'
+          }} />;
         case 2:
-          return <Chip variant="outlined" color="error" label="Rejected" />;
+          return <Chip variant="outlined" color="error" label="Rejected" style={{
+            backgroundColor: 'red',
+            border: 'none',
+            boxShadow: '0px 0px 1px 1px black',
+            color: 'black'
+          }} />;
         case 3:
-          return <Chip variant="outlined" color="secondary" label="Closed" />;
+          return <Chip variant="outlined" color="secondary" label="Closed" style={{
+            backgroundColor: 'grey',
+            border: 'none',
+            boxShadow: '0px 0px 1px 1px black',
+            color: 'black'
+          }} />;
         default:
       }
     },

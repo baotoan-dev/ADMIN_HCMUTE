@@ -128,7 +128,7 @@ const Table = forwardRef((props, ref) => {
       rows={rows}
       columns={columns}
       autoPageSize
-      checkboxSelection={showCheckbox}
+      checkboxSelection={false}
       rowHeight={46}
       disableSelectionOnClick={true}
       disableExtendRowFullWidth={true}

@@ -70,9 +70,19 @@ const searchSuggestColumn = [
     renderCell: (params) => {
       switch (params.row.status) {
         case 0:
-          return <Chip variant="outlined" color="primary" label="Disable" />;
+          return <Chip variant="outlined" color="primary" label="Disable" style={{
+            backgroundColor: "#f44336",
+            border: "none",
+            color: "white",
+            boxShadow: "0 0 0 1px black",
+          }}/>;
         case 1:
-          return <Chip variant="outlined" color="success" label="Enable" />;
+          return <Chip variant="outlined" color="success" label="Enable" style={{
+            backgroundColor: "#4caf50",
+            border: "none",
+            color: "white",
+            boxShadow: "0 0 0 1px black",
+          }}/>;
         default:
       }
     },
