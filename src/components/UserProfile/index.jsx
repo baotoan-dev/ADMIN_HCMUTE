@@ -79,12 +79,14 @@ const UserProfile = () => {
     }
   };
 
+  console.log(profiles);
+
   return (
     <>
       {profiles && (
         <Box className={cx("wrapper")} sx={{ backgroundColor: theme.palette.background.main }}>
           <Box className={cx("info")} sx={{ borderBottom: theme.palette.border }}>
-            <img src={avatar} alt="" />
+            <img src={profiles.avatarPath ? profiles.avatarPath : avatar} alt="" />
             <Box className={cx("content")} sx={{ color: theme.palette.color.main }}>
               <p className={cx("name")}>{profiles?.name}</p>
               <p className={cx("phone")}>{profiles?.phone}</p>
@@ -92,8 +94,12 @@ const UserProfile = () => {
             </Box>
           </Box>
 
-          <Box>
-            <Button variant="outlined" color="primary" fullWidth onClick={handleSignout}>
+          <Box style={{
+            width: "100%",
+          }}>
+            <Button variant="outlined" color="primary" style={{
+              width: "100%",
+            }} onClick={handleSignout}>
               Sign out
             </Button>
           </Box>

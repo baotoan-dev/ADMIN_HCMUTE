@@ -135,7 +135,6 @@ const AuthForm = () => {
           : navigate("/admin/posts/create");
       }, 1000);
     } catch (error) {
-      console.log("::: error: ", error);
       return toast.error("Đăng nhập thất bại");
     }
   };
