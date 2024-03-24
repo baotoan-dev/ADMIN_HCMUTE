@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -106,6 +106,7 @@ const AdminLanguageManagerPage = () => {
 
   return (
     <Box sx={{ padding: "1rem" }}>
+
       <Typography
         variant="h3"
         style={{ marginBottom: "1.5rem" }}
@@ -113,41 +114,48 @@ const AdminLanguageManagerPage = () => {
       >
         Quản lý ngôn ngữ
       </Typography>
-
-      <Button
-        sx={{
-          marginBottom: "1.5rem",
-          justifyContent: "flex-end",
-          position: "relative",
-          overflow: "hidden",
-        }}
-        variant="outlined"
-        component="label"
-      >
-        Upload FILE
-        <input
-          type="file"
-          accept=".json"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            opacity: 0,
+      <Box sx={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "1rem",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        marginBottom: "1.5rem",
+      }}>
+        <Button
+          sx={{
+            marginBottom: "1.5rem",
+            justifyContent: "flex-end",
+            position: "relative",
+            overflow: "hidden",
           }}
-          onChange={(e) => handleImportFile(e)}
+          variant="outlined"
+          component="label"
+        >
+          Upload FILE
+          <input
+            type="file"
+            accept=".json"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              opacity: 0,
+            }}
+            onChange={(e) => handleImportFile(e)}
+          />
+        </Button>
+
+        <Autocomplete
+          disablePortal
+          size="small"
+          options={optionLangauge}
+          value={selectedLanguage}
+          onChange={(event, newValue) => handleUpdateLanguage(newValue.label)}
+          sx={{ width: 180, marginBottom: "1rem" }}
+          renderInput={(params) => <TextField {...params} label="Language" />}
         />
-      </Button>
-
-      <Autocomplete
-        disablePortal
-        size="small"
-        options={optionLangauge}
-        value={selectedLanguage}
-        onChange={(event, newValue) => handleUpdateLanguage(newValue.label)}
-        sx={{ width: 180, marginBottom: "1rem" }}
-        renderInput={(params) => <TextField {...params} label="Language" />}
-      />
-
+      </Box>
       <Grid container>
         <Grid item xs={12} lg={12}>
           <Item>
@@ -161,7 +169,7 @@ const AdminLanguageManagerPage = () => {
                 const inputValue = e.target.value;
                 try {
                   setDataLanguage(JSON.parse(inputValue));
-                } catch (error) {}
+                } catch (error) { }
               }}
               inputProps={{
                 style: {

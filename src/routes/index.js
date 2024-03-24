@@ -36,6 +36,7 @@ import {
   AdminServiceCreatePage,
   ServiceDetailPage,
 } from "pages";
+import Analytics from "pages/Analytics/Analytics";
 import Company from "pages/Company";
 import CompanyDetail from "pages/Company/CompanyDetail";
 import SendMailPage from "pages/SendMail/SendMail";
@@ -44,6 +45,11 @@ const publicRoutes = [
   {
     path: "/",
     component: HomePage,
+    layout: MainLayout,
+  },
+  {
+    path: routes.analytics,
+    component: Analytics,
     layout: MainLayout,
   },
   {
@@ -135,7 +141,7 @@ const publicRoutes = [
     path: routes.createChildCategory,
     component: CreateChildCategoryPage,
     layout: MainLayout
-  }, 
+  },
   {
     path: routes.createParentCategory,
     component: CreateParentCategoryPage,

@@ -18,6 +18,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import RedeemIcon from '@mui/icons-material/Redeem';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import { FaBuilding } from 'react-icons/fa';
+import { MdOutlineAnalytics } from "react-icons/md";
 
 export const normalAdminTabs = [
   {
@@ -46,6 +47,11 @@ export const superAdminTabs = [
         name: "home",
         icon: <HomeIcon />,
       },
+      {
+        path: "/admin/analytics",
+        name: "analysis",
+        icon: <MdOutlineAnalytics />,
+      }
     ],
   },
   {

@@ -34,6 +34,8 @@ const routes = {
   detailService: "/admin/service-manager/:id",
   companyManager: "/admin/company-manager",
   companyDetail: "/admin/company-manager/:id",
+  // analytics
+  analytics: "/admin/analytics",
 };
 
 export default routes;
