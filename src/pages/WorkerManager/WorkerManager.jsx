@@ -13,50 +13,17 @@ const WorkerManager = () => {
   const theme = useTheme();
   const [workers, setWorkers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [checkData, setCheckData] = useState(false);
-  const [modifyLimit, setModifyLimit] = useState(10)
-  const [dataSearch, setDataSearch] = useState('')
-  const [checkSearch, setCheckSearch] = useState(false);
 
   const fetchWorkers = async () => {
 
-    let limitNumber = +modifyLimit ? +modifyLimit : 10
-
-    const res = await axios.get(`/v1/accounts?role=2&page=${currentPage}&limit=${limitNumber}`);
-    // console.log("res:", res.data);
+    const res = await axios.get(`/v1/accounts?role=2`);
     setWorkers(res.data);
-    setCheckData(true);
     setIsLoading(false);
   };
 
   useEffect(() => {
     fetchWorkers();
-  }, [currentPage, modifyLimit]);
-
-  const handleSearchFilterParent = (async (search) => {
-    if (search) {
-      let resSearch;
-
-      resSearch = await axios.get(`/v1/accounts/search?role=2&search=${search}`);
-
-      if (resSearch?.data?.length > 0) {
-        setCheckData(true);
-        setCheckSearch(true)
-        setDataSearch(resSearch?.data)
-      }
-      else {
-        setCheckData(true);
-        setDataSearch([])
-        setCheckSearch(true)
-      }
-    }
-    else {
-      setDataSearch([])
-      setCheckSearch(false)
-    }
-  });
-
+  }, []);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import { DataGrid, GridToolbarQuickFilter, GridToolbarExport } from "@mui/x-data-grid";
 import { styled } from "@mui/material/styles";
 
 import { Box, Typography } from "@mui/material";
@@ -18,6 +18,14 @@ function CustomNoRowsOverlay() {
     </Box>
   );
 }
+
+const CssGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
+  color: theme.palette.color.primary,
+  fontSize: "1rem",
+  "& .MuiMenuItem-root": {
+    fontSize: "1rem",
+  },
+}));
 
 const CssGridToolbarQuickFilter = styled(GridToolbarQuickFilter)(
   ({ theme }) => ({
@@ -57,6 +65,7 @@ function CustomToolbar() {
         padding: "0.625rem",
       }}
     >
+      <CssGridToolbarExport />
       <CssGridToolbarQuickFilter />
     </Box>
   );

@@ -61,28 +61,13 @@ const companyListColumn = [
     minWidth: 110,
     filterable: true,
     renderCell: (params) => {
-      switch (params.row.status) {
+      switch (params.row.isActive) {
         case 0:
-          return <Chip style={{
-            backgroundColor: "yellow",
-            color: "black",
-            borderColor: "yellow",
-            boxShadow: "0 0 0 1px black",
-          }} variant="outlined" color="primary" label="Not verify" />;
+          return <Chip label="No Active" color="error" />;
         case 1:
-          return <Chip variant="outlined" color="success" label="Accepted" style={{
-            backgroundColor: "green",
-            color: "white",
-            borderColor: "green",
-            boxShadow: "0 0 0 1px black",
-          }} />;
+          return <Chip label="Active" color="success" />;
         default:
-          return <Chip variant="outlined" label="Block" style={{
-            backgroundColor: "red",
-            color: "white",
-            borderColor: "red",
-            boxShadow: "0 0 0 1px black",
-          }} />;
+          return <Chip label="No Active" color="error" />;
       }
     },
   },

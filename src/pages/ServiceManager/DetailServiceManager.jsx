@@ -24,12 +24,14 @@ import { usePermission } from "hooks";
 import imageCompression from "browser-image-compression";
 import { updateServiceValidation } from "validations/Service/update";
 import { validatePostImages } from "validations";
+import { useNavigate } from "react-router-dom";
 
 const ServiceDetail = () => {
   usePermission();
   const theme = useTheme();
   const params = useParams();
   const id = +params.id;
+  const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const [serviceData, setServiceData] = useState();
   const [basicInformation, setBasicInformation] = useState(null);
@@ -40,6 +42,7 @@ const ServiceDetail = () => {
   const [check, setCheck] = useState(false);
 
   const handleOnChangeImages = async (e) => {
+
     const imagesUpload = Array.from(e.target.files);
 
     const options = {
@@ -93,11 +96,10 @@ const ServiceDetail = () => {
 
     if (res.status === 200) {
       const { image, ...otherData } = res.data;
-
       setBasicInformation(otherData);
       setServiceData(res.data);
-      setEnabledImages(res.data.iconData ? [{
-        image: res.data.iconData,
+      setEnabledImages(res.data && res.data.imageData.length > 0 ? [{
+        image: res.data.imageData[0].image,
       }] : []);
     }
   };
@@ -108,7 +110,7 @@ const ServiceDetail = () => {
     if (id) {
       fetchPostData(id);
     }
-  }, [check]);
+  }, [check, id]);
 
   // HANDLE DISABLE PHOTO
   const handleDisableImage = useCallback(
@@ -146,6 +148,8 @@ const ServiceDetail = () => {
     serviceSubmit.append("price", basicInformation.price ? basicInformation.price : 0);
     serviceSubmit.append("discount", basicInformation.discount ? basicInformation.discount : 0);
     serviceSubmit.append("expiration", basicInformation.expiration ? basicInformation.expiration : 0);
+    serviceSubmit.append("type", basicInformation.type ? basicInformation.type : 'V1');
+    serviceSubmit.append("status", basicInformation.status ? basicInformation.status : 1);
     serviceSubmit.append("deleteImages", deleteImages);
 
     images.length > 0 && images.forEach((image) => serviceSubmit.append("images", image.image));
@@ -159,7 +163,7 @@ const ServiceDetail = () => {
 
     // GET RESPONSE
     try {
-      await axios.put(
+      const res = await axios.put(
         `http://localhost:1902/api/v3/service-recruitment/${id}`,
         serviceSubmit,
         {
@@ -168,9 +172,11 @@ const ServiceDetail = () => {
           },
         }
       );
-      setCheck(!check);
-      setImages([]);
-      return toast.success("Cập nhật dịch vụ thành công");
+      if (res && res.statusCode) {
+        setCheck(!check);
+        setImages([]);
+        return toast.success("Cập nhật dịch vụ thành công");
+      }
     } catch (error) {
       return toast.error("Cập nhật dịch vụ thất bại");
     }
@@ -183,14 +189,11 @@ const ServiceDetail = () => {
     );
   };
 
-  const deleteCommunity = async (id) => {
-    const res = await axios.put(`http://localhost:1902/api/v3/service-recruitment/${id}`, {
-      name: basicInformation.name,
-      description: basicInformation.description,
-      price: basicInformation.price,
-      discount: basicInformation.discount,
-      expiration: basicInformation.expiration,
-      status: 0,
+  const hideCommunity = async (id, status) => {
+    const res = await axios.put(`http://localhost:1902/api/v3/service-recruitment/${id}/status/${status}`, {
+      data: {
+        status: 0
+      }
     }, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -199,6 +202,7 @@ const ServiceDetail = () => {
 
     if (res.statusCode === 200) {
       toast.success("Ẩn dịch vụ thành công")
+      navigate('/admin/service-manager')
     }
     else {
       toast.error('Ẩn dịch vụ thất bại')
@@ -209,7 +213,7 @@ const ServiceDetail = () => {
     <Box sx={{ padding: "1rem" }}>
       {role === "2" && (
         <Tooltip title="Quay trở lại danh sách">
-          <Link to="/admin/community-manager">
+          <Link to="/admin/service-manager">
             <IconButton>
               <ArrowLeft />
             </IconButton>
@@ -233,16 +237,28 @@ const ServiceDetail = () => {
         </Link>
       </Box>
 
-      <Box
-        sx={{
+      <Box sx={
+        {
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
           marginTop: "10px",
-        }}
-      >
-        <Button variant="outlined" onClick={() => deleteCommunity(id)}>Ẩn dịch vụ</Button>
+        }
+      }>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "10px",
+            marginRight: "10px",
+          }}
+        >
+          <Button variant="outlined" onClick={() => hideCommunity(id, basicInformation?.status === 1 ? 0 : 1)}>
+            {basicInformation?.status === 1 ? 'Ẩn dịch vụ' : 'Hiện dịch vụ'}
+          </Button>
+        </Box>
       </Box>
+
       {serviceData ? (
         <Box>
           {/* BASIC INFORMATION */}

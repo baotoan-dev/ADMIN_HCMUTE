@@ -71,14 +71,12 @@ const AdminServiceManagerPage = () => {
               >
                 Danh sách dịch vụ
               </Typography>
-
               <Box>
                 <Link to="/admin/service-manager/create">
                   <Button variant="outlined">Tạo dịch vụ</Button>
                 </Link>
               </Box>
             </Box>
-
             <TableCommunity
               handleSearchFilterParent={handleSearchFilterParent}
               rows={services}

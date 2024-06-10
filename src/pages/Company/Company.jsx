@@ -42,7 +42,6 @@ const Company = () => {
         >
           List company
         </Typography>
-
         <TableCompany rows={companies} columns={companyListColumn} />
       </Box>
     </>

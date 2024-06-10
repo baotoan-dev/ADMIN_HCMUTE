@@ -89,7 +89,7 @@ const CompanyDetail = () => {
 
   const handleUpdateStatus = async (status) => {
     try {
-      const response = await axios.put(`http://localhost:1902/api/v3/companies/${id}/status`, { status });
+      const response = await axios.put(`http://localhost:1902/api/v3/companies/${id}/active`, { status });
 
       if (response.statusCode === 200) {
         toast.success("Update status company successfully");
@@ -147,75 +147,24 @@ const CompanyDetail = () => {
                 }}
               >
                 <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                  <Typography variant="h3">Status: </Typography>
+                  <Typography variant="h3">Active: </Typography>
                   {
-                    company.status === 0 ? (
-                      <Chip label="Not verify" color="warning" />
-                    ) : company.status === 1 ? (
-                      <Chip label="Accept" color="success" />
-                    ) : (
-                      <Chip label="Block" color="error" />
-                    )
+                    company.isActive ? <Chip label="Active" color="success" /> : <Chip label="No Active" color="error" />
                   }
                 </Box>
-                {company.status === 0 ? (
-                  <div style={{
-                    display: "flex",
-                    gap: "8px",
-                  }}>
-                    <Button
-                      variant="outlined"
-                      style={{
-                        backgroundColor: 'red',
-                        border: 'none',
-                        boxShadow: '0 1px 1px black',
-                        color: 'white'
-                      }}
-                      onClick={() => handleUpdateStatus(companyStatus.block)}
-                    >
-                      Block
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      style={{
-                        backgroundColor: 'green',
-                        border: 'none',
-                        boxShadow: '0 1px 1px black',
-                        color: 'white'
-                      }}
-                      onClick={() => handleUpdateStatus(companyStatus.verify)}
-                    >
-                      Verify
-                    </Button>
-                  </div>
+                <Button
+                  variant="outlined"
+                  style={{
+                    backgroundColor: 'green',
+                    border: 'none',
+                    boxShadow: '0 1px 1px black',
+                    color: 'white'
+                  }}
+                  onClick={() => handleUpdateStatus(company.isActive ? companyStatus.noActive : companyStatus.active)}
+                >
+                  {company.isActive === 1 ? "Từ chối" : "Duyệt"}
+                </Button>
 
-                ) : company.status === 1 ? (
-                  <Button
-                    variant="outlined"
-                    style={{
-                      backgroundColor: 'red',
-                      border: 'none',
-                      boxShadow: '0 1px 1px black',
-                      color: 'white'
-                    }}
-                    onClick={() => handleUpdateStatus(companyStatus.block)}
-                  >
-                    Block
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outlined"
-                    style={{
-                      backgroundColor: 'green',
-                      border: 'none',
-                      boxShadow: '0 1px 1px black',
-                      color: 'white'
-                    }}
-                    onClick={() => handleUpdateStatus(companyStatus.verify)}
-                  >
-                    Unclock
-                  </Button>
-                )}
               </Box>
             </Box>
           </Box>

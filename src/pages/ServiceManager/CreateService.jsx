@@ -16,6 +16,11 @@ import { MenuItem, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { validatePostImages } from "validations";
 import imageCompression from "browser-image-compression";
+import { useNavigate } from "react-router-dom";
+
+const TypeDefault = [
+    "V1", "V2", "V3"
+];
 
 const Item = styled(Box)(({ theme }) => ({
     textarea: {
@@ -26,6 +31,7 @@ const Item = styled(Box)(({ theme }) => ({
 const AdminServiceCreatePage = () => {
     usePermission();
     const theme = useTheme();
+    const navigate = useNavigate();
     const role = localStorage.getItem("role");
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [nameService, setNameService] = useState('');
@@ -35,6 +41,7 @@ const AdminServiceCreatePage = () => {
     const [images, setImages] = useState([]);
     const [expireValue, setExpireValue] = useState(1);
     const [description, setDescription] = useState('')
+    const [typeValue, setTypeValue] = useState('')
 
     // GET POST DATA
 
@@ -44,8 +51,13 @@ const AdminServiceCreatePage = () => {
         setShowConfirmModal(false);
         const formData = new FormData();
 
-        if (nameService === '' || description === '' || priceValue < 0 || discountValue < 0 || expireValue < 0 || images.length === 0) {
+        if (nameService === '' || description === '' || priceValue < 0 || discountValue < 0 || expireValue < 0 || images.length === 0 || typeValue === '') {
             toast.warning('Chưa nhập đủ dữ liệu')
+            return
+        }
+
+        if (TypeDefault.indexOf(typeValue) === -1) {
+            toast.warning('Loại dịch vụ không hợp lệ')
             return
         }
         else {
@@ -56,20 +68,24 @@ const AdminServiceCreatePage = () => {
             formData.append('discount', discountValue);
             formData.append('expiration', expireValue);
             formData.append('status', status);
+            formData.append('type', typeValue);
         }
 
         // GET RESPONSE
         try {
             const res = await axios.post(`http://localhost:1902/api/v3/service-recruitment`, formData);
-            if (res.status === 200) {
+
+            if (res.statusCode === 201) {
                 setNameService('')
                 setPriceValue(0)
                 setDiscountValue(0)
                 setExpireValue(1)
                 setDescription('')
                 setStatus(1)
+                setTypeValue('')
                 setImages([])
-                return toast.success("Tạo dịch vụ thành công");
+                toast.success("Tạo dịch vụ thành công");
+                navigate("/admin/service-manager");
             }
         } catch (error) {
             return toast.error("Tạo dịch vụ thất bại");
@@ -137,7 +153,7 @@ const AdminServiceCreatePage = () => {
         <Box sx={{ padding: "1rem" }}>
 
             <Typography variant="h3" style={{ marginBottom: '1rem' }} color={theme.palette.color.main}>
-                Tạo dịch vụ cha
+                Tạo dịch vụ 
             </Typography>
 
             <Grid container spacing={4}>
@@ -236,7 +252,30 @@ const AdminServiceCreatePage = () => {
                     </Item>
                 </Grid>
 
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} lg={3}>
+                    <Item>
+                        <TextField
+                            label="Type"
+                            variant="outlined"
+                            type="string"
+                            InputProps={{
+                                inputProps: {
+                                    style: {
+                                        cursor: "pointer",
+                                    },
+                                },
+                            }}
+                            value={typeValue}
+                            onChange={(e) => {
+                                setTypeValue(e.target.value)
+                            }}
+                            fullWidth
+                        />
+                    </Item>
+                </Grid>
+
+
+                <Grid item xs={12} lg={3}>
                     <Item>
                         <TextField
                             select

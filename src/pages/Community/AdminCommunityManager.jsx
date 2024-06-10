@@ -98,7 +98,7 @@ const AdminCommunityManagerPage = () => {
               disablePortal
               size="small"
               options={optionLangauge}
-              value={selectedType === 0 ? "HiJob News" : "Working Story"}
+              value={selectedType === 0 ? "News" : "Working Story"}
               onChange={(event, newValue) =>
                 handleUpdateLanguage(newValue.value)
               }
