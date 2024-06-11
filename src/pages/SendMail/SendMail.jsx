@@ -101,7 +101,7 @@ const SendMailPage = () => {
             color={theme.palette.color.main}
             marginTop={2}
           >
-            History (Coming soon)
+            Lịch sử ( tính năng đang phát triển )
           </Typography>
         </Grid>
 

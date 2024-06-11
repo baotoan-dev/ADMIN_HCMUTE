@@ -105,6 +105,7 @@ const PostsListPage = () => {
                   </Box>
 
                   <Table
+                    type="post"
                     columns={postListColumns}
                     rows={posts}
                   />

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Card, AreaChart, PieChart } from 'components';
+import { Card } from 'components';
 import { axios } from 'configs';
 import { usePermission } from 'hooks';
-import { ExperienceDistribution } from 'components/Chart/Barchart/bar';
 
 const cards = [
   {
@@ -35,10 +34,8 @@ const cards = [
 
 const HomePage = () => {
   usePermission();
-
-  const theme = useTheme();
   const [cardsData, setCardsData] = useState([...cards]);
-  const [statisticData, setStatisticData] = useState();
+  // const [statisticData, setStatisticData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,11 +54,11 @@ const HomePage = () => {
         });
 
         // SET STATISTIC DATA
-        setStatisticData({
-          postPerMonth: res.data.post_per_month,
-          accountPerMonth: res.data.account_per_month,
-          postPerStatus: res.data.post_per_status,
-        });
+        // setStatisticData({
+        //   postPerMonth: res.data.post_per_month,
+        //   accountPerMonth: res.data.account_per_month,
+        //   postPerStatus: res.data.post_per_status,
+        // });
       }
     };
 

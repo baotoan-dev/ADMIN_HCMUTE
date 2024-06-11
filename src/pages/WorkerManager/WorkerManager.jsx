@@ -67,7 +67,12 @@ const WorkerManager = () => {
             </Box>
           </Box>
 
-          <Table rows={workers} columns={workerColumns} showCheckbox={false} />
+          <Table
+            type="account"
+            rows={workers}
+            columns={workerColumns}
+            showCheckbox={false}
+          />
         </Box>
       )}
     </>

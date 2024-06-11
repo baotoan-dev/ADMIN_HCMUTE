@@ -19,7 +19,6 @@ const AdminServiceManagerPage = () => {
   const theme = useTheme();
   const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [updateLanguage, setUpdateLanguage] = useState(true);
 
   useEffect(() => {
     const getServicesData = async () => {
@@ -34,7 +33,7 @@ const AdminServiceManagerPage = () => {
       }
     };
     getServicesData();
-  }, [updateLanguage]);
+  }, []);
 
   const handleSearchFilterParent = (search) => {};
 
@@ -78,6 +77,7 @@ const AdminServiceManagerPage = () => {
               </Box>
             </Box>
             <TableCommunity
+              type="service"
               handleSearchFilterParent={handleSearchFilterParent}
               rows={services}
               columns={serviceColumns}

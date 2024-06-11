@@ -13,28 +13,22 @@ const WorkerDetail = () => {
   const [searchParams] = useSearchParams();
   const aid = searchParams.get("aid");
   const isOwn = searchParams.get("own");
-  const [modifyLimit, setModifyLimit] = useState(10)
   const [checkData, setCheckData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const [posts, setPosts] = useState([]);
   const [quantityData, setQuantityData] = useState(null);
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
-  const [dataSearch, setDataSearch] = useState('')
-  const [checkSearch, setCheckSearch] = useState(false);
 
   const fetchPosts = async () => {
     let res;
 
-    let limitNumber = +modifyLimit ? +modifyLimit : 10
-
     if (isOwn === "true") {
-      res = await axios.get(`/v1/posts/by-admin?is_own=true&page=${currentPage}&limit=${limitNumber}`);
+      res = await axios.get(`/v1/posts/by-admin?is_own=true`);
     } else if (aid) {
-      res = await axios.get(`/v1/posts/by-admin?aid=${aid}&page=${currentPage}&limit=${limitNumber}`);
+      res = await axios.get(`/v1/posts/by-admin?aid=${aid}`);
     }
     setPosts(res.data);
 
-    if (res?.data?.length > 0){
+    if (res?.data?.length > 0) {
       setCheckData(true);
     }
     setIsLoadingPosts(false);
@@ -43,15 +37,13 @@ const WorkerDetail = () => {
   const fetchQuantity = async () => {
     let res;
 
-    try
-    {
+    try {
       if (isOwn === "true") {
         res = await axios.get(`/v1/posts/by-admin/count-quantity?is_own=true`);
       } else {
         res = await axios.get(`/v1/posts/by-admin/count-quantity?aid=${aid}`);
       }
-    }catch(err)
-    {
+    } catch (err) {
 
     }
     if (res && res.data) {
@@ -62,48 +54,8 @@ const WorkerDetail = () => {
   useEffect(() => {
     fetchPosts();
     fetchQuantity();
-  }, [currentPage, modifyLimit]);
+  }, []);
 
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
-  }
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  }
-
-  const handleOnchangeLimit = (limit) => {
-    setModifyLimit(limit);
-  }
-
-  const handleSearchFilterParent = (async (search) => {
-    if (search) {
-      let resSearch;
-      
-      if (isOwn === "true") {
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&is_own=true`);
-      } else if (aid) {
-        resSearch = await axios.get(`/v1/posts/admin/search?search=${search}&aid=${aid}`);
-      }
-     
-      if (resSearch?.data?.length > 0) {
-        setCheckData(true);
-        setCheckSearch(true)
-        setDataSearch(resSearch?.data)
-      }
-      else {
-        setCheckData(true);
-        setCheckSearch(true)
-        setDataSearch([])
-      }
-    }
-
-    else
-    {
-      setDataSearch([])
-      setCheckSearch(false)
-    }
-  });
 
   return (
     <>
@@ -118,7 +70,7 @@ const WorkerDetail = () => {
         </Stack>
       ) : (
         <Box
-          sx={{ 
+          sx={{
             width: "100%",
             height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
           }}
@@ -146,18 +98,13 @@ const WorkerDetail = () => {
             </Box>
           </Box>
 
-          <Table 
-            handleOnchangeLimit={handleOnchangeLimit}
-            handleSearchFilterParent={handleSearchFilterParent}
-            rows={checkSearch === true ? (dataSearch?.length > 0 ? dataSearch : []) : posts} 
+          <Table
+            rows={posts}
+            type="post"
             checkAutoFocus={true}
-            checkSearch={checkSearch}
-            columns={workerDetailColumns} 
-            showCheckbox={false} 
+            columns={workerDetailColumns}
+            showCheckbox={false}
             checkData={checkData}
-            currentPage={currentPage}
-            prevPage={prevPage}
-            nextPage={nextPage}
           />
         </Box>
       )}

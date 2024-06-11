@@ -1,4 +1,3 @@
-import routes from "configs/routes";
 import { Link } from "react-router-dom";
 import { Chip } from "@mui/material";
 

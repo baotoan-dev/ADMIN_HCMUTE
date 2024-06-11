@@ -13,7 +13,7 @@ const Company = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("http://localhost:1902/api/v3/companies");
+        const response = await axios.get("http://localhost:1902/api/v3/companies?limit=100");
         setCompanies(response.data.companies);
       } catch (error) {
         throw error;
@@ -24,6 +24,7 @@ const Company = () => {
   if (companies.length === 0) {
     return;
   }
+
   return (
     <>
       <Box
@@ -40,7 +41,7 @@ const Company = () => {
             paddingBottom: "1rem",
           }}
         >
-          List company
+          Danh sách company
         </Typography>
         <TableCompany rows={companies} columns={companyListColumn} />
       </Box>

@@ -84,12 +84,12 @@ const AdminCommunityManagerPage = () => {
                   paddingBottom: "1rem",
                 }}
               >
-                Danh sách bài đăng
+                Danh sách bài Blog
               </Typography>
 
               <Box>
                 <Link to="/admin/community-create">
-                  <Button variant="outlined">Tạo bài đăng</Button>
+                  <Button variant="outlined">Tạo bài Blog</Button>
                 </Link>
               </Box>
             </Box>
@@ -109,6 +109,7 @@ const AdminCommunityManagerPage = () => {
             <TableCommunity
               handleSearchFilterParent={handleSearchFilterParent}
               rows={posts}
+              type="community"
               columns={communityListColumns}
               showCheckbox={false}
             />

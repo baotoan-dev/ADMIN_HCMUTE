@@ -58,14 +58,12 @@ const AccountListColumns = [
           return <Chip variant="outlined" color="primary" label="Block" style={{
             backgroundColor: "#f44336",
             border: "none",
-            boxShadow: "0 0 0 1px black",
             color: 'white'
           }} />;
         case 1:
           return <Chip variant="outlined" color="success" label="Active" style={{
             backgroundColor: "#4caf50",
             border: "none",
-            boxShadow: "0 0 0 1px black",
             color: 'white'
           }} />;
         default:

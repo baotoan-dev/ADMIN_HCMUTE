@@ -67,7 +67,7 @@ const CategoryPage = () => {
               paddingBottom: "1rem",
               }}
             >
-            Tất cả danh mục cha
+            Tất cả danh mục 
           </Typography>
 
           <Button

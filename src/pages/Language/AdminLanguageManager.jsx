@@ -108,7 +108,7 @@ const AdminLanguageManagerPage = () => {
     <Box sx={{ padding: "1rem" }}>
 
       <Typography
-        variant="h3"
+        variant="h2"
         style={{ marginBottom: "1.5rem" }}
         color={theme.palette.color.main}
       >

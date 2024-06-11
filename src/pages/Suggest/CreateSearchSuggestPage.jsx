@@ -1,30 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import {
   Box,
   Button,
-  Typography,
-  Stack,
-  Skeleton,
-  IconButton,
-  Tooltip,
+  Typography
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-import { TextField, CreatePostImages } from "components";
+import { TextField } from "components";
 import { axios } from "configs";
 import {
-  ConfirmDialog,
-  Table,
-  PostBasicInformation,
-  PostCategories,
-  ImageList,
+  ConfirmDialog
 } from "components";
 import { usePermission } from "hooks";
-import { MenuItem, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { MenuItem, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { validatePostImages } from "validations";
-import imageCompression from "browser-image-compression";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -35,8 +24,6 @@ const Item = styled(Box)(({ theme }) => ({
 const CreateSearchSuggestPage = () => {
   usePermission();
   const theme = useTheme();
-  const params = useParams();
-  const idParent = +params.id;
   const role = localStorage.getItem("role");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [keyword, setkeyword] = useState('');
@@ -49,7 +36,6 @@ const CreateSearchSuggestPage = () => {
   const handleSubmitPostData = async () => {
     // HIDE MODAL
     setShowConfirmModal(false);
-    const formData = new FormData();
 
     if (!keyword || !order|| !status ) {
         toast.warning('Chưa nhập đủ dữ liệu')

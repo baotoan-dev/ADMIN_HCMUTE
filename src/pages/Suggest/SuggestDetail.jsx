@@ -53,7 +53,7 @@ const SuggestDetailPage = () => {
     if (id) {
       fetchSuggestData(id);
     }
-  }, [checkRefresh]);
+  }, [checkRefresh, id]);
 
 
   // HANDLE SUBMIT

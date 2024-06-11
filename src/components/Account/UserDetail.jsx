@@ -2,6 +2,7 @@ import { useEffect, useState, memo, createContext } from "react";
 import { Stack, Skeleton, Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { axios } from "configs";
+import { Button } from "antd";
 import {
   AccountPersonalInformation,
   AccountContactInformation,
@@ -10,12 +11,13 @@ import {
   AccountEducations,
   AccountExperiences,
 } from "components";
+import ModalBlockUser from "../../pages/Account/Modal/ModalBlockUser";
 
 export const AccountContext = createContext();
 
 const UserDetail = ({ accountId }) => {
   const theme = useTheme();
-
+  const [isActive, setIsActive] = useState(false);
   const [accountData, setAccountData] = useState(null);
 
   const [basicInformations, setBasicInformations] = useState(null);
@@ -102,10 +104,26 @@ const UserDetail = ({ accountId }) => {
     experiences,
   };
 
+
   return (
     <AccountContext.Provider value={ContextValues}>
       {accountData ? (
         <>
+          <Button type="default" style={{
+            backgroundColor: accountData.status === 1 ? "#f5222d" : "#52c41a",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            alignItems: "center",
+            boxShadow: "0 1px 1px black",
+          }}
+            onClick={() => setIsActive(true)}
+          >
+            {
+              accountData.status === 1 ? 'Block' : 'Unblock'
+            }
+          </Button>
+          <ModalBlockUser isActive={isActive} setIsActive={setIsActive} userId={accountId} />
           {/* PERSONAL INFORMATION */}
           <Box p="2rem 0">
             <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>

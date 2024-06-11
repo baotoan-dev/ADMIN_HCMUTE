@@ -62,14 +62,12 @@ const categoryColumns = [
           return <Chip variant="outlined" color="primary" label="Disable" style={{
             backgroundColor: "#f44336",
             border: "none",
-            boxShadow: "0 0 0 1px black",
             color: 'white'
           }}/>;
         case 1:
           return <Chip variant="outlined" color="success" label="Enable" style={{
             backgroundColor: "#4caf50",
             border: "none",
-            boxShadow: "0 0 0 1px black",
             color: 'white'
           }}/>;
         default:
