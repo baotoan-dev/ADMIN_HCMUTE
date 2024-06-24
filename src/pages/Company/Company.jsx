@@ -4,6 +4,7 @@ import { axios } from "configs";
 import { Box, Typography } from "@mui/material";
 import TableCompany from "components/Table/TableCompany";
 import companyListColumn from "configs/table/companyListColumn";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const Company = () => {
   const theme = useTheme();
@@ -13,7 +14,7 @@ const Company = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("http://localhost:1902/api/v3/companies?limit=100");
+        const response = await axios.get(`${API_CONSTANT_V3}/v3/companies?limit=100`);
         setCompanies(response.data.companies);
       } catch (error) {
         throw error;

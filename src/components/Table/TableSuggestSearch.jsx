@@ -19,6 +19,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import * as XLSX from 'xlsx';
 import { Select } from 'antd';
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const { Option } = Select;
 
@@ -251,7 +252,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
                 if (e.keyCode === 13) {
                     const { id, value, field } = params;
                     try {
-                        const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+                        const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
                             [field]: value,
                         });
                         if (res && res.statusCode === 200) {
@@ -275,7 +276,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
             const { id, status } = params.row;
 
             if (status === 1) {
-                const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+                const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
                     status: 0
                 })
                 if (res && res.statusCode === 200) {
@@ -288,7 +289,7 @@ const TableSuggestSearch = forwardRef((props, ref) => {
                 }
             }
             else {
-                const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+                const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
                     status: 1
                 })
 

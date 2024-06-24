@@ -14,6 +14,7 @@ import { axios } from "configs";
 import { communityListColumns } from "configs/table";
 import { usePermission } from "hooks";
 import TableCommunity from "components/Table/TableCommunity";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 // PAGE
 const AdminCommunityManagerPage = () => {
@@ -34,7 +35,7 @@ const AdminCommunityManagerPage = () => {
       let res;
 
       res = await axios.get(
-        `http://localhost:1902/api/v3/communications/news?type=${selectedType}`
+        `${API_CONSTANT_V3}/v3/communications/news?type=${selectedType}`
       );
 
       if (res && res.status === 200) {

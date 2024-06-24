@@ -16,6 +16,7 @@ import { MenuItem, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { validatePostImages } from "validations";
 import imageCompression from "browser-image-compression";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -57,7 +58,7 @@ const CreateParentCategoryPage = () => {
 
     // GET RESPONSE
     try {
-      const res = await axios.post(`http://localhost:1902/api/v3/parent/add`, formData);
+      const res = await axios.post(`${API_CONSTANT_V3}/v3/parent/add`, formData);
       if (res.status === 200) {
         setNameCategories('')
         setNameEnCategories('')

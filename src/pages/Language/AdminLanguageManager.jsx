@@ -14,6 +14,7 @@ import { axios } from "configs";
 import { ConfirmDialog } from "components";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -52,7 +53,7 @@ const AdminLanguageManagerPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `http://localhost:1902/api/v3/site/languages?lang=vi`
+        `${API_CONSTANT_V3}/v3/site/languages?lang=vi`
       );
 
       if (res && res.data) {
@@ -67,8 +68,8 @@ const AdminLanguageManagerPage = () => {
 
     const res = await axios.get(
       newValue === "Vietnamese"
-        ? `http://localhost:1902/api/v3/site/languages?lang=vi`
-        : `http://localhost:1902/api/v3/site/languages?lang=en`
+        ? `${API_CONSTANT_V3}/v3/site/languages?lang=vi`
+        : `${API_CONSTANT_V3}/v3/site/languages?lang=en`
     );
 
     setSelectedLanguage(newValue);
@@ -83,12 +84,12 @@ const AdminLanguageManagerPage = () => {
     setShowConfirmUpdate(true);
     if (selectedLanguage === "Vietnamese") {
       res = await axios.post(
-        `http://localhost:1902/api/v3/site?lang=vi`,
+        `${API_CONSTANT_V3}/v3/site?lang=vi`,
         dataLanguage
       );
     } else {
       res = await axios.post(
-        `http://localhost:1902/api/v3/site?lang=en`,
+        `${API_CONSTANT_V3}/v3/site?lang=en`,
         dataLanguage
       );
     }

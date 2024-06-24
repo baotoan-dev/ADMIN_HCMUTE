@@ -7,6 +7,7 @@ import { axios } from "configs";
 import { usePermission } from "hooks";
 import searchSuggestColumn from "configs/table/searchSuggestColumn";
 import TableSuggestSearch from "components/Table/TableSuggestSearch";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const AdminSuggestManagerPage = () => {
   usePermission();
@@ -20,7 +21,7 @@ const AdminSuggestManagerPage = () => {
   const fetchSuggests = async () => {
     let res;
 
-    res = await axios.get(`http://localhost:1902/api/v3/suggest-search`);
+    res = await axios.get(`${API_CONSTANT_V3}/v3/suggest-search`);
  
     setSuggests(res.data);
 

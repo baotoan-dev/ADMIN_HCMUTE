@@ -24,6 +24,7 @@ import { usePermission } from "hooks";
 import imageCompression from "browser-image-compression";
 import updateCommunityValidation from "validations/Community/update";
 import { validatePostImages } from "validations";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const CommunityDetail = () => {
   usePermission();
@@ -88,7 +89,7 @@ const CommunityDetail = () => {
   // GET POST DATA
   const fetchPostData = async (id) => {
     const res = await axios.get(
-      `http://localhost:1902/api/v3/communications/detail/${id}`
+      `${API_CONSTANT_V3}/v3/communications/detail/${id}`
     );
 
     if (res.status === 200) {
@@ -156,7 +157,7 @@ const CommunityDetail = () => {
     // GET RESPONSE
     try {
       await axios.put(
-        `http://localhost:1902/api/v3/communications/by-admin/${id}`,
+        `${API_CONSTANT_V3}/v3/communications/by-admin/${id}`,
         communitySubmit,
         {
           headers: {

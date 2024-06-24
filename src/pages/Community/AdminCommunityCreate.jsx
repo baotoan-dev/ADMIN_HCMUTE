@@ -13,6 +13,7 @@ import { validatePostImages } from "validations";
 import { usePermission } from "hooks";
 import CreateCommunityInformations from "components/Community/Create/information";
 import createCommunityValidation from "validations/Community/create";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const initCommunity = {
   title: "",
@@ -104,7 +105,7 @@ const AdminCommunityCreatePage = () => {
     // Fetch api
     try {
       await axios.post(
-        "http://localhost:1902/api/v3/communications/by-admin",
+        `${API_CONSTANT_V3}/v3/communications/by-admin`,
         communitySubmit,
         {
           headers: {

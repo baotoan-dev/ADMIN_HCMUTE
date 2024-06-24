@@ -25,6 +25,7 @@ import imageCompression from "browser-image-compression";
 import { updateServiceValidation } from "validations/Service/update";
 import { validatePostImages } from "validations";
 import { useNavigate } from "react-router-dom";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const ServiceDetail = () => {
   usePermission();
@@ -91,7 +92,7 @@ const ServiceDetail = () => {
   // GET POST DATA
   const fetchPostData = async (id) => {
     const res = await axios.get(
-      `http://localhost:1902/api/v3/service-recruitment/${id}`
+      `${API_CONSTANT_V3}/v3/service-recruitment/${id}`
     );
 
     if (res.status === 200) {
@@ -164,7 +165,7 @@ const ServiceDetail = () => {
     // GET RESPONSE
     try {
       const res = await axios.put(
-        `http://localhost:1902/api/v3/service-recruitment/${id}`,
+        `${API_CONSTANT_V3}/v3/service-recruitment/${id}`,
         serviceSubmit,
         {
           headers: {
@@ -190,7 +191,7 @@ const ServiceDetail = () => {
   };
 
   const hideCommunity = async (id, status) => {
-    const res = await axios.put(`http://localhost:1902/api/v3/service-recruitment/${id}/status/${status}`, {
+    const res = await axios.put(`${API_CONSTANT_V3}/v3/service-recruitment/${id}/status/${status}`, {
       data: {
         status: 0
       }

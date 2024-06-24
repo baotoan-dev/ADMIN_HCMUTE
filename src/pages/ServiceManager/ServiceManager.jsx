@@ -12,6 +12,7 @@ import { axios } from "configs";
 import { serviceColumns } from "configs/table";
 import { usePermission } from "hooks";
 import TableCommunity from "components/Table/TableCommunity";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 // PAGE
 const AdminServiceManagerPage = () => {
@@ -23,7 +24,7 @@ const AdminServiceManagerPage = () => {
   useEffect(() => {
     const getServicesData = async () => {
       let res = await axios.get(
-        `http://localhost:1902/api/v3/service-recruitment`
+        `${API_CONSTANT_V3}/v3/service-recruitment`
       );
 
       if (res && res.status === 200) {

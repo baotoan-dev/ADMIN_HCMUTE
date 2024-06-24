@@ -12,6 +12,7 @@ import { Select } from 'antd';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import * as XLSX from 'xlsx';
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const { Option } = Select;
 
@@ -223,13 +224,13 @@ const TableCategory = forwardRef((props, ref) => {
         let res;
         if (params.field === 'actions') {
             if (params.row.status === 1) {
-                res = await axios.put(`http://localhost:1902/api/v3/children/update/${params.row.id}`,
+                res = await axios.put(`${API_CONSTANT_V3}/v3/children/update/${params.row.id}`,
                     {
                         status: 0,
                     });
             }
             else {
-                res = await axios.put(`http://localhost:1902/api/v3/children/update/${params.row.id}`,
+                res = await axios.put(`${API_CONSTANT_V3}/v3/children/update/${params.row.id}`,
                     {
                         status: 1,
                     });
@@ -251,7 +252,7 @@ const TableCategory = forwardRef((props, ref) => {
                 if (e.keyCode === 13) {
                     const { id, value, field } = params;
                     try {
-                        const res = await axios.put(`http://localhost:1902/api/v3/children/update/${id}`, {
+                        const res = await axios.put(`${API_CONSTANT_V3}/v3/children/update/${id}`, {
                             [field]: value,
                         });
                         if (res && res.statusCode === 200) {

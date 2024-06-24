@@ -15,6 +15,7 @@ import {
 import { usePermission } from "hooks";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -38,7 +39,7 @@ const SuggestDetailPage = () => {
 
   // GET POST DATA
   const fetchSuggestData = async (id) => {
-    const res = await axios.get(`http://localhost:1902/api/v3/suggest-search/${id}`);
+    const res = await axios.get(`${API_CONSTANT_V3}/v3/suggest-search/${id}`);
     if (res.statusCode === 200) {
       const data  = res.data;
       setSuggestData(data);
@@ -68,7 +69,7 @@ const SuggestDetailPage = () => {
 
     // GET RESPONSE
     try {
-      const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+      const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
         keyword : keyword, order : order
       });
       if (res && res.statusCode === 200) {
@@ -84,7 +85,7 @@ const SuggestDetailPage = () => {
     setShowConfirmApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+    const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
       status: 0
     });
     if (res && res.statusCode === 200) {
@@ -99,7 +100,7 @@ const SuggestDetailPage = () => {
     setShowEnableApprovalModal(false);
 
     // UPDATE POST STATUS
-    const res = await axios.put(`http://localhost:1902/api/v3/suggest-search/update/${id}`, {
+    const res = await axios.put(`${API_CONSTANT_V3}/v3/suggest-search/update/${id}`, {
       status: 1
     });
     if (res && res.statusCode === 200) {

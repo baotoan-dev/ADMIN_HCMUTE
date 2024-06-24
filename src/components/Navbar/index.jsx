@@ -2,12 +2,11 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import { Tooltip, Button, IconButton, Avatar, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
 import styles from "./Navbar.module.scss";
 import { Notification, UserProfile, Popup } from "components";
 import { useAppStateContext } from "contexts/AppContext";
 import {
-  // BellIcon,
+  BellIcon,
   ArrowDownIcon,
   SettingIcon,
   MenuIcon,
@@ -24,18 +23,16 @@ const CustomIconButton = ({ theme, children }) => (
 
 const Navbar = () => {
   const theme = useTheme();
-
   const { sidebarRef, themeSettingRef, overlayRef } = useAppStateContext();
-
   const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
   const [profileAnchorEl, setProfileAnchorEl] = useState(null);
-
   const openNotification = Boolean(notificationAnchorEl);
   const openProfile = Boolean(profileAnchorEl);
 
-  // const handleClickNotification = (event) => {
-  //     setNotificationAnchorEl(event.currentTarget);
-  // };
+  const handleClickNotification = (event) => {
+      setNotificationAnchorEl(event.currentTarget);
+  };
+
   const handleClickProfile = (event) => {
     setProfileAnchorEl(event.currentTarget);
   };
@@ -86,9 +83,9 @@ const Navbar = () => {
       {/* Right icons */}
       <Box className={cx("right-icons")}>
         {/* Notification */}
-        {/* <Tooltip title="Notification">
-                    <Box
-                        id="notification-button"
+        <Tooltip title="Notification">
+              <Box
+                  id="notification-button"
                         onClick={handleClickNotification}
                         aria-controls={
                             openNotification ? "notification-menu" : undefined
@@ -100,8 +97,9 @@ const Navbar = () => {
                             <BellIcon />
                         </CustomIconButton>
                     </Box>
-                </Tooltip> */}
+                </Tooltip>
 
+        {/* Notification */}
         {/* Setting */}
         <Tooltip title="Setting">
           <Box onClick={handleOpenThemeSetting}>

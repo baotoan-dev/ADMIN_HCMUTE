@@ -14,6 +14,7 @@ import {
 } from "components";
 import { createPostValidation, validatePostImages } from "validations";
 import { usePermission } from "hooks";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const initPost = {
   title: "",
@@ -283,7 +284,7 @@ const CreatePostPage = () => {
     // Fetch api
     try {
       // await axios.post("/v3/posts/by-worker", postSubmit, {
-      await axios.post("http://localhost:1902/api/v3/posts/by-worker", postSubmit, {
+      await axios.post(`${API_CONSTANT_V3}/v3/posts/by-worker`, postSubmit, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

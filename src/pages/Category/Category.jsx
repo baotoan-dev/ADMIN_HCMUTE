@@ -6,6 +6,7 @@ import { axios } from "configs";
 import { usePermission } from "hooks";
 import categoryColumns from "configs/table/categoryColumns";
 import TableCategoryParent from "components/Table/TableCategoryParent";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const CategoryPage = () => {
   usePermission();
@@ -19,7 +20,7 @@ const CategoryPage = () => {
   const fetchCategories = async () => {
     let res;
 
-    res = await axios.get(`http://localhost:1902/api/v3/parent`);
+    res = await axios.get(`${API_CONSTANT_V3}/v3/parent`);
  
     setCategories(res.data);
 

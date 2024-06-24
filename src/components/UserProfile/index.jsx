@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { axios } from "configs";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfile } from "../../redux/slice/profileSlice";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const cx = classNames.bind(styles);
 
@@ -31,7 +32,7 @@ const UserProfile = () => {
         const accessToken = sessionStorage.getItem("access-token");
 
         const fetchData = async () => {
-          const url = "http://localhost:1902/api/v3/profiles/me";
+          const url = "`${API_CONSTANT_V3}/v3/profiles/me";
           try {
             const res = await axios.get(url, {
               headers: {

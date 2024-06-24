@@ -12,6 +12,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import * as XLSX from 'xlsx';
 import { Select } from 'antd';
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const { Option } = Select;
 // Custom display when empty row
@@ -222,13 +223,13 @@ const TableCategoryParent = forwardRef((props, ref) => {
         let res;
         if (params.field === 'status') {
             if (params.row.status === 1) {
-                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`,
+                res = await axios.put(`${API_CONSTANT_V3}/v3/parent/${params.row.id}`,
                     {
                         status: 0,
                     });
             }
             else {
-                res = await axios.put(`http://localhost:1902/api/v3/parent/${params.row.id}`,
+                res = await axios.put(`${API_CONSTANT_V3}/v3/parent/${params.row.id}`,
                     {
                         status: 1,
                     });
@@ -250,7 +251,7 @@ const TableCategoryParent = forwardRef((props, ref) => {
                 if (e.keyCode === 13) {
                     const { id, value, field } = params;
                     try {
-                        const res = await axios.put(`http://localhost:1902/api/v3/parent/${id}`, {
+                        const res = await axios.put(`${API_CONSTANT_V3}/v3/parent/${id}`, {
                             [field]: value,
                         });
                         if (res && res.status === 200) {

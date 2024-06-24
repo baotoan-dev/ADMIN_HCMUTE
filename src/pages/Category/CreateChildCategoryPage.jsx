@@ -9,6 +9,7 @@ import {ConfirmDialog} from 'components';
 import {usePermission} from 'hooks';
 import {MenuItem, Grid} from '@mui/material';
 import {styled} from '@mui/material/styles';
+import { API_CONSTANT_V3 } from 'constant/urlServer';
 
 const Item = styled(Box)(({theme}) => ({
   textarea: {
@@ -53,7 +54,7 @@ const CreateChildCategoryPage = () => {
     // GET RESPONSE
     try {
       const res = await axios.post(
-        `http://localhost:1902/api/v3/children/create`,
+        `${API_CONSTANT_V3}/v3/children/create`,
         data,
       );
 

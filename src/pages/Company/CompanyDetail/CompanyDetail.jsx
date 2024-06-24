@@ -14,6 +14,7 @@ import {
 import { toast } from "react-toastify";
 import TablePostsCompany from "components/Table/TablePostsCompany";
 import postsCompanyListColumn from "configs/table/postCompanyListColumn";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const CompanyDetail = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const CompanyDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await axios.get(`http://localhost:1902/api/v3/companies/${id}`);
+        const data = await axios.get(`${API_CONSTANT_V3}/v3/companies/${id}`);
         setCompany(data.data);
       } catch (error) {
         throw error;
@@ -37,7 +38,7 @@ const CompanyDetail = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await axios.get(`http://localhost:1902/api/v3/posts/company/${id}`);
+        const data = await axios.get(`${API_CONSTANT_V3}/v3/posts/company/${id}`);
         setPosts(data.data.posts);
       } catch (error) {
         throw error;
@@ -89,7 +90,7 @@ const CompanyDetail = () => {
 
   const handleUpdateStatus = async (status) => {
     try {
-      const response = await axios.put(`http://localhost:1902/api/v3/companies/${id}/active`, { status });
+      const response = await axios.put(`${API_CONSTANT_V3}/v3/companies/${id}/active`, { status });
 
       if (response.statusCode === 200) {
         toast.success("Update status company successfully");

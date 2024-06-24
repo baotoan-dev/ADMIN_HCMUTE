@@ -7,6 +7,7 @@ import { axios } from "configs";
 import { ConfirmDialog } from "components";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -35,7 +36,7 @@ const SendMailPage = () => {
         .filter((data) => data !== "")
         .map((line) => ({ to: line.trim() }));
 
-      const res = await axios.post(`http://localhost:1902/api/v3/admin/send-mail`, emailArray);
+      const res = await axios.post(`${API_CONSTANT_V3}/v3/admin/send-mail`, emailArray);
       if (res.statusCode === 200) {
         return toast.update(toastId, {
           render: "Gửi mail thành công",

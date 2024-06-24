@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 import { validatePostImages } from "validations";
 import imageCompression from "browser-image-compression";
 import { useNavigate } from "react-router-dom";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const TypeDefault = [
     "V1", "V2", "V3"
@@ -73,7 +74,7 @@ const AdminServiceCreatePage = () => {
 
         // GET RESPONSE
         try {
-            const res = await axios.post(`http://localhost:1902/api/v3/service-recruitment`, formData);
+            const res = await axios.post(`${API_CONSTANT_V3}/v3/service-recruitment`, formData);
 
             if (res.statusCode === 201) {
                 setNameService('')

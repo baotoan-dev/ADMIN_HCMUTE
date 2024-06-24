@@ -3,6 +3,7 @@ import { Input, Modal } from 'antd';
 import axios from 'axios';
 import { Select, Space } from 'antd';
 import { toast } from 'react-toastify';
+import { API_CONSTANT_V3 } from 'constant/urlServer';
 
 const BlockUser = ({
     isActive,
@@ -20,7 +21,7 @@ const BlockUser = ({
     // create fake data from option
     const fetchDataResonBlock = async () => {
         try {
-            const res = await axios.get('http://localhost:1902/api/v3/block-reasons?type=1')
+            const res = await axios.get(`${API_CONSTANT_V3}/v3/block-reasons?type=1`)
 
             if (res && res.data.statusCode === 200) {
                 setDataReasonBlock(res.data.data);
@@ -41,7 +42,7 @@ const BlockUser = ({
             data.description = otherReason;
         }
         try {
-            const res = await axios.post('http://localhost:1902/api/v3/users/block', data,
+            const res = await axios.post('`${API_CONSTANT_V3}/v3/users/block', data,
                 {
                     headers: {
                         'Content-Type': 'application/json',
