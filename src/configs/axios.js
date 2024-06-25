@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_CONSTANT_V1 } from "constant/urlServer";
 
 // Create instance
 const instance = axios.create({
-  baseURL: "https://backend-hcmute-nodejs.onrender.com/api",
+  baseURL: `${API_CONSTANT_V1}`,
   timeout: 10000,
   headers: {
       "Content-Type": "application/json",

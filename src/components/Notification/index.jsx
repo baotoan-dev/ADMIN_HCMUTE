@@ -1,64 +1,76 @@
-import classNames from "classnames/bind";
-import { Button } from "@mui/material";
-import styles from "./Notification.module.scss";
-import avatar from "data/avatar2.jpg";
-import { useAppStateContext } from "contexts/AppContext";
-import socket, { subscribeToNotification, subscribeToError } from "socket/socketService";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames/bind';
+import styles from './Notification.module.scss';
+import avatar from 'data/product3.jpg';
+import { useAppStateContext } from 'contexts/AppContext';
+import socket, { subscribeToNotification, subscribeToError } from 'socket/socketService';
+import { getNotificationCompaniesAction } from 'redux/slice/notificationCompaniesSlice';
+import moment from 'moment';
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const Notification = () => {
+const Notification = ({
+  handleCloseNotification
+}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const notificationCompanies = useSelector((state) => state.notificationCompanies.notificationCompanies);
   const { themeMode } = useAppStateContext();
   const [notifications, setNotifications] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    subscribeToNotification((notification) => {
-      setNotifications((prev) => [...prev, notification]);
-    });
+    dispatch(getNotificationCompaniesAction());
+  }, [dispatch]);
 
-    subscribeToError((error) => {
+  useEffect(() => {
+    if (notificationCompanies.length > 0) {
+      setNotifications(notificationCompanies);
+    }
+  }, [notificationCompanies]);
+
+  useEffect(() => {
+    const handleNotification = (notification) => {
+      console.log('Notification received:', notification);
+      setNotifications((prev) => {
+        const uniqueNotifications = new Set([...prev, notification]);
+        return Array.from(uniqueNotifications);
+      });
+    };
+
+    const handleError = (error) => {
+      console.error('Error received:', error);
       setError(error);
-    });
+    };
+
+    subscribeToNotification(handleNotification);
+    subscribeToError(handleError);
 
     return () => {
-      socket.off("server-send-notification");
-      socket.off("server-send-error");
+      socket.off('server-send-notification', handleNotification);
+      socket.off('server-send-error-message', handleError);
     };
   }, []);
 
-  console.log(notifications);
-
   return (
-    <div className={cx("wrapper", themeMode === "dark" ? "dark" : "")}>
-      <div className={cx("item", themeMode === "dark" ? "dark" : "")}>
-        <img src={avatar} alt="" />
-        <div className={cx("content")}>
-          <p className={cx("title")}>Roman Joined the Team!</p>
-          <p className={cx("sub-title")}>Congratulate him</p>
+    <div className={cx('wrapper', themeMode === 'dark' ? 'dark' : '')}>
+      {notifications.map((notif, index) => (
+        <div key={index} className={cx('item', themeMode === 'dark' ? 'dark' : '')}>
+          <img src={avatar} alt="" />
+          <div className={cx('content')}
+            onClick={() => {
+              navigate(`/admin/company-manager/${notif.company_id}`);
+              handleCloseNotification();
+            }}
+          >
+            <p className={cx('sub-title')}>{notif.message}</p>
+            <p className={cx('time')}>{moment(notif.created_at).format('DD-MM-YYYY HH:mm:ss')}</p>
+          </div>
         </div>
-      </div>
-
-      <div className={cx("item", themeMode === "dark" ? "dark" : "")}>
-        <img src={avatar} alt="" />
-        <div className={cx("content")}>
-          <p className={cx("title")}>Roman Joined the Team!</p>
-          <p className={cx("sub-title")}>Congratulate him</p>
-        </div>
-      </div>
-
-      <div className={cx("item", themeMode === "dark" ? "dark" : "")}>
-        <img src={avatar} alt="" />
-        <div className={cx("content")}>
-          <p className={cx("title")}>Roman Joined the Team!</p>
-          <p className={cx("sub-title")}>Congratulate him</p>
-        </div>
-      </div>
-
-      <div className={cx("button")}>
-        <Button lg>See all notifications</Button>
-      </div>
+      ))}
+      {error && <div className="error">{error}</div>}
     </div>
   );
 };

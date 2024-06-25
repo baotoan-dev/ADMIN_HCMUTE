@@ -1,4 +1,4 @@
-const API_CONSTANT_V1 = 'http://localhost:3000/api';
+const API_CONSTANT_V1 = 'http://localhost:8888/api';
 
 const API_CONSTANT_V3 = 'http://localhost:1902/api';
 

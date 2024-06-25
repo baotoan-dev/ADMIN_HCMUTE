@@ -30,7 +30,7 @@ const Navbar = () => {
   const openProfile = Boolean(profileAnchorEl);
 
   const handleClickNotification = (event) => {
-      setNotificationAnchorEl(event.currentTarget);
+    setNotificationAnchorEl(event.currentTarget);
   };
 
   const handleClickProfile = (event) => {
@@ -68,7 +68,7 @@ const Navbar = () => {
       className={cx("wrapper")}
     >
       {/* Menu icon */}
-      {localStorage.getItem("role") &&
+      {localStorage.getItem("role") && (
         <Box>
           <Tooltip title="Menu">
             <Box onClick={handleOpenSidebar}>
@@ -78,26 +78,24 @@ const Navbar = () => {
             </Box>
           </Tooltip>
         </Box>
-      }
+      )}
 
       {/* Right icons */}
       <Box className={cx("right-icons")}>
         {/* Notification */}
         <Tooltip title="Notification">
-              <Box
-                  id="notification-button"
-                        onClick={handleClickNotification}
-                        aria-controls={
-                            openNotification ? "notification-menu" : undefined
-                        }
-                        aria-haspopup="true"
-                        aria-expanded={openNotification ? "true" : undefined}
-                    >
-                        <CustomIconButton theme={theme}>
-                            <BellIcon />
-                        </CustomIconButton>
-                    </Box>
-                </Tooltip>
+          <Box
+            id="notification-button"
+            onClick={handleClickNotification}
+            aria-controls={openNotification ? "notification-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={openNotification ? "true" : undefined}
+          >
+            <CustomIconButton theme={theme}>
+              <BellIcon />
+            </CustomIconButton>
+          </Box>
+        </Tooltip>
 
         {/* Notification */}
         {/* Setting */}
@@ -143,7 +141,7 @@ const Navbar = () => {
             "aria-labelledby": "notification-button",
           }}
         >
-          <Notification />
+          <Notification handleCloseNotification={handleCloseNotification} />
         </Popup>
 
         {/* Profile */}
