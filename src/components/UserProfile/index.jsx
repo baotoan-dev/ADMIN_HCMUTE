@@ -32,7 +32,7 @@ const UserProfile = () => {
         const accessToken = sessionStorage.getItem("access-token");
 
         const fetchData = async () => {
-          const url = "`${API_CONSTANT_V3}/v3/profiles/me";
+          const url = `${API_CONSTANT_V3}/v3/profiles/me`;
           try {
             const res = await axios.get(url, {
               headers: {

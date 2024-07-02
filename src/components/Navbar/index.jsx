@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import { Tooltip, Button, IconButton, Avatar, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -12,6 +12,10 @@ import {
   MenuIcon,
 } from "components/Icons";
 import avatar from "data/avatar2.jpg";
+import { useSelector, useDispatch } from "react-redux";
+import { setProfile } from "../../redux/slice/profileSlice";
+import { axios } from "configs";
+import { API_CONSTANT_V3 } from "constant/urlServer";
 
 const cx = classNames.bind(styles);
 
@@ -23,11 +27,52 @@ const CustomIconButton = ({ theme, children }) => (
 
 const Navbar = () => {
   const theme = useTheme();
+  const profiles = useSelector((state) => state.profile.profile);
+  const dispatch = useDispatch();
   const { sidebarRef, themeSettingRef, overlayRef } = useAppStateContext();
   const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
   const [profileAnchorEl, setProfileAnchorEl] = useState(null);
   const openNotification = Boolean(notificationAnchorEl);
   const openProfile = Boolean(profileAnchorEl);
+
+  useEffect(() => {
+    // Kiểm tra xem profiles đã có dữ liệu hay chưa
+    if (!profiles || !profiles.name) {
+      // Kiểm tra xem có dữ liệu trong localStorage hay không
+      const storedProfileData = sessionStorage.getItem("userProfile");
+      if (storedProfileData) {
+        const profileData = JSON.parse(storedProfileData);
+        dispatch(setProfile(profileData));
+      } else {
+        // Fetch access token from the session
+        const accessToken = sessionStorage.getItem("access-token");
+
+        const fetchData = async () => {
+          const url = `${API_CONSTANT_V3}/v3/profiles/me`;
+          try {
+            const res = await axios.get(url, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            });
+            if (res && res.status === 200) {
+              const profileData = res.data;
+              dispatch(setProfile(profileData));
+              // Lưu dữ liệu vào localStorage
+              sessionStorage.setItem(
+                "userProfile",
+                JSON.stringify(profileData)
+              );
+            }
+          } catch (error) {
+            console.error("Error fetching user profile data:", error);
+          }
+        };
+
+        fetchData();
+      }
+    }
+  }, [profiles, dispatch]);
 
   const handleClickNotification = (event) => {
     setNotificationAnchorEl(event.currentTarget);
@@ -83,19 +128,21 @@ const Navbar = () => {
       {/* Right icons */}
       <Box className={cx("right-icons")}>
         {/* Notification */}
-        <Tooltip title="Notification">
-          <Box
-            id="notification-button"
-            onClick={handleClickNotification}
-            aria-controls={openNotification ? "notification-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={openNotification ? "true" : undefined}
-          >
-            <CustomIconButton theme={theme}>
-              <BellIcon />
-            </CustomIconButton>
-          </Box>
-        </Tooltip>
+        {profiles && profiles.roleData === 1 && (
+          <Tooltip title="Notification">
+            <Box
+              id="notification-button"
+              onClick={handleClickNotification}
+              aria-controls={openNotification ? "notification-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openNotification ? "true" : undefined}
+            >
+              <CustomIconButton theme={theme}>
+                <BellIcon />
+              </CustomIconButton>
+            </Box>
+          </Tooltip>
+        )}
 
         {/* Notification */}
         {/* Setting */}
