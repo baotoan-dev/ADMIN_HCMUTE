@@ -49,7 +49,7 @@ const CreateCommunityInformations = ({ community, setCommunity }) => {
       showTooltipDelay: 0,
       showTooltipOnSelection: false,
       style: {
-        background: themeMode === 'light' ? '#ffff' : '#3D2B1F',
+        background: themeMode === 'light' ? '#ffff' : '#0a1929',
         color: "#ffff",
       },
       theme: "dark",

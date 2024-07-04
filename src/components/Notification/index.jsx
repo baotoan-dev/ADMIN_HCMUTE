@@ -34,9 +34,11 @@ const Notification = ({
   useEffect(() => {
     const handleNotification = (notification) => {
       console.log('Notification received:', notification);
-      setNotifications((prev) => {
-        const uniqueNotifications = new Set([...prev, notification]);
-        return Array.from(uniqueNotifications);
+      setNotifications((prevNotifications) => {
+        // Ensure notifications are unique based on some identifier, e.g., notification.id
+        const uniqueNotifications = new Map(prevNotifications.map((n) => [n.id, n]));
+        uniqueNotifications.set(notification.id, notification);
+        return Array.from(uniqueNotifications.values());
       });
     };
 
@@ -48,6 +50,7 @@ const Notification = ({
     subscribeToNotification(handleNotification);
     subscribeToError(handleError);
 
+    // Clean up subscriptions when component unmounts
     return () => {
       socket.off('server-send-notification', handleNotification);
       socket.off('server-send-error-message', handleError);

@@ -100,6 +100,7 @@ const ServiceDetail = () => {
       setBasicInformation(otherData);
       setServiceData(res.data);
       setEnabledImages(res.data && res.data.imageData.length > 0 ? [{
+        id: res.data.imageData[0].id,
         image: res.data.imageData[0].image,
       }] : []);
     }
@@ -151,8 +152,7 @@ const ServiceDetail = () => {
     serviceSubmit.append("expiration", basicInformation.expiration ? basicInformation.expiration : 0);
     serviceSubmit.append("type", basicInformation.type ? basicInformation.type : 'V1');
     serviceSubmit.append("status", basicInformation.status ? basicInformation.status : 1);
-    serviceSubmit.append("deleteImages", deleteImages);
-
+    deleteImages.length > 0 && deleteImages.forEach((image) => serviceSubmit.append("deleteImages", image.id));
     images.length > 0 && images.forEach((image) => serviceSubmit.append("images", image.image));
 
     // VALIDATION
