@@ -1,13 +1,10 @@
 import io from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:8888';
+const SOCKET_URL = 'https://backend-hcmute-nodejs.onrender.com';
 
 const socket = io(SOCKET_URL, {
-  transports: ['websocket'], // Explicitly specifying WebSocket transport
-  reconnectionAttempts: 3,
-  timeout: 10000,
   extraHeaders: {
-    Authorization: `Bearer ${localStorage.getItem('access-token')}`
+    Authorization: `Bearer ${sessionStorage.getItem('access-token')}`
   }
 });
 
@@ -16,6 +13,7 @@ socket.on('connect', () => {
 });
 
 socket.on('connect_error', (err) => {
+  console.log(err.message);
   console.error('Connection error:', err);
 });
 

@@ -35,7 +35,6 @@ const Notification = ({
     const handleNotification = (notification) => {
       console.log('Notification received:', notification);
       setNotifications((prevNotifications) => {
-        // Ensure notifications are unique based on some identifier, e.g., notification.id
         const uniqueNotifications = new Map(prevNotifications.map((n) => [n.id, n]));
         uniqueNotifications.set(notification.id, notification);
         return Array.from(uniqueNotifications.values());
