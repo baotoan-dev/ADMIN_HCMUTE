@@ -1,7 +1,8 @@
-import {  memo } from "react";
+import { memo } from "react";
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import moment from "moment";
+
 import { TextField } from "components";
 const Item = styled(Box)(({ theme }) => ({
   textarea: {
@@ -13,23 +14,6 @@ const BasicInformation = ({ basicInformation, setBasicInformation }) => {
   return (
     basicInformation && (
       <Grid container spacing={4}>
-        {/* Id */}
-
-        {/* <Grid item xs={12} lg={6}>
-          <Item>
-            <TextField
-              label="Account_id"
-              variant="outlined"
-              value={basicInformation.account_id || "1"}
-              InputProps={{
-                readOnly: true,
-              }}
-              onChange={(e) => {}}
-              fullWidth
-            />
-          </Item>
-        </Grid> */}
-
         <Grid item xs={12} lg={6}>
           <Item>
             <TextField
@@ -45,21 +29,55 @@ const BasicInformation = ({ basicInformation, setBasicInformation }) => {
           </Item>
         </Grid>
 
-        {/* Created at */}
+        {/* Title */}
         <Grid item xs={12} lg={6}>
           <Item>
             <TextField
-              label="Ngày tạo"
+              label="Tên"
               variant="outlined"
-              value={
-                moment(basicInformation.created_at).format(
-                  "DD/MM/YYYY HH:mm:ss"
-                ) || ""
-              }
-              InputProps={{
-                readOnly: true,
+              value={basicInformation.name || ""}
+              onChange={(e) => {
+                setBasicInformation((prevState) => ({
+                  ...prevState,
+                  name: e.target.value,
+                }));
               }}
-              onChange={(e) => {}}
+              fullWidth
+            />
+          </Item>
+        </Grid>
+
+        {/* URL */}
+        <Grid item xs={12} lg={6}>
+          <Item>
+            <TextField
+              label="Tên nút"
+              variant="outlined"
+              value={basicInformation.nameButton || ""}
+              onChange={(e) => {
+                setBasicInformation((prevState) => ({
+                  ...prevState,
+                  nameButton: e.target.value,
+                }));
+              }}
+              fullWidth
+            />
+          </Item>
+        </Grid>
+
+        {/* URL */}
+        <Grid item xs={12} lg={6}>
+          <Item>
+            <TextField
+              label="Link"
+              variant="outlined"
+              value={basicInformation.link || ""}
+              onChange={(e) => {
+                setBasicInformation((prevState) => ({
+                  ...prevState,
+                  link: e.target.value,
+                }));
+              }}
               fullWidth
             />
           </Item>
@@ -69,33 +87,15 @@ const BasicInformation = ({ basicInformation, setBasicInformation }) => {
         <Grid item xs={12} lg={12}>
           <Item>
             <TextField
-              label="Tiêu đề"
+              label="Mô tả"
               variant="outlined"
-              value={basicInformation.title || "1"}
-              onChange={(e) => {
-                setBasicInformation((prevState) => ({
-                  ...prevState,
-                  title: e.target.value,
-                }));
-              }}
-              fullWidth
-            />
-          </Item>
-        </Grid>
-
-        {/* URL */}
-        <Grid item xs={12} lg={12}>
-          <Item>
-            <TextField
-              label="Nội dung bài đăng"
-              variant="outlined"
-              multiline
               rows={6}
-              value={basicInformation.content || ""}
+              multiline
+              value={basicInformation.description || "1"}
               onChange={(e) => {
                 setBasicInformation((prevState) => ({
                   ...prevState,
-                  content: e.target.value,
+                  description: e.target.value,
                 }));
               }}
               fullWidth

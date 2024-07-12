@@ -15,6 +15,7 @@ const CustomImageList = ({ images, handleOnClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+
   return (
     <>
       {images.length > 0 ? (

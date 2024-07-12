@@ -39,6 +39,8 @@ import {
 import Analytics from "pages/Analytics/Analytics";
 import Company from "pages/Company";
 import CompanyDetail from "pages/Company/CompanyDetail";
+import DetailHotMangager from "pages/Hot/DetailHotMangager";
+import HotManager from "pages/Hot/HotManager";
 import SendMailPage from "pages/SendMail/SendMail";
 
 const publicRoutes = [
@@ -213,6 +215,16 @@ const publicRoutes = [
     component: CompanyDetail,
     layout: MainLayout
   },
+  {
+    path: routes.hotManager,
+    component: HotManager,
+    layout: MainLayout
+  },
+  {
+    path: routes.hotDetail,
+    component: DetailHotMangager,
+    layout: MainLayout
+  }
 ];
 
 export { publicRoutes };

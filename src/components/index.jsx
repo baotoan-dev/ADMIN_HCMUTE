@@ -62,3 +62,7 @@ export { default as AddThemeDialog } from "./Theme/AddThemeDialog";
 
 // Community
 export { default as CommunityBasicInformation } from "./Community/BasicInformation";
+
+// Hot
+
+export { default as HotBasicInformation } from "./Hot/BasicInformation";

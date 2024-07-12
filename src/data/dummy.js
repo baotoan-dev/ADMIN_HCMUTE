@@ -6,7 +6,7 @@ import {
   BannerIcon,
   MultiAccountsIcon,
 } from "components/Icons";
-import { MdCleaningServices } from "react-icons/md";
+import { MdCleaningServices, MdAllInbox } from "react-icons/md";
 import { BsCurrencyDollar } from "react-icons/bs";
 import avatar from "./avatar.jpg";
 import avatar2 from "./avatar2.jpg";
@@ -121,6 +121,11 @@ export const superAdminTabs = [
         path: '/admin/company-manager',
         name: 'Công ty',
         icon: <FaBuilding />,
+      },
+      {
+        path: '/admin/hot-manager',
+        name: 'Hot',
+        icon: <MdAllInbox />,
       },
       {
         path: "/admin/send-mail",
