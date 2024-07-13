@@ -97,7 +97,10 @@ const ServiceDetail = () => {
 
     if (res.status === 200) {
       const { image, ...otherData } = res.data;
-      setBasicInformation(otherData);
+      setBasicInformation({
+        ...otherData,
+        price: otherData.valueOld ? otherData.valueOld : 0,
+      });
       setServiceData(res.data);
       setEnabledImages(res.data && res.data.imageData.length > 0 ? [{
         id: res.data.imageData[0].id,

@@ -77,7 +77,7 @@ const BasicInformationService = ({ basicInformation, setBasicInformation }) => {
                             type="number"
                             inputProps={{ min: 0 }}
                             variant="outlined"
-                            value={basicInformation.valueOld || 0}
+                            value={basicInformation.price || 0}
                             onChange={(e) => {
                                 setBasicInformation((prevState) => ({
                                     ...prevState,
