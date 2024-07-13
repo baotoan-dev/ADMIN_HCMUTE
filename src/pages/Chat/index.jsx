@@ -11,7 +11,7 @@
 //     extraHeaders: {
 //         Authorization: `Bearer ${sessionStorage.getItem("access-token")}`,
 //     },
-// });
+// })
 
 // const ChatPage = () => {
 //   usePermission();
