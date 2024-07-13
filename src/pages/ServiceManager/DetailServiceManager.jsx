@@ -233,7 +233,7 @@ const ServiceDetail = () => {
           Chi tiết dịch vụ
         </Typography>
 
-        <Link to="/admin/community-create">
+        <Link to="/admin/service-manager/create">
           <Button variant="outlined">Tạo dịch vụ</Button>
         </Link>
       </Box>

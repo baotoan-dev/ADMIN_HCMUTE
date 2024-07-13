@@ -69,7 +69,7 @@ const BasicInformationService = ({ basicInformation, setBasicInformation }) => {
 
                 {/* price */}
 
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} lg={3}>
                     <Item>
                         <TextField
                             label="Giá"
@@ -87,6 +87,25 @@ const BasicInformationService = ({ basicInformation, setBasicInformation }) => {
                         />
                     </Item>
                 </Grid>
+
+                <Grid item xs={12} lg={3}>
+                    <Item>
+                        <TextField
+                            label="Loại"
+                            type="string"
+                            variant="outlined"
+                            value={basicInformation.type || ''}
+                            onChange={(e) => {
+                                setBasicInformation((prevState) => ({
+                                    ...prevState,
+                                    type: e.target.value,
+                                }));
+                            }}
+                            fullWidth
+                        />
+                    </Item>
+                </Grid>
+
 
 
                 {/* Discount */}
