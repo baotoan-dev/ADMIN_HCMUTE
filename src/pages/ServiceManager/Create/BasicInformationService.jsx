@@ -10,6 +10,7 @@ const Item = styled(Box)(({ theme }) => ({
     },
 }));
 
+
 const BasicInformationService = ({ basicInformation, setBasicInformation }) => {
     return (
         basicInformation && (
@@ -76,7 +77,7 @@ const BasicInformationService = ({ basicInformation, setBasicInformation }) => {
                             type="number"
                             inputProps={{ min: 0 }}
                             variant="outlined"
-                            value={basicInformation.price || 0}
+                            value={basicInformation.valueOld || 0}
                             onChange={(e) => {
                                 setBasicInformation((prevState) => ({
                                     ...prevState,
