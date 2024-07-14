@@ -248,11 +248,13 @@ const PostDetail = () => {
         }}
       >
         <Typography variant="h2" color={theme.palette.color.main}>
-          Chi tiết bài đăng
+        Post Details
         </Typography>
 
         <Link to="/admin/posts/create">
-          <Button variant="outlined">Tạo bài đăng</Button>
+          <Button variant="outlined">
+            Create a post
+          </Button>
         </Link>
       </Box>
       {postData ? (
@@ -260,7 +262,7 @@ const PostDetail = () => {
           {basicInformation.status === 0 && role === "1" && (
             <Box>
               <Typography sx={{ color: "#eee", marginBottom: "1rem" }}>
-                Bài viết này chưa được phê duyệt
+              This article has not been approved              
               </Typography>
               <Button
                 variant="outlined"
@@ -270,7 +272,7 @@ const PostDetail = () => {
                   setShowConfirmApprovalModal(true);
                 }}
               >
-                Phê duyệt
+                Approve
               </Button>
               <Button
                 variant="outlined"
@@ -279,7 +281,7 @@ const PostDetail = () => {
                   setShowConfirmApprovalModal(true);
                 }}
               >
-                Không phê duyệt
+                Reject
               </Button>
             </Box>
           )}
@@ -293,7 +295,7 @@ const PostDetail = () => {
                 setShowConfirmApprovalModal(true);
               }}
             >
-              Bỏ bài đăng
+              Unpost
             </Button>
           )}
 
@@ -306,7 +308,7 @@ const PostDetail = () => {
                 setShowConfirmApprovalModal(true);
               }}
             >
-              Phục hồi bài đăng
+              Repost
             </Button>
           )}
 
@@ -314,7 +316,7 @@ const PostDetail = () => {
           {/* {basicInformation !== null && ( */}
           <Box sx={{ flexGrow: 1, padding: "2rem 0" }}>
             <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>
-              Thông tin bài viết
+            Article information            
             </Typography>
             <PostBasicInformation
               basicInformation={basicInformation}
@@ -326,7 +328,7 @@ const PostDetail = () => {
           {/*  CATEGORIES */}
           <Box p="2rem 0">
             <Typography mb="1rem" variant="h3" color={theme.palette.color.main}>
-              Danh mục nghành nghề
+              Categories
             </Typography>
             <PostCategories
               categories={postCategories}
@@ -337,7 +339,7 @@ const PostDetail = () => {
           {/* APPLICATIONS */}
           <Box width="100%" p="2rem 0" sx={{ color: "#eeeeee" }}>
             <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>
-              Đơn ứng tuyển
+              Applications
             </Typography>
             <Box height="400px">
               <Table
@@ -358,7 +360,7 @@ const PostDetail = () => {
                   variant="h3"
                   color={theme.palette.color.main}
                 >
-                  Hình ảnh hợp lệ
+                  Valid Images
                 </Typography>
                 <ImageList
                   images={enabledImages}
@@ -373,7 +375,7 @@ const PostDetail = () => {
                   variant="h3"
                   color={theme.palette.color.main}
                 >
-                  Hình ảnh không hợp lệ
+                  Invalid Images
                 </Typography>
                 <ImageList
                   images={disabledImages}
@@ -398,7 +400,7 @@ const PostDetail = () => {
                   component="label"
                   disabled={enabledImages.length === 5}
                 >
-                  Tải ảnh
+                  Add image
                   <input
                     type="file"
                     name="images"
@@ -423,7 +425,7 @@ const PostDetail = () => {
               variant="outlined"
               onClick={() => setShowConfirmModal(true)}
             >
-              Lưu
+              Save
             </Button>
           )}
 
@@ -432,8 +434,8 @@ const PostDetail = () => {
             isOpen={showConfirmModal}
             onClose={() => setShowConfirmModal(false)}
             onClickConfirm={handleSubmitPostData}
-            title="Cập nhật thông tin bài đăng"
-            text="Bạn đã chắc chắn với thông tin đã chỉnh sửa?"
+            title="Update post"
+            text="Are you sure?"
           />
 
           {/* Confirm update post status dialog */}
@@ -441,11 +443,11 @@ const PostDetail = () => {
             isOpen={showConfirmApprovalModal}
             onClose={() => setShowConfirmApprovalModal(false)}
             onClickConfirm={handleApprovePost}
-            title="Phê duyệt bài đăng"
+            title="Approve a post"
             text={
               postStatusApproved === 1
-                ? "Bài đăng này sẽ được phê duyệt, bạn chắc chắn chứ?"
-                : "Bài đăng này sẽ không được phê duyệt, bạn chắc chắn chứ?"
+                ? "This post will be approved, are you sure?"
+                : "This post won't be approved, are you sure?"
             }
           />
         </Box>

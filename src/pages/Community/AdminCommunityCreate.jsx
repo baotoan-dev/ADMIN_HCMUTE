@@ -118,7 +118,7 @@ const AdminCommunityCreatePage = () => {
       images.forEach((image) => window.URL.revokeObjectURL(image));
       setImages([]);
       return toast.update(toastId, {
-        render: "Tạo bài đăng thành công",
+        render: "Create community successfully",
         type: toast.TYPE.SUCCESS,
         closeButton: true,
         closeOnClick: true,
@@ -131,7 +131,7 @@ const AdminCommunityCreatePage = () => {
         return navigate("/admin/auth");
       }
       return toast.update(toastId, {
-        render: "Tạo bài đăng thất bại",
+        render: "Create community failure",
         type: toast.TYPE.ERROR,
         closeButton: true,
         closeOnClick: true,
@@ -145,7 +145,7 @@ const AdminCommunityCreatePage = () => {
     <Box sx={{ padding: "1rem" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h2" color={theme.palette.color.main}>
-          Tạo bài đăng
+          Create Community
         </Typography>
         {/* <Link to="/admin/worker-manager/detail?own=true">
           <Button variant="outlined">Bài đã đăng</Button>
@@ -212,8 +212,8 @@ const AdminCommunityCreatePage = () => {
           isOpen={isShowConfirmDialog}
           onClose={() => setIsShowConfirmDialog(false)}
           onClickConfirm={handleOnCreateCommunity}
-          title="Tạo bài đăng"
-          text="Hãy kiểm tra thật kỹ thông tin trước khi nhấn nút Đồng ý"
+          title="Confirm create community"
+          text="Are you sure to create this community?"
         />
       </Box>
     </Box>

@@ -71,7 +71,7 @@ const Analytics = () => {
         <div className='container'>
             <h1 style={{
                 color: 'white',
-            }}>Thống kê</h1>
+            }}>Statistics</h1>
             <Box>
                 <Select
                     native

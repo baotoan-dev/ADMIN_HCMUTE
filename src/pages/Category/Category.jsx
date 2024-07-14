@@ -68,7 +68,7 @@ const CategoryPage = () => {
               paddingBottom: "1rem",
               }}
             >
-            Tất cả danh mục 
+            All Categories
           </Typography>
 
           <Button
@@ -78,7 +78,7 @@ const CategoryPage = () => {
               navigate(`/admin/create-parent-category`);
             }}
           >
-            Tạo danh mục
+            Add 
           </Button>
 
           </Box>

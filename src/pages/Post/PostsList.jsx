@@ -94,12 +94,12 @@ const PostsListPage = () => {
                         paddingBottom: "1rem",
                       }}
                     >
-                      Danh sách bài đăng
+                      List of posts
                     </Typography>
 
                     <Box>
                       <Link to="/admin/posts/create">
-                        <Button variant="outlined">Tạo bài đăng</Button>
+                        <Button variant="outlined">Create a post</Button>
                       </Link>
                     </Box>
                   </Box>

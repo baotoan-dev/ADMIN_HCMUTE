@@ -58,7 +58,7 @@ const HotManager = () => {
                 paddingBottom: "1rem",
               }}
             >
-              Danh sách bìa công ty
+              List of company covers
             </Typography>
           </Box>
 

@@ -88,12 +88,12 @@ const WorkerDetail = () => {
                 paddingBottom: "1rem",
               }}
             >
-              Danh sách bài đăng
+              List of posts
             </Typography>
 
             <Box>
               <Link to="/admin/posts/create">
-                <Button variant="outlined">Tạo bài đăng</Button>
+                <Button variant="outlined">Create Post</Button>
               </Link>
             </Box>
           </Box>

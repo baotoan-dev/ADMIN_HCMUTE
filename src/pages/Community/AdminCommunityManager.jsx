@@ -85,12 +85,12 @@ const AdminCommunityManagerPage = () => {
                   paddingBottom: "1rem",
                 }}
               >
-                Danh sách bài Blog
+                List of Blog
               </Typography>
 
               <Box>
                 <Link to="/admin/community-create">
-                  <Button variant="outlined">Tạo bài Blog</Button>
+                  <Button variant="outlined">Create a Blog</Button>
                 </Link>
               </Box>
             </Box>

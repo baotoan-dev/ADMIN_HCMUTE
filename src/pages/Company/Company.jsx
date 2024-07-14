@@ -42,7 +42,7 @@ const Company = () => {
             paddingBottom: "1rem",
           }}
         >
-          Danh sách company
+          List of Companies
         </Typography>
         <TableCompany rows={companies} columns={companyListColumn} />
       </Box>

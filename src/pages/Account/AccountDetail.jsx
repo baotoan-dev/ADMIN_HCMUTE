@@ -25,7 +25,7 @@ const AccountDetailPage = () => {
         flexWrap: 'wrap',
       }}>
         <Typography variant="h2" p="2rem 0" color={theme.palette.color.main}>
-          Chi tiết tài khoản
+        Account details
         </Typography>
       </Typography>
       <>

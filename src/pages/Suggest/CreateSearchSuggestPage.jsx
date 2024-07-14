@@ -38,12 +38,12 @@ const CreateSearchSuggestPage = () => {
     setShowConfirmModal(false);
 
     if (!keyword || !order|| !status ) {
-        toast.warning('Chưa nhập đủ dữ liệu')
+        toast.warning('Not enough data')
         return
     }
 
     if (+order <= 0) {
-        toast.warning('Nhập order lớn hơn 0')
+        toast.warning('Order must be greater than 0')
         return
     }
 
@@ -56,10 +56,10 @@ const CreateSearchSuggestPage = () => {
         setkeyword('')
         setOrder('')
         setStatus(1)
-        return toast.success("Tạo từ khoá thành công");
+        return toast.success("Create successfully");
       }
     } catch (error) {
-        return toast.error("Tạo từ khoá thất bại");
+        return toast.error("Create failed");
     }
   };
 
@@ -74,7 +74,7 @@ const CreateSearchSuggestPage = () => {
     <Box sx={{ padding: "1rem" }}>
 
       <Typography variant="h3" style={{marginBottom: '3rem'}} color={theme.palette.color.main}>
-        Tạo từ khoá 
+        Add Search Suggest
       </Typography>
 
       <Grid container spacing={4}>

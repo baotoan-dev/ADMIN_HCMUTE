@@ -133,7 +133,7 @@ const CreateParentCategoryPage = () => {
     <Box sx={{ padding: "1rem" }}>
 
       <Typography variant="h3" style={{ marginBottom: '1rem' }} color={theme.palette.color.main}>
-        Tạo danh mục cha
+        Create Parent Category
       </Typography>
 
       <Grid container spacing={4}>
@@ -201,12 +201,12 @@ const CreateParentCategoryPage = () => {
 
         <Box p="2rem 2rem">
           <Typography mb="1rem" variant="h3" color={theme.palette.color.main}>
-            Hình ảnh
+              Images
           </Typography>
 
           <Typography variant="p" color={theme.palette.color.main}>
-            Có thể tải tối đa 1 ảnh, ảnh không quá 10MB. (Định dạng cho
-            phép: jpeg, jpg, png)
+           A maximum of 1 photo can be downloaded, the photo is not more than 10MB. (Format for
+            Magic: jpeg, jpg, png)
           </Typography>
 
           <Box mt="2rem">
@@ -215,7 +215,7 @@ const CreateParentCategoryPage = () => {
               component="label"
               disabled={images.length === 1}
             >
-              Tải ảnh
+              Add image
               <input
                 type="file"
                 name="images"
@@ -240,7 +240,7 @@ const CreateParentCategoryPage = () => {
               variant="outlined"
               onClick={() => setShowConfirmModal(true)}
             >
-              Lưu danh mục
+              Save category
             </Button>
           )}
         </Box>

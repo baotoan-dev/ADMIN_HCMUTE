@@ -53,12 +53,12 @@ const AdminServiceCreatePage = () => {
         const formData = new FormData();
 
         if (nameService === '' || description === '' || priceValue < 0 || discountValue < 0 || expireValue < 0 || images.length === 0 || typeValue === '') {
-            toast.warning('Chưa nhập đủ dữ liệu')
+            toast.warning('Not enough data')
             return
         }
 
         if (TypeDefault.indexOf(typeValue) === -1) {
-            toast.warning('Loại dịch vụ không hợp lệ')
+            toast.warning('Type not found')
             return
         }
         else {
@@ -85,11 +85,11 @@ const AdminServiceCreatePage = () => {
                 setStatus(1)
                 setTypeValue('')
                 setImages([])
-                toast.success("Tạo dịch vụ thành công");
+                toast.success("Create service successfully");
                 navigate("/admin/service-manager");
             }
         } catch (error) {
-            return toast.error("Tạo dịch vụ thất bại");
+            return toast.error("Create service failure");
         }
     };
 
@@ -114,7 +114,7 @@ const AdminServiceCreatePage = () => {
             const validateImagesReply = validatePostImages(imagesToCheck);
             if (validateImagesReply.isError) {
                 console.log("::: Invalid images");
-                return toast.warn("Ảnh không đúng định dạng");
+                return toast.warn("Invalid images");
             } else {
                 try {
                     const compressedImages = [];
@@ -154,7 +154,7 @@ const AdminServiceCreatePage = () => {
         <Box sx={{ padding: "1rem" }}>
 
             <Typography variant="h3" style={{ marginBottom: '1rem' }} color={theme.palette.color.main}>
-                Tạo dịch vụ 
+                Add Service
             </Typography>
 
             <Grid container spacing={4}>
@@ -316,12 +316,12 @@ const AdminServiceCreatePage = () => {
 
                 <Box p="2rem 2rem">
                     <Typography mb="1rem" variant="h3" color={theme.palette.color.main}>
-                        Hình ảnh
+                        Images
                     </Typography>
 
                     <Typography variant="p" color={theme.palette.color.main}>
-                        Có thể tải tối đa 1 ảnh, ảnh không quá 10MB. (Định dạng cho
-                        phép: jpeg, jpg, png)
+                    A maximum of 1 photo can be downloaded, the photo is not more than 10MB. (Format for
+                        Magic: jpeg, jpg, png)
                     </Typography>
 
                     <Box mt="2rem">
@@ -330,7 +330,7 @@ const AdminServiceCreatePage = () => {
                             component="label"
                             disabled={images.length === 1}
                         >
-                            Tải ảnh
+                            Upload images
                             <input
                                 type="file"
                                 name="images"
@@ -355,7 +355,7 @@ const AdminServiceCreatePage = () => {
                             variant="outlined"
                             onClick={() => setShowConfirmModal(true)}
                         >
-                            Lưu dịch vụ
+                            Save service
                         </Button>
                     )}
                 </Box>
@@ -363,8 +363,8 @@ const AdminServiceCreatePage = () => {
                     isOpen={showConfirmModal}
                     onClose={() => setShowConfirmModal(false)}
                     onClickConfirm={handleSubmitPostData}
-                    title="Tạo dịch vụ"
-                    text="Bạn đã chắc chắn tạo"
+                    title="Create service"
+                    text="Are you sure?"
                 />
 
             </Grid>

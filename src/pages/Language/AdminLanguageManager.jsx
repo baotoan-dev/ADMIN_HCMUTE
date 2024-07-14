@@ -95,11 +95,11 @@ const AdminLanguageManagerPage = () => {
     }
 
     if (res && res.status === 200) {
-      toast.success("Điều chỉnh ngôn ngữ thành công");
+      toast.success("Modifying language successfully");
       setShowConfirmUpdate(false);
       setDataLanguage();
     } else {
-      toast.error("Điều chỉnh ngôn ngữ thất bại");
+      toast.error("Modifying language failure");
     }
   };
 
@@ -113,7 +113,7 @@ const AdminLanguageManagerPage = () => {
         style={{ marginBottom: "1.5rem" }}
         color={theme.palette.color.main}
       >
-        Quản lý ngôn ngữ
+        Language Manager
       </Typography>
       <Box sx={{
         display: "flex",
@@ -196,7 +196,7 @@ const AdminLanguageManagerPage = () => {
         onClose={() => setShowConfirmUpdate(false)}
         onClickConfirm={handleConfirmUpload}
         title="Update language.."
-        text="Bạn đã chắc cập nhật"
+        text="Are you sure?"
       />
     </Box>
   );

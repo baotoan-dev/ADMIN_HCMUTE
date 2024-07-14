@@ -31,7 +31,7 @@ export const normalAdminTabs = [
       },
       {
         path: "/admin/send-mail",
-        name: "Gửi mail",
+        name: "Send mail",
         icon: <EmailOutlined />,
       }     
     ],
@@ -59,52 +59,52 @@ export const superAdminTabs = [
     links: [
       {
         path: "/admin/posts",
-        name: "Bài đăng",
+        name: "Post",
         icon: <PostIcon />,
         subLinks: [
           {
             path: "/admin/posts",
-            name: "Tất cả",
+            name: "All Posts",
           },
           {
             path: "/admin/posts/create",
-            name: "Tạo mới",
+            name: "Create Post",
           },
         ],
       },
       {
         path: "/admin/accounts",
-        name: "Tài khoản",
+        name: "Accounts",
         icon: <AccountIcon />,
       },
       {
         path: "/admin/banners",
-        name: "Bìa",
+        name: "Cover",
         icon: <BannerIcon />,
       },
       {
         path: "/admin/themes",
-        name: "Chủ đề",
+        name: "Topics",
         icon: <ThemeIcon />,
       },
       {
         path: "/admin/worker-manager",
-        name: "Người thuê",
+        name: "Renter",
         icon: <MultiAccountsIcon />,
       },
       {
         path: "/admin/category-manager",
-        name: "Danh mục",
+        name: "Category",
         icon: <RedeemIcon />,
       },
       {
         path: "/admin/search-suggest",
-        name: "Từ khoá gợi ý",
+        name: "Search Suggest",
         icon: <TravelExploreIcon />,
       },
       {
         path: "/admin/language-manager",
-        name: "Ngôn ngữ",
+        name: "Language",
         icon: <LanguageIcon />,
       },
       {
@@ -114,12 +114,12 @@ export const superAdminTabs = [
       },
       {
         path: '/admin/service-manager',
-        name: 'Dịch vụ',
+        name: 'Service',
         icon: <MdCleaningServices />,
       },
       {
         path: '/admin/company-manager',
-        name: 'Công ty',
+        name: 'Companies',
         icon: <FaBuilding />,
       },
       {
@@ -129,7 +129,7 @@ export const superAdminTabs = [
       },
       {
         path: "/admin/send-mail",
-        name: "Gửi mail",
+        name: "Send mail",
         icon: <EmailOutlined />,
       }     
     ],
@@ -144,7 +144,7 @@ export const workerTabs = [
   },
   {
     path: "/admin/send-mail",
-    name: "Gửi mail",
+    name: "Send mail",
     icon: <EmailOutlined />,
   } 
 ]

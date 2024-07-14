@@ -69,11 +69,11 @@ const AdminServiceManagerPage = () => {
                   paddingBottom: "1rem",
                 }}
               >
-                Danh sách dịch vụ
+                Service Manager
               </Typography>
               <Box>
                 <Link to="/admin/service-manager/create">
-                  <Button variant="outlined">Tạo dịch vụ</Button>
+                  <Button variant="outlined">Add</Button>
                 </Link>
               </Box>
             </Box>

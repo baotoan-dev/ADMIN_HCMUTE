@@ -295,7 +295,7 @@ const CreatePostPage = () => {
       images.forEach((image) => window.URL.revokeObjectURL(image));
       setImages([]);
       return toast.update(toastId, {
-        render: "Tạo bài đăng thành công",
+        render: "Create post successfully",
         type: toast.TYPE.SUCCESS,
         closeButton: true,
         closeOnClick: true,
@@ -308,7 +308,7 @@ const CreatePostPage = () => {
         return navigate("/admin/auth");
       }
       return toast.update(toastId, {
-        render: "Tạo bài đăng thất bại",
+        render: "Create post failed",
         type: toast.TYPE.ERROR,
         closeButton: true,
         closeOnClick: true,
@@ -322,10 +322,10 @@ const CreatePostPage = () => {
     <Box sx={{ padding: "1rem" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h2" color={theme.palette.color.main}>
-          Tạo bài đăng
+          Create Post
         </Typography>
         <Link to="/admin/worker-manager/detail?own=true">
-          <Button variant="outlined">Bài đã đăng</Button>
+          <Button variant="outlined">Published posts</Button>
         </Link>
       </Box>
 
@@ -349,7 +349,7 @@ const CreatePostPage = () => {
         {/*  CATEGORIES */}
         <Box p="2rem 0">
           <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>
-            Danh mục nghành nghề
+            List categories
           </Typography>
           <CreatePostCategories
             parentCategories={parentCategories}
@@ -364,12 +364,12 @@ const CreatePostPage = () => {
         {/* Images */}
         <Box p="2rem 0">
           <Typography mb="1rem" variant="h3" color={theme.palette.color.main}>
-            Hình ảnh
+            Images
           </Typography>
 
           <Typography variant="p" color={theme.palette.color.main}>
-            Có thể tải tối đa 5 ảnh, mỗi ảnh không quá 10MB. (Định dạng cho
-            phép: jpeg, jpg, png)
+          Up to 5 photos can be downloaded, each no more than 10MB. (Format for
+            Magic: jpeg, jpg, png)
           </Typography>
 
           <Box mt="2rem">
@@ -378,7 +378,7 @@ const CreatePostPage = () => {
               component="label"
               disabled={images.length === 5}
             >
-              Tải ảnh
+              Upload images
               <input
                 type="file"
                 name="images"
@@ -404,7 +404,7 @@ const CreatePostPage = () => {
           variant="outlined"
           onClick={() => setIsShowConfirmDialog(true)}
         >
-          Tạo
+          Create post
         </Button>
 
         {/* DIALOG */}
@@ -412,8 +412,8 @@ const CreatePostPage = () => {
           isOpen={isShowConfirmDialog}
           onClose={() => setIsShowConfirmDialog(false)}
           onClickConfirm={handleOnCreatePost}
-          title="Tạo bài đăng"
-          text="Hãy kiểm tra thật kỹ thông tin trước khi nhấn nút Đồng ý"
+          title="Create post"
+          text="Are you sure you want to create this post?"
         />
       </Box>
     </Box>

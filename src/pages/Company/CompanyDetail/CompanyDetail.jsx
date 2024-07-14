@@ -163,7 +163,7 @@ const CompanyDetail = () => {
                   }}
                   onClick={() => handleUpdateStatus(company.isActive ? companyStatus.noActive : companyStatus.active)}
                 >
-                  {company.isActive === 1 ? "Từ chối" : "Duyệt"}
+                  {company.isActive === 1 ? "Reject" : "Active"}
                 </Button>
 
               </Box>

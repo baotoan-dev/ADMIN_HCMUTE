@@ -73,7 +73,7 @@ const AdminSuggestManagerPage = () => {
               paddingBottom: "1rem",
               }}
             >
-            Tất cả từ khoá
+            Keywords
           </Typography>
 
           <Button
@@ -83,7 +83,7 @@ const AdminSuggestManagerPage = () => {
               navigate(`/admin/create-search-suggest`);
             }}
           >
-            Tạo từ khoá
+            Add 
           </Button>
 
           </Box>

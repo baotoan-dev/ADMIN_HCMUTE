@@ -27,7 +27,7 @@ const SendMailPage = () => {
     // HIDE MODAL
     setShowConfirmModal(false);
 
-    const toastId = toast.loading("Đang gửi mail...");
+    const toastId = toast.loading("Sending mail...");
 
     // GET RESPONSE
     try {
@@ -39,7 +39,7 @@ const SendMailPage = () => {
       const res = await axios.post(`${API_CONSTANT_V3}/v3/admin/send-mail`, emailArray);
       if (res.statusCode === 200) {
         return toast.update(toastId, {
-          render: "Gửi mail thành công",
+          render: "Send mail successfully",
           type: toast.TYPE.SUCCESS,
           isLoading: false,
           autoClose: 2000,
@@ -47,7 +47,7 @@ const SendMailPage = () => {
       }
     } catch (error) {
       return toast.update(toastId, {
-        render: "Gửi mail thất bại",
+        render: "Send mail failure",
         type: toast.TYPE.ERROR,
         isLoading: false,
         autoClose: 2000,
@@ -64,7 +64,7 @@ const SendMailPage = () => {
         style={{ marginBottom: "3rem" }}
         color={theme.palette.color.main}
       >
-        Gửi Mail
+        Send mail
       </Typography>
 
       <Grid container spacing={4}>
@@ -76,7 +76,7 @@ const SendMailPage = () => {
               label="Email người nhận"
               variant="outlined"
               multiline
-              placeholder="Nhập email người nhận..."
+              placeholder="Enter email ..."
               value={email || ""}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -91,7 +91,7 @@ const SendMailPage = () => {
               variant="outlined"
               onClick={() => setShowConfirmModal(true)}
             >
-              Gửi mail
+              Send mail
             </Button>
           </Item>
         </Grid>
@@ -102,7 +102,7 @@ const SendMailPage = () => {
             color={theme.palette.color.main}
             marginTop={2}
           >
-            Lịch sử ( tính năng đang phát triển )
+            History (developing feature)
           </Typography>
         </Grid>
 
@@ -110,8 +110,8 @@ const SendMailPage = () => {
           isOpen={showConfirmModal}
           onClose={() => setShowConfirmModal(false)}
           onClickConfirm={handleSubmitPostData}
-          title="Xác nhận gửi mail"
-          text="Bạn có chắc chắn muốn gửi mail không?"
+          title="Confirmation send mail"
+          text="Are you sure?"
         />
       </Grid>
     </Box>

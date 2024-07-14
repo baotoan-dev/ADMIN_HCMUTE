@@ -68,7 +68,7 @@ const Banner = () => {
   return (
     <Box sx={{ padding: '10px'}}>
       <Typography variant="h2" color={theme.palette.color.main}>
-        Danh sách bìa
+        Cover List
       </Typography>
 
       <Tooltip title="Add new" disableInteractive>

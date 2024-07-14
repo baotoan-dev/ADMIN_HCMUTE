@@ -66,7 +66,7 @@ const AccountPage = () => {
                 paddingBottom: "1rem",
               }}
             >
-              Danh sách tài khoản đã đăng ký app
+              List of registered accounts
             </Typography>
             <Table
               checkAutoFocus={true}

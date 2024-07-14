@@ -179,10 +179,10 @@ const ServiceDetail = () => {
       if (res && res.statusCode) {
         setCheck(!check);
         setImages([]);
-        return toast.success("Cập nhật dịch vụ thành công");
+        return toast.success("Update service successfully");
       }
     } catch (error) {
-      return toast.error("Cập nhật dịch vụ thất bại");
+      return toast.error("Update service failed");
     }
   };
 
@@ -205,11 +205,11 @@ const ServiceDetail = () => {
     })
 
     if (res.statusCode === 200) {
-      toast.success("Ẩn dịch vụ thành công")
+      toast.success("Hide service successfully")
       navigate('/admin/service-manager')
     }
     else {
-      toast.error('Ẩn dịch vụ thất bại')
+      toast.error('Hide service failed')
     }
   }
 
@@ -233,11 +233,11 @@ const ServiceDetail = () => {
         }}
       >
         <Typography variant="h2" color={theme.palette.color.main}>
-          Chi tiết dịch vụ
+          Detail service
         </Typography>
 
         <Link to="/admin/service-manager/create">
-          <Button variant="outlined">Tạo dịch vụ</Button>
+          <Button variant="outlined">Add</Button>
         </Link>
       </Box>
 
@@ -258,7 +258,7 @@ const ServiceDetail = () => {
           }}
         >
           <Button variant="outlined" onClick={() => hideCommunity(id, basicInformation?.status === 1 ? 0 : 1)}>
-            {basicInformation?.status === 1 ? 'Ẩn dịch vụ' : 'Hiện dịch vụ'}
+            {basicInformation?.status === 1 ? 'Hide service' : 'Show service'}
           </Button>
         </Box>
       </Box>
@@ -269,7 +269,7 @@ const ServiceDetail = () => {
           {/* {basicInformation !== null && ( */}
           <Box sx={{ flexGrow: 1, padding: "2rem 0" }}>
             <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>
-              Thông tin bài viết
+              Basic information
             </Typography>
             <BasicInformationService
               basicInformation={basicInformation}
@@ -306,7 +306,7 @@ const ServiceDetail = () => {
                   component="label"
                   disabled={enabledImages.length + images.length === 5}
                 >
-                  Thêm ảnh
+                  Add image
                   <input
                     type="file"
                     name="images"
@@ -334,7 +334,7 @@ const ServiceDetail = () => {
               variant="outlined"
               onClick={() => setShowConfirmModal(true)}
             >
-              Lưu
+              Save service
             </Button>
           )}
 
@@ -343,8 +343,8 @@ const ServiceDetail = () => {
             isOpen={showConfirmModal}
             onClose={() => setShowConfirmModal(false)}
             onClickConfirm={handleSubmitSeviceData}
-            title="Cập nhật thông tin dịch vụ"
-            text="Bạn đã chắc chắn với thông tin đã chỉnh sửa?"
+            title="Update service"
+            text="Are you sure?"
           />
         </Box>
       ) : (

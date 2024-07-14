@@ -211,11 +211,11 @@ const CommunityDetail = () => {
         }}
       >
         <Typography variant="h2" color={theme.palette.color.main}>
-          Chi tiết bài đăng
+          Post Details
         </Typography>
 
         <Link to="/admin/community-create">
-          <Button variant="outlined">Tạo bài đăng</Button>
+          <Button variant="outlined">Create a post</Button>
         </Link>
       </Box>
 
