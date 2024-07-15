@@ -7,8 +7,7 @@ const userPointHistoriesColumns = [
   {
     field: "id",
     headerName: "ID",
-    flex: 1,
-    minWidth: 10,
+    minWidth: 5,
     filterable: true,
     renderCell: (params) => <Link>{params.row.id}</Link>,
   },
@@ -25,14 +24,14 @@ const userPointHistoriesColumns = [
     headerName: "ID order",
     type: "string",
     flex: 1,
-    minWidth: 150,
+    minWidth: 200,
   },
   {
     field: "amount",
     headerName: "Money",
-    type: "number",
+    type: "string",
     flex: 1,
-    minWidth: 150,
+    minWidth: 100,
   },
   {
     field: "status",
