@@ -131,7 +131,7 @@ export const superAdminTabs = [
         path: "/admin/send-mail",
         name: "Send mail",
         icon: <EmailOutlined />,
-      }     
+      }  
     ],
   },
 ];
