@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { Card } from 'components';
 import { axios } from 'configs';
 import { usePermission } from 'hooks';
+import { convertMoney } from 'utils/convertMeney';
 
 const cards = [
   {
@@ -30,6 +30,10 @@ const cards = [
     title: 'Today pending post',
     link: '/admin/posts?is_today=true&status=0',
   },
+  {
+    title: 'Total Money',
+    link: '/admin/histories',
+  }
 ];
 
 const HomePage = () => {
@@ -50,6 +54,7 @@ const HomePage = () => {
           newState[3].quantity = res.data.today_post;
           newState[4].quantity = res.data.total_pending_post;
           newState[5].quantity = res.data.today_pending_post;
+          newState[6].quantity = convertMoney(+res.data.money_per_month);
           return newState;
         });
 

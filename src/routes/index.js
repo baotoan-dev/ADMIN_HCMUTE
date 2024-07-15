@@ -42,6 +42,7 @@ import CompanyDetail from "pages/Company/CompanyDetail";
 import DetailHotMangager from "pages/Hot/DetailHotMangager";
 import HotManager from "pages/Hot/HotManager";
 import SendMailPage from "pages/SendMail/SendMail";
+import UserPointManager from "pages/UserPoint/UserPointManager";
 
 const publicRoutes = [
   {
@@ -142,89 +143,94 @@ const publicRoutes = [
   {
     path: routes.createChildCategory,
     component: CreateChildCategoryPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.createParentCategory,
     component: CreateParentCategoryPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.suggestDetail,
     component: SuggestDetailPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.adminSuggestManager,
     component: AdminSuggestManagerPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.createSearchSuggest,
     component: CreateSearchSuggestPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.sendMail,
     component: SendMailPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.language,
     component: AdminLanguageManagerPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.communityManager,
     component: AdminCommunityManagerPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.createCommunity,
     component: AdminCommunityCreatePage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.communityDetail,
     component: AdminCommunityDetailPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   // Serivce Manager
   {
     path: routes.serviceManager,
     component: AdminServiceManagerPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.createService,
     component: AdminServiceCreatePage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.detailService,
     component: ServiceDetailPage,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.companyManager,
     component: Company,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.companyDetail,
     component: CompanyDetail,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.hotManager,
     component: HotManager,
-    layout: MainLayout
+    layout: MainLayout,
   },
   {
     path: routes.hotDetail,
     component: DetailHotMangager,
-    layout: MainLayout
-  }
+    layout: MainLayout,
+  },
+  {
+    path: routes.userPointHistory,
+    component: UserPointManager,
+    layout: MainLayout,
+  },
 ];
 
 export { publicRoutes };

@@ -38,6 +38,7 @@ const routes = {
   analytics: "/admin/analytics",
   hotManager: "/admin/hot-manager",
   hotDetail: "/admin/hot-manager/:id",
+  userPointHistory: "/admin/histories",
 };
 
 export default routes;
