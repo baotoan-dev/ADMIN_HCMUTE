@@ -5,6 +5,7 @@ const routes = {
   // ADMIN
   home: "/admin",
   postsList: "/admin/posts",
+  postHistoryList: "/admin/post-history",
   postDetail: "/admin/posts/:id",
   createPost: "/admin/posts/create",
   accountList: "/admin/accounts",
@@ -30,6 +31,7 @@ const routes = {
   communityDetail: "/admin/community-detail/:id",
   sendMail: "/admin/send-mail",
   serviceManager: "/admin/service-manager",
+  serviceHistory: "/admin/service-history",
   createService: "/admin/service-manager/create",
   detailService: "/admin/service-manager/:id",
   companyManager: "/admin/company-manager",
@@ -39,6 +41,8 @@ const routes = {
   hotManager: "/admin/hot-manager",
   hotDetail: "/admin/hot-manager/:id",
   userPointHistory: "/admin/histories",
+  historiesDelete: "admin/community-history",
+  hotHistory: "admin/hot-history",
 };
 
 export default routes;

@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -15,6 +15,8 @@ import { communityListColumns } from "configs/table";
 import { usePermission } from "hooks";
 import TableCommunity from "components/Table/TableCommunity";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { IoIosCreate } from "react-icons/io";
+import { FaHistory } from "react-icons/fa";
 
 // PAGE
 const AdminCommunityManagerPage = () => {
@@ -50,12 +52,14 @@ const AdminCommunityManagerPage = () => {
   const handleSearchFilterParent = (search) => {};
 
   const optionLangauge = [
-    { label: "HijobNews", value: 0 },
+    { label: "JobsIT", value: 0 },
     { label: "WorkingStory", value: 1 },
   ];
 
   return (
-    <>
+    <Box sx={{
+      height: "100vh"
+    }}>
       {isLoading ? (
         <Stack spacing={1}>
           <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
@@ -70,6 +74,7 @@ const AdminCommunityManagerPage = () => {
               width: "100%",
               height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
               paddingLeft: "10px",
+              flexWrap: "wrap",
             }}
           >
             <Box
@@ -88,10 +93,26 @@ const AdminCommunityManagerPage = () => {
                 List of Blog
               </Typography>
 
-              <Box>
-                <Link to="/admin/community-create">
-                  <Button variant="outlined">Create a Blog</Button>
-                </Link>
+              <Box sx={{
+                display: "flex",
+                alignItems: "center",
+              }}>
+                <Box sx={{
+                  marginRight: "10px",
+                }}>
+                  <Link to="/admin/community-history">
+                    <Button variant="outlined">
+                      <FaHistory/>
+                    </Button>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link to="/admin/community-create">
+                    <Button variant="outlined">
+                      <IoIosCreate/>
+                    </Button>
+                  </Link>
+                </Box>
               </Box>
             </Box>
 
@@ -99,7 +120,7 @@ const AdminCommunityManagerPage = () => {
               disablePortal
               size="small"
               options={optionLangauge}
-              value={selectedType === 0 ? "News" : "Working Story"}
+              value={selectedType === 0 ? "News" : "Story"}
               onChange={(event, newValue) =>
                 handleUpdateLanguage(newValue.value)
               }
@@ -117,7 +138,7 @@ const AdminCommunityManagerPage = () => {
           </Box>
         </>
       )}
-    </>
+    </Box>
   );
 };
 

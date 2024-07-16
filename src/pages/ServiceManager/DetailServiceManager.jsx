@@ -11,13 +11,8 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-
 import { axios } from "configs";
-import {
-  ConfirmDialog,
-  ImageList,
-  CreatePostImages,
-} from "components";
+import { ConfirmDialog, ImageList, CreatePostImages } from "components";
 import BasicInformationService from "./Create/BasicInformationService";
 import { ArrowLeft } from "components/Icons";
 import { usePermission } from "hooks";
@@ -26,6 +21,10 @@ import { updateServiceValidation } from "validations/Service/update";
 import { validatePostImages } from "validations";
 import { useNavigate } from "react-router-dom";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { IoIosCreate } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { MdAutoDelete } from "react-icons/md";
 
 const ServiceDetail = () => {
   usePermission();
@@ -43,7 +42,6 @@ const ServiceDetail = () => {
   const [check, setCheck] = useState(false);
 
   const handleOnChangeImages = async (e) => {
-
     const imagesUpload = Array.from(e.target.files);
 
     const options = {
@@ -102,10 +100,16 @@ const ServiceDetail = () => {
         price: otherData.valueOld ? otherData.valueOld : 0,
       });
       setServiceData(res.data);
-      setEnabledImages(res.data && res.data.imageData.length > 0 ? [{
-        id: res.data.imageData[0].id,
-        image: res.data.imageData[0].image,
-      }] : []);
+      setEnabledImages(
+        res.data && res.data.imageData.length > 0
+          ? [
+              {
+                id: res.data.imageData[0].id,
+                image: res.data.imageData[0].image,
+              },
+            ]
+          : []
+      );
     }
   };
 
@@ -150,13 +154,32 @@ const ServiceDetail = () => {
     const serviceSubmit = new FormData();
     serviceSubmit.append("name", basicInformation.name.trim());
     serviceSubmit.append("description", basicInformation.description.trim());
-    serviceSubmit.append("price", basicInformation.price ? basicInformation.price : 0);
-    serviceSubmit.append("discount", basicInformation.discount ? basicInformation.discount : 0);
-    serviceSubmit.append("expiration", basicInformation.expiration ? basicInformation.expiration : 0);
-    serviceSubmit.append("type", basicInformation.type ? basicInformation.type : 'V1');
-    serviceSubmit.append("status", basicInformation.status ? basicInformation.status : 1);
-    deleteImages.length > 0 && deleteImages.forEach((image) => serviceSubmit.append("deleteImages", image.id));
-    images.length > 0 && images.forEach((image) => serviceSubmit.append("images", image.image));
+    serviceSubmit.append(
+      "price",
+      basicInformation.price ? basicInformation.price : 0
+    );
+    serviceSubmit.append(
+      "discount",
+      basicInformation.discount ? basicInformation.discount : 0
+    );
+    serviceSubmit.append(
+      "expiration",
+      basicInformation.expiration ? basicInformation.expiration : 0
+    );
+    serviceSubmit.append(
+      "type",
+      basicInformation.type ? basicInformation.type : "V1"
+    );
+    serviceSubmit.append(
+      "status",
+      basicInformation.status ? basicInformation.status : 1
+    );
+    deleteImages.length > 0 &&
+      deleteImages.forEach((image) =>
+        serviceSubmit.append("deleteImages", image.id)
+      );
+    images.length > 0 &&
+      images.forEach((image) => serviceSubmit.append("images", image.image));
 
     // VALIDATION
     const validationRes = updateServiceValidation(data);
@@ -194,22 +217,38 @@ const ServiceDetail = () => {
   };
 
   const hideCommunity = async (id, status) => {
-    const res = await axios.put(`${API_CONSTANT_V3}/v3/service-recruitment/${id}/status/${status}`, {
-      data: {
-        status: 0
-      }
-    }, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    const res = await axios.put(
+      `${API_CONSTANT_V3}/v3/service-recruitment/${id}/status/${status}`,
+      {
+        data: {
+          status: 0,
+        },
       },
-    })
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
     if (res.statusCode === 200) {
-      toast.success("Hide service successfully")
-      navigate('/admin/service-manager')
+      toast.success("Hide service successfully");
+      navigate("/admin/service-manager");
+    } else {
+      toast.error("Hide service failed");
     }
-    else {
-      toast.error('Hide service failed')
+  };
+
+  const deleteServiceManager = async () => {
+    const res = await axios.delete(
+      `${API_CONSTANT_V3}/v3/service-recruitment/by-admin/${id}`
+    );
+    
+    if (res.statusCode === 200) {
+      toast.success(res.message);
+      navigate("/admin/service-history");
+    } else {
+      toast.error("Delete service failed");
     }
   }
 
@@ -235,19 +274,26 @@ const ServiceDetail = () => {
         <Typography variant="h2" color={theme.palette.color.main}>
           Detail service
         </Typography>
-
         <Link to="/admin/service-manager/create">
-          <Button variant="outlined">Add</Button>
+          <Button
+            sx={{
+              height: "40px",
+              marginRight: "10px",
+            }}
+            variant="outlined"
+          >
+            <IoIosCreate />
+          </Button>
         </Link>
       </Box>
 
-      <Box sx={
-        {
+      <Box
+        sx={{
           display: "flex",
           alignItems: "center",
           marginTop: "10px",
-        }
-      }>
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -257,8 +303,28 @@ const ServiceDetail = () => {
             marginRight: "10px",
           }}
         >
-          <Button variant="outlined" onClick={() => hideCommunity(id, basicInformation?.status === 1 ? 0 : 1)}>
-            {basicInformation?.status === 1 ? 'Hide service' : 'Show service'}
+          <Button
+            variant="outlined"
+            sx={{
+              height: "40px",
+              marginRight: "10px",
+            }}
+            onClick={() =>
+              hideCommunity(id, basicInformation?.status === 1 ? 0 : 1)
+            }
+          >
+            {basicInformation?.status === 1 ? <FaEye /> : <FaEyeSlash />}
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{
+              height: "40px",
+            }}
+            onClick={() => {
+              deleteServiceManager(id);
+            }}
+          >
+            <MdAutoDelete/>
           </Button>
         </Box>
       </Box>

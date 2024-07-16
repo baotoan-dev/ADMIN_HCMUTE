@@ -10,7 +10,7 @@ import { IoIosCreate } from "react-icons/io";
 import { FaHistory } from "react-icons/fa";
 
 // PAGE
-const PostsListPage = () => {
+const PostsHistoryListPage = () => {
   usePermission();
   const theme = useTheme();
   const [searchParams] = useSearchParams();
@@ -27,22 +27,22 @@ const PostsListPage = () => {
 
       if (themeId) {
         // GET POSTS BY THEME
-        res = await axios.get(`/v1/posts/theme/all?tid=${themeId}`);
+        res = await axios.get(`/v1/posts/theme/all?tid=${themeId}&type=1`);
       } else if (isToday === "true" && status === "0") {
         // GET TODAY PENDING POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_today=true&status=0`);
+        res = await axios.get(`/v1/posts/by-admin?is_today=true&status=0&type=1`);
       } else if (isToday === "true") {
         // GET TODAY POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_today=true`);
+        res = await axios.get(`/v1/posts/by-admin?is_today=true&type=1`);
       } else if (status === "0") {
         // GET PENDING POSTS
-        res = await axios.get(`/v1/posts/by-admin?status=0`);
+        res = await axios.get(`/v1/posts/by-admin?status=0&type=1`);
       } else if (isOwn === "true") {
         // GET OWN POSTS
-        res = await axios.get(`/v1/posts/by-admin?is_own=true`);
+        res = await axios.get(`/v1/posts/by-admin?is_own=true&type=1`);
       } else {
         // GET ALL POSTS
-        res = await axios.get(`/v1/posts/by-admin`);
+        res = await axios.get(`/v1/posts/by-admin?type=1`);
       }
 
       if (res && res.success) {
@@ -100,7 +100,7 @@ const PostsListPage = () => {
                         paddingBottom: "1rem",
                       }}
                     >
-                      List of posts
+                      List of posts deleted
                     </Typography>
 
                     <Box sx={{
@@ -112,11 +112,6 @@ const PostsListPage = () => {
                           marginRight: "10px",
                         }}
                       >
-                        <Link to="/admin/post-history">
-                          <Button variant="outlined">
-                            <FaHistory />
-                          </Button>
-                        </Link>
                       </Box>
                       <Link to="/admin/posts/create">
                         <Button variant="outlined">
@@ -137,4 +132,4 @@ const PostsListPage = () => {
   );
 };
 
-export default PostsListPage;
+export default PostsHistoryListPage;

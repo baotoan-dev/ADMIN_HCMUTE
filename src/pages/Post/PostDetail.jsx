@@ -24,9 +24,16 @@ import { ArrowLeft } from "components/Icons";
 import updatePostValidation from "validations/post/update";
 import { usePermission } from "hooks";
 import imageCompression from "browser-image-compression";
+import { IoIosCreate } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { MdAutoDelete } from "react-icons/md";
+import { API_CONSTANT_V3 } from "constant/urlServer";
+import { useNavigate } from "react-router-dom";
 
 const PostDetail = () => {
   usePermission();
+  const navigation = useNavigate();
   const theme = useTheme();
   const params = useParams();
   const id = +params.id;
@@ -72,17 +79,6 @@ const PostDetail = () => {
               );
             })
           );
-
-          // console.log("Original image ::: ", imagesUpload);
-          // console.log("Compressed image ::: ", compressedImages);
-
-          // setImages((prevState) => [
-          //   ...prevState,
-          //   ...compressedImages.map((image) => ({
-          //     image,
-          //     preview: window.URL.createObjectURL(image),
-          //   })),
-          // ]);
         } catch (error) {
           console.log(error);
         }
@@ -115,12 +111,10 @@ const PostDetail = () => {
 
   // GET APPLICATIONS
   const fetchApplicationsOfPostData = async (id) => {
-
     const res = await axios.get(`/v1/history/recruiter/${id}/applications`);
 
     if (res.success) {
       setApplications(res.data.applications);
-
     }
   };
 
@@ -156,10 +150,12 @@ const PostDetail = () => {
 
     const data = {
       id: id,
-      title: basicInformation.title ? basicInformation.title : '',
-      companyName: basicInformation.company_name ? basicInformation.company_name : '',
+      title: basicInformation.title ? basicInformation.title : "",
+      companyName: basicInformation.company_name
+        ? basicInformation.company_name
+        : "",
       wardId: basicInformation.ward_id,
-      address: basicInformation.address ? basicInformation.address : '',
+      address: basicInformation.address ? basicInformation.address : "",
       phoneContact: basicInformation.phone_contact,
       isDatePeriod: basicInformation.is_date_period,
       isWorkingWeekend: basicInformation.is_working_weekend,
@@ -172,7 +168,9 @@ const PostDetail = () => {
       salaryMax: basicInformation.salary_max,
       salaryType: basicInformation.salary_type_id,
       moneyType: basicInformation.money_type,
-      description: basicInformation.description ? basicInformation.description : '',
+      description: basicInformation.description
+        ? basicInformation.description
+        : "",
       categoryIds: postCategories.map((category) => category.child_category_id),
       enabledImageIds: enabledImages.map((image) => image.id),
       disabledImageIds: disabledImages.map((image) => image.id),
@@ -228,6 +226,22 @@ const PostDetail = () => {
     }
   };
 
+  const handleDeletePost = async (id) => {
+    const res = await axios.delete(`${API_CONSTANT_V3}/v3/posts/by-admin/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("access-token")}`
+      }
+    });
+
+    if (res && res.statusCode === 200) {
+      toast.success(res.message);
+      navigation("/admin/post-history");
+    }
+    else {
+      toast.error(res.message);
+    }
+  }
+
   return (
     <Box sx={{ padding: "1rem" }}>
       {role === "2" && (
@@ -248,12 +262,12 @@ const PostDetail = () => {
         }}
       >
         <Typography variant="h2" color={theme.palette.color.main}>
-        Post Details
+          Post Details
         </Typography>
 
         <Link to="/admin/posts/create">
           <Button variant="outlined">
-            Create a post
+            <IoIosCreate />
           </Button>
         </Link>
       </Box>
@@ -262,7 +276,7 @@ const PostDetail = () => {
           {basicInformation.status === 0 && role === "1" && (
             <Box>
               <Typography sx={{ color: "#eee", marginBottom: "1rem" }}>
-              This article has not been approved              
+                This article has not been approved
               </Typography>
               <Button
                 variant="outlined"
@@ -287,36 +301,58 @@ const PostDetail = () => {
           )}
 
           {role === "1" && basicInformation.status === 1 && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: "1rem" }}
-              onClick={() => {
-                setPostStatusApproved(2);
-                setShowConfirmApprovalModal(true);
-              }}
-            >
-              Unpost
-            </Button>
+            <Box>
+              <Button
+                variant="outlined"
+                sx={{ marginTop: "1rem", marginRight: '1rem' }}
+                onClick={() => {
+                  setPostStatusApproved(2);
+                  setShowConfirmApprovalModal(true);
+                }}
+              >
+                <FaEyeSlash />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{ marginTop: "1rem" }}
+                onClick={() => {
+                  handleDeletePost(id);
+                }}
+              >
+                <MdAutoDelete />
+              </Button>
+            </Box>
           )}
 
           {role === "1" && basicInformation.status === 2 && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: "1rem" }}
-              onClick={() => {
-                setPostStatusApproved(1);
-                setShowConfirmApprovalModal(true);
-              }}
-            >
-              Repost
-            </Button>
+            <Box>
+              <Button
+                variant="outlined"
+                sx={{ marginTop: "1rem", marginRight: '1rem' }}
+                onClick={() => {
+                  setPostStatusApproved(1);
+                  setShowConfirmApprovalModal(true);
+                }}
+              >
+                <FaEye />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{ marginTop: "1rem" }}
+                onClick={() => {
+                  handleDeletePost(id)
+                }}
+              >
+                <MdAutoDelete />
+              </Button>
+            </Box>
           )}
 
           {/* BASIC INFORMATION */}
           {/* {basicInformation !== null && ( */}
           <Box sx={{ flexGrow: 1, padding: "2rem 0" }}>
             <Typography mb="2rem" variant="h3" color={theme.palette.color.main}>
-            Article information            
+              Article information
             </Typography>
             <PostBasicInformation
               basicInformation={basicInformation}

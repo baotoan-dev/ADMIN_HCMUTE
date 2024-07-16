@@ -7,6 +7,7 @@ import { Table } from "components";
 import { workerColumns } from "configs/table";
 import { axios } from "configs";
 import { usePermission } from "hooks";
+import { IoIosCreate } from "react-icons/io";
 
 const WorkerManager = () => {
   usePermission();
@@ -15,7 +16,6 @@ const WorkerManager = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchWorkers = async () => {
-
     const res = await axios.get(`/v1/accounts?role=2`);
     setWorkers(res.data);
     setIsLoading(false);
@@ -26,7 +26,9 @@ const WorkerManager = () => {
   }, []);
 
   return (
-    <>
+    <Box sx={{
+      height: "100vh"
+    }}>
       {isLoading ? (
         <Stack spacing={1}>
           {/* For variant="text", adjust the height via font-size */}
@@ -41,7 +43,7 @@ const WorkerManager = () => {
           sx={{
             width: "100%",
             height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
-            paddingLeft: "10px"
+            paddingLeft: "10px",
           }}
         >
           <Box
@@ -62,7 +64,9 @@ const WorkerManager = () => {
 
             <Box>
               <Link to="/admin/posts/create">
-                <Button variant="outlined">Create a post</Button>
+                <Button variant="outlined">
+                  <IoIosCreate />
+                </Button>
               </Link>
             </Box>
           </Box>
@@ -75,7 +79,7 @@ const WorkerManager = () => {
           />
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

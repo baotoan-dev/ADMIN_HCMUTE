@@ -7,6 +7,7 @@ import { usePermission } from "hooks";
 import categoryColumns from "configs/table/categoryColumns";
 import TableCategoryParent from "components/Table/TableCategoryParent";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { IoIosCreate } from "react-icons/io";
 
 const CategoryPage = () => {
   usePermission();
@@ -21,12 +22,11 @@ const CategoryPage = () => {
     let res;
 
     res = await axios.get(`${API_CONSTANT_V3}/v3/parent`);
- 
+
     setCategories(res.data);
 
     setIsLoadingCategories(false);
   };
-
 
   useEffect(() => {
     fetchCategories();
@@ -34,7 +34,7 @@ const CategoryPage = () => {
 
   const handleCheck = () => {
     setCheckRefresh(!checkRefresh);
-  }
+  };
 
   return (
     <>
@@ -48,46 +48,45 @@ const CategoryPage = () => {
           <Skeleton variant="rounded" width={210} height={60} />
         </Stack>
       ) : (
-
-        
         <Box
-          sx={{ 
+          sx={{
             width: "100%",
             height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
-            paddingLeft: "10px"
+            paddingLeft: "10px",
           }}
         >
-          <Box sx= {{
-            display: "flex",
-            justifyContent: 'space-between',
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <Typography
               variant="h2"
               sx={{
-              color: theme.palette.color.main,
-              paddingBottom: "1rem",
+                color: theme.palette.color.main,
+                paddingBottom: "1rem",
               }}
             >
-            All Categories
-          </Typography>
+              All Categories
+            </Typography>
 
-          <Button
-            sx={{ marginBottom: "1.5rem", justifyContent: 'flex-end' }}
-            variant="outlined"
-            onClick={() => {
-              navigate(`/admin/create-parent-category`);
-            }}
-          >
-            Add 
-          </Button>
-
+            <Button
+              sx={{ marginBottom: "1.5rem", justifyContent: "center" }}
+              variant="outlined"
+              onClick={() => {
+                navigate(`/admin/create-parent-category`);
+              }}
+            >
+              <IoIosCreate />
+            </Button>
           </Box>
-          
-          <TableCategoryParent 
+
+          <TableCategoryParent
             handleCheck={handleCheck}
-            rows={categories} 
-            columns={categoryColumns} 
-            showCheckbox={false} 
+            rows={categories}
+            columns={categoryColumns}
+            showCheckbox={false}
           />
         </Box>
       )}

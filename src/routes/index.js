@@ -37,11 +37,15 @@ import {
   ServiceDetailPage,
 } from "pages";
 import Analytics from "pages/Analytics/Analytics";
+import AdminCommunityHistoryManagerPage from "pages/Community/AdminCommunityHistory";
 import Company from "pages/Company";
 import CompanyDetail from "pages/Company/CompanyDetail";
 import DetailHotMangager from "pages/Hot/DetailHotMangager";
+import HotHistoryManager from "pages/Hot/HotHistoryManager";
 import HotManager from "pages/Hot/HotManager";
+import PostsHistoryListPage from "pages/Post/PostHistoryList";
 import SendMailPage from "pages/SendMail/SendMail";
+import ServiceHistoryManager from "pages/ServiceManager/ServiceHistoryManager";
 import UserPointManager from "pages/UserPoint/UserPointManager";
 
 const publicRoutes = [
@@ -229,6 +233,26 @@ const publicRoutes = [
   {
     path: routes.userPointHistory,
     component: UserPointManager,
+    layout: MainLayout,
+  },
+  {
+    path: routes.historiesDelete,
+    component: AdminCommunityHistoryManagerPage,
+    layout: MainLayout,
+  },
+  {
+    path: routes.hotHistory,
+    component: HotHistoryManager,
+    layout: MainLayout,
+  },
+  {
+    path: routes.serviceHistory,
+    component: ServiceHistoryManager,
+    layout: MainLayout,
+  },
+  {
+    path: routes.postHistoryList,
+    component: PostsHistoryListPage,
     layout: MainLayout,
   },
 ];

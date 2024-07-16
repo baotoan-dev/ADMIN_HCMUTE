@@ -6,6 +6,7 @@ import { Table, LineChart } from "components";
 import { axios } from "configs";
 import { workerDetailColumns } from "configs/table";
 import { usePermission } from "hooks";
+import { IoIosCreate } from "react-icons/io";
 
 const WorkerDetail = () => {
   usePermission();
@@ -43,9 +44,7 @@ const WorkerDetail = () => {
       } else {
         res = await axios.get(`/v1/posts/by-admin/count-quantity?aid=${aid}`);
       }
-    } catch (err) {
-
-    }
+    } catch (err) {}
     if (res && res.data) {
       setQuantityData(res.data);
     }
@@ -56,9 +55,10 @@ const WorkerDetail = () => {
     fetchQuantity();
   }, []);
 
-
   return (
-    <>
+    <Box sx={{
+      height: "100vh"
+    }}>
       {isLoadingPosts ? (
         <Stack spacing={1}>
           {/* For variant="text", adjust the height via font-size */}
@@ -79,13 +79,15 @@ const WorkerDetail = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
+              flexWrap: "wrap",
+              alignItems: "center",
+              paddingBottom: "1rem",
             }}
           >
             <Typography
               variant="h2"
               sx={{
                 color: theme.palette.color.main,
-                paddingBottom: "1rem",
               }}
             >
               List of posts
@@ -93,7 +95,9 @@ const WorkerDetail = () => {
 
             <Box>
               <Link to="/admin/posts/create">
-                <Button variant="outlined">Create Post</Button>
+                <Button variant="outlined">
+                  <IoIosCreate />
+                </Button>
               </Link>
             </Box>
           </Box>
@@ -142,7 +146,7 @@ const WorkerDetail = () => {
           </Box>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

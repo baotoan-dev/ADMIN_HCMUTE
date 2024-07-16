@@ -10,7 +10,7 @@ import { API_CONSTANT_V3 } from "constant/urlServer";
 import themeColumns from "configs/table/themeColumn";
 import { FaHistory } from "react-icons/fa";
 
-const HotManager = () => {
+const HotHistoryManager = () => {
   usePermission();
   const theme = useTheme();
   const [themes, setThemes] = useState([]);
@@ -18,7 +18,7 @@ const HotManager = () => {
 
   const fetchThemes = async () => {
     const res = await axios.get(
-      `${API_CONSTANT_V3}/v3/theme-companies/by-admin`
+      `${API_CONSTANT_V3}/v3/theme-companies/by-admin/histories`
     );
     setThemes(res.data);
     setIsLoading(false);
@@ -30,7 +30,7 @@ const HotManager = () => {
 
   return (
     <Box sx={{
-      height: "100vh"
+      height: fetchThemes ? "100vh" : "auto",
     }}>
       {isLoading ? (
         <Stack spacing={1}>
@@ -53,6 +53,8 @@ const HotManager = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
+              flexWrap: "wrap",
+              marginBottom: "1rem",
             }}
           >
             <Typography
@@ -62,7 +64,7 @@ const HotManager = () => {
                 paddingBottom: "1rem",
               }}
             >
-              List of company covers
+              List of hot delete history
             </Typography>
             <Link to="/admin/hot-history">
               <Button variant="outlined">
@@ -83,4 +85,4 @@ const HotManager = () => {
   );
 };
 
-export default HotManager;
+export default HotHistoryManager;

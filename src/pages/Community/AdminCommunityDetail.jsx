@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-
 import { axios } from "configs";
 import {
   ConfirmDialog,
@@ -25,9 +24,12 @@ import imageCompression from "browser-image-compression";
 import updateCommunityValidation from "validations/Community/update";
 import { validatePostImages } from "validations";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { MdAutoDelete } from "react-icons/md";
+import { IoIosCreate } from "react-icons/io";
 
 const CommunityDetail = () => {
   usePermission();
+  const navigate = useNavigate();
   const theme = useTheme();
   const params = useParams();
   const id = +params.id;
@@ -181,15 +183,17 @@ const CommunityDetail = () => {
   };
 
   const deleteCommunity = async (id) => {
-    const res = await axios.delete(`/v3/communications/by-admin/${id}`)
+    const res = await axios.delete(
+      `${API_CONSTANT_V3}/v3/communications/action/by-admin/${id}`
+    );
 
     if (res.statusCode === 200) {
-      toast.success("Cập nhật bài đăng thành công")
+      toast.success(res.message);
+      navigate('/admin/community-manager');
+    } else {
+      toast.error("Xoá bài thất bại");
     }
-    else {
-      toast.error('Xoá bài thất bại')
-    }
-  }
+  };
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -206,29 +210,39 @@ const CommunityDetail = () => {
       <Box
         sx={{
           display: "flex",
+          flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          flexWrap: "wrap",
         }}
       >
-        <Typography variant="h2" color={theme.palette.color.main}>
-          Post Details
-        </Typography>
+        <Box>
+          <Typography variant="h2" color={theme.palette.color.main}>
+            Post Details
+          </Typography>
+        </Box>
 
-        <Link to="/admin/community-create">
-          <Button variant="outlined">Create a post</Button>
-        </Link>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "10px",
+          }}
+        >
+          <Link to="/admin/community-create">
+            <Button sx={{
+              marginRight: "10px"
+            }} variant="outlined">
+              <IoIosCreate />
+            </Button>
+          </Link>
+          <Button variant="outlined" onClick={() => deleteCommunity(id)}>
+            <MdAutoDelete />
+          </Button>
+        </Box>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "10px",
-        }}
-      >
-        <Button variant="outlined" onClick={() => deleteCommunity(id)}>Xoá bài</Button>
-      </Box>
       {postData ? (
         <Box>
           {/* BASIC INFORMATION */}

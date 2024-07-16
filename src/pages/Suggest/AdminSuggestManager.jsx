@@ -8,6 +8,7 @@ import { usePermission } from "hooks";
 import searchSuggestColumn from "configs/table/searchSuggestColumn";
 import TableSuggestSearch from "components/Table/TableSuggestSearch";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { IoIosCreate } from "react-icons/io";
 
 const AdminSuggestManagerPage = () => {
   usePermission();
@@ -22,24 +23,22 @@ const AdminSuggestManagerPage = () => {
     let res;
 
     res = await axios.get(`${API_CONSTANT_V3}/v3/suggest-search`);
- 
+
     setSuggests(res.data);
 
-    if (res?.data?.length > 0){
+    if (res?.data?.length > 0) {
       setCheckData(true);
     }
     setIsLoadingCategories(false);
   };
 
-
   useEffect(() => {
     fetchSuggests();
   }, [checkData]);
 
-
   const handleCheckData = () => {
     setCheckData(!checkData);
-  }
+  };
   return (
     <>
       {isLoadingCategories ? (
@@ -52,47 +51,45 @@ const AdminSuggestManagerPage = () => {
           <Skeleton variant="rounded" width={210} height={60} />
         </Stack>
       ) : (
-
-        
         <Box
-          sx={{ 
+          sx={{
             width: "100%",
             height: `calc(100vh - ${theme.height.navbar} - 6rem)`,
-            paddingLeft: "10px"
-            
+            paddingLeft: "10px",
           }}
         >
-          <Box sx= {{
-            display: "flex",
-            justifyContent: 'space-between',
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <Typography
               variant="h2"
               sx={{
-              color: theme.palette.color.main,
-              paddingBottom: "1rem",
+                color: theme.palette.color.main,
+                paddingBottom: "1rem",
               }}
             >
-            Keywords
-          </Typography>
+              Keywords
+            </Typography>
 
-          <Button
-            sx={{ marginBottom: "1.5rem", justifyContent: 'flex-end' }}
-            variant="outlined"
-            onClick={() => {
-              navigate(`/admin/create-search-suggest`);
-            }}
-          >
-            Add 
-          </Button>
-
+            <Button
+              sx={{ marginBottom: "1.5rem", justifyContent: "center" }}
+              variant="outlined"
+              onClick={() => {
+                navigate(`/admin/create-search-suggest`);
+              }}
+            >
+              <IoIosCreate />
+            </Button>
           </Box>
-          
-          <TableSuggestSearch 
+
+          <TableSuggestSearch
             handleCheckData={handleCheckData}
-            rows={suggests} 
-            columns={searchSuggestColumn} 
-            showCheckbox={false} 
+            rows={suggests}
+            columns={searchSuggestColumn}
+            showCheckbox={false}
           />
         </Box>
       )}

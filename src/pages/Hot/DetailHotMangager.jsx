@@ -16,13 +16,15 @@ import {
   ConfirmDialog,
   HotBasicInformation,
   ImageList,
-  CreatePostImages,
 } from "components";
 import { ArrowLeft } from "components/Icons";
 import { usePermission } from "hooks";
 import imageCompression from "browser-image-compression";
 import { validatePostImages } from "validations";
 import { API_CONSTANT_V3 } from "constant/urlServer";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const DetailHotMangager = () => {
   usePermission();
@@ -265,6 +267,26 @@ const DetailHotMangager = () => {
     }
   };
 
+  const deleteTheme = async (id) => {
+    try {
+      const res = await axios.delete(
+        `${API_CONSTANT_V3}/v3/theme-companies/by-admin/${id}`
+      );
+
+      if (res.statusCode === 200) {
+        toast.success(res.message)
+        window.history.back();
+      }
+
+      else {
+        toast.error("Thất bại");  
+      }
+    } catch (error) { 
+      throw error;
+    }
+  }
+    
+
   return (
     <Box sx={{ padding: "1rem" }}>
       {role === "2" && (
@@ -285,7 +307,7 @@ const DetailHotMangager = () => {
         }}
       >
         <Typography variant="h2" color={theme.palette.color.main}>
-          Chi tiết bìa
+          Detail Hot Company
         </Typography>
       </Box>
 
@@ -293,17 +315,31 @@ const DetailHotMangager = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
           marginTop: "10px",
         }}
       >
         <Button
+          sx={{
+            height: "40px",
+            marginRight: "1rem",
+          }}
           variant="outlined"
           onClick={() =>
             updateStatusTheme(id, basicInformation?.status ? 0 : 1)
           }
         >
-          {basicInformation?.status ? "Ẩn bìa" : "Hiện bìa"}
+          {basicInformation?.status ? <FaEye /> : <FaEyeSlash />}
+        </Button>
+        <Button
+          sx={{
+            height: "40px",
+          }}
+          variant="outlined"
+          onClick={() =>
+            deleteTheme(id, basicInformation?.isDeleted ? 0 : 1)
+          }
+        >
+          <MdDelete />
         </Button>
       </Box>
       {postData ? (

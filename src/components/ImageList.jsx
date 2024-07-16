@@ -17,7 +17,9 @@ const CustomImageList = ({ images, handleOnClick }) => {
 
 
   return (
-    <>
+    <Box sx={{
+      width: "100%",
+    }}>
       {images.length > 0 ? (
         <Box mt={4} sx={{ color: "#eeeeee" }}>
           <ImageList
@@ -57,7 +59,7 @@ const CustomImageList = ({ images, handleOnClick }) => {
       ) : (
         <Typography color={theme.palette.color.main}>Empty</Typography>
       )}
-    </>
+    </Box>
   );
 };
 

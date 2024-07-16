@@ -11,7 +11,7 @@ import { IoIosCreate } from "react-icons/io";
 import { FaHistory } from "react-icons/fa";
 
 // PAGE
-const AdminServiceManagerPage = () => {
+const ServiceHistoryManager = () => {
   usePermission();
   const theme = useTheme();
   const [services, setServices] = useState([]);
@@ -19,7 +19,7 @@ const AdminServiceManagerPage = () => {
 
   useEffect(() => {
     const getServicesData = async () => {
-      let res = await axios.get(`${API_CONSTANT_V3}/v3/service-recruitment/by-admin`);
+      let res = await axios.get(`${API_CONSTANT_V3}/v3/service-recruitment/by-admin/history`);
 
       if (res && res.status === 200) {
         setServices(res.data);
@@ -67,24 +67,13 @@ const AdminServiceManagerPage = () => {
                   paddingBottom: "1rem",
                 }}
               >
-                Service Manager
+                Service Manager History Delete
               </Typography>
               <Box sx={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "row",
               }}>
-                <Box
-                  sx={{
-                    marginRight: "10px",
-                  }}
-                >
-                  <Link to="/admin/service-history">
-                    <Button variant="outlined">
-                      <FaHistory />
-                    </Button>
-                  </Link>
-                </Box>
                 <Box>
                   <Link to="/admin/service-manager/create">
                     <Button variant="outlined">
@@ -108,4 +97,4 @@ const AdminServiceManagerPage = () => {
   );
 };
 
-export default AdminServiceManagerPage;
+export default ServiceHistoryManager;
