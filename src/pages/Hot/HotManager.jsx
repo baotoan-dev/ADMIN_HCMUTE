@@ -64,11 +64,11 @@ const HotManager = () => {
             >
               List of company covers
             </Typography>
-            <Link to="/admin/hot-history">
+            {/* <Link to="/admin/hot-history">
               <Button variant="outlined">
                 <FaHistory />
               </Button>
-            </Link>
+            </Link> */}
           </Box>
 
           <Table

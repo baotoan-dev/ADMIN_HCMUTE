@@ -48,7 +48,7 @@ const PostDetail = () => {
   const [showConfirmApprovalModal, setShowConfirmApprovalModal] =
     useState(false);
   const [postStatusApproved, setPostStatusApproved] = useState(1);
-
+  const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
   const handleOnChangeImages = async (e) => {
     const imagesUpload = Array.from(e.target.files);
 
@@ -227,20 +227,22 @@ const PostDetail = () => {
   };
 
   const handleDeletePost = async (id) => {
-    const res = await axios.delete(`${API_CONSTANT_V3}/v3/posts/by-admin/${id}`, {
-      headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("access-token")}`
+    const res = await axios.delete(
+      `${API_CONSTANT_V3}/v3/posts/by-admin/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access-token")}`,
+        },
       }
-    });
+    );
 
     if (res && res.statusCode === 200) {
       toast.success(res.message);
       navigation("/admin/post-history");
-    }
-    else {
+    } else {
       toast.error(res.message);
     }
-  }
+  };
 
   return (
     <Box sx={{ padding: "1rem" }}>
@@ -304,7 +306,7 @@ const PostDetail = () => {
             <Box>
               <Button
                 variant="outlined"
-                sx={{ marginTop: "1rem", marginRight: '1rem' }}
+                sx={{ marginTop: "1rem", marginRight: "1rem" }}
                 onClick={() => {
                   setPostStatusApproved(2);
                   setShowConfirmApprovalModal(true);
@@ -316,7 +318,7 @@ const PostDetail = () => {
                 variant="outlined"
                 sx={{ marginTop: "1rem" }}
                 onClick={() => {
-                  handleDeletePost(id);
+                  setShowModalConfirmDelete(true);
                 }}
               >
                 <MdAutoDelete />
@@ -328,7 +330,7 @@ const PostDetail = () => {
             <Box>
               <Button
                 variant="outlined"
-                sx={{ marginTop: "1rem", marginRight: '1rem' }}
+                sx={{ marginTop: "1rem", marginRight: "1rem" }}
                 onClick={() => {
                   setPostStatusApproved(1);
                   setShowConfirmApprovalModal(true);
@@ -340,7 +342,7 @@ const PostDetail = () => {
                 variant="outlined"
                 sx={{ marginTop: "1rem" }}
                 onClick={() => {
-                  handleDeletePost(id)
+                  setShowModalConfirmDelete(true);
                 }}
               >
                 <MdAutoDelete />
@@ -485,6 +487,13 @@ const PostDetail = () => {
                 ? "This post will be approved, are you sure?"
                 : "This post won't be approved, are you sure?"
             }
+          />
+          <ConfirmDialog
+            isOpen={showModalConfirmDelete}
+            onClose={() => setShowModalConfirmDelete(false)}
+            onClickConfirm={() => handleDeletePost(id)}
+            title="Delete post"
+            text="Are you sure?"
           />
         </Box>
       ) : (

@@ -100,11 +100,11 @@ const AdminCommunityManagerPage = () => {
                 <Box sx={{
                   marginRight: "10px",
                 }}>
-                  <Link to="/admin/community-history">
+                  {/* <Link to="/admin/community-history">
                     <Button variant="outlined">
                       <FaHistory/>
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Box>
                 <Box>
                   <Link to="/admin/community-create">

@@ -40,6 +40,7 @@ const ServiceDetail = () => {
   const [deleteImages, setDeleteImages] = useState([]);
   const [images, setImages] = useState([]);
   const [check, setCheck] = useState(false);
+  const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
 
   const handleOnChangeImages = async (e) => {
     const imagesUpload = Array.from(e.target.files);
@@ -246,7 +247,8 @@ const ServiceDetail = () => {
     
     if (res.statusCode === 200) {
       toast.success(res.message);
-      navigate("/admin/service-history");
+      navigate("/admin/service-manager");
+      setShowModalConfirmDelete(false);
     } else {
       toast.error("Delete service failed");
     }
@@ -321,7 +323,7 @@ const ServiceDetail = () => {
               height: "40px",
             }}
             onClick={() => {
-              deleteServiceManager(id);
+              setShowModalConfirmDelete(true);
             }}
           >
             <MdAutoDelete/>
@@ -411,6 +413,13 @@ const ServiceDetail = () => {
             onClickConfirm={handleSubmitSeviceData}
             title="Update service"
             text="Are you sure?"
+          />
+          <ConfirmDialog
+            isOpen={showModalConfirmDelete}
+            onClose={() => setShowModalConfirmDelete(false)}
+            onClickConfirm={() => deleteServiceManager(id, 1)}
+            title="Bạn có chắc chắn muốn xóa bài đăng này?"
+            text="Bài đăng sẽ không hiển thị trên trang chủ"
           />
         </Box>
       ) : (

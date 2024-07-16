@@ -79,11 +79,11 @@ const AdminServiceManagerPage = () => {
                     marginRight: "10px",
                   }}
                 >
-                  <Link to="/admin/service-history">
+                  {/* <Link to="/admin/service-history">
                     <Button variant="outlined">
                       <FaHistory />
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Box>
                 <Box>
                   <Link to="/admin/service-manager/create">

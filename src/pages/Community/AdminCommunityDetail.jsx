@@ -41,6 +41,7 @@ const CommunityDetail = () => {
   const [deleteImages, setDeleteImages] = useState([]);
   const [images, setImages] = useState([]);
   const [check, setCheck] = useState(false);
+  const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
 
   const handleOnChangeImages = async (e) => {
     const imagesUpload = Array.from(e.target.files);
@@ -237,7 +238,9 @@ const CommunityDetail = () => {
               <IoIosCreate />
             </Button>
           </Link>
-          <Button variant="outlined" onClick={() => deleteCommunity(id)}>
+          <Button variant="outlined" onClick={() => {
+            setShowModalConfirmDelete(true);
+          }}>
             <MdAutoDelete />
           </Button>
         </Box>
@@ -325,6 +328,13 @@ const CommunityDetail = () => {
             onClickConfirm={handleSubmitPostData}
             title="Cập nhật thông tin bài đăng"
             text="Bạn đã chắc chắn với thông tin đã chỉnh sửa?"
+          />
+          <ConfirmDialog  
+            isOpen={showModalConfirmDelete}
+            onClose={() => setShowModalConfirmDelete(false)}
+            onClickConfirm={() => deleteCommunity(id)}
+            title="Xác nhận xoá bài viết"
+            text="Bạn có chắc chắn muốn xoá bài viết này?"
           />
         </Box>
       ) : (

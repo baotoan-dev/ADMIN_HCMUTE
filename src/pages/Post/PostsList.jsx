@@ -112,11 +112,11 @@ const PostsListPage = () => {
                           marginRight: "10px",
                         }}
                       >
-                        <Link to="/admin/post-history">
+                        {/* <Link to="/admin/post-history">
                           <Button variant="outlined">
                             <FaHistory />
                           </Button>
-                        </Link>
+                        </Link> */}
                       </Box>
                       <Link to="/admin/posts/create">
                         <Button variant="outlined">

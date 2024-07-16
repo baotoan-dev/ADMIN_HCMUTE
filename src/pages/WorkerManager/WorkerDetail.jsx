@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button, Skeleton, Typography, Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Table, LineChart } from "components";
+import { Table, LineChart, ConfirmDialog } from "components";
 import { axios } from "configs";
 import { workerDetailColumns } from "configs/table";
 import { usePermission } from "hooks";
 import { IoIosCreate } from "react-icons/io";
+import { MdAutoDelete } from "react-icons/md";
+import { API_CONSTANT_V3 } from "constant/urlServer";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const WorkerDetail = () => {
   usePermission();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [searchParams] = useSearchParams();
   const aid = searchParams.get("aid");
@@ -18,6 +23,7 @@ const WorkerDetail = () => {
   const [posts, setPosts] = useState([]);
   const [quantityData, setQuantityData] = useState(null);
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+  const [showModalConfirmRole, setShowModalConfirmRole] = useState(false);
 
   const fetchPosts = async () => {
     let res;
@@ -55,10 +61,27 @@ const WorkerDetail = () => {
     fetchQuantity();
   }, []);
 
+  const handleAcceptRole = async () => {
+    try {
+      const data = await axios.delete(`${API_CONSTANT_V3}/v3/users/worker/${aid}`);
+      if (data && data.statusCode === 200) {
+        setShowModalConfirmRole(false);
+        toast.success("Hạ role thành công");
+        navigate("/admin/worker-manager");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <Box sx={{
-      height: "100vh"
-    }}>
+    <Box
+      sx={
+        {
+          // height: "100vh"
+        }
+      }
+    >
       {isLoadingPosts ? (
         <Stack spacing={1}>
           {/* For variant="text", adjust the height via font-size */}
@@ -95,10 +118,21 @@ const WorkerDetail = () => {
 
             <Box>
               <Link to="/admin/posts/create">
-                <Button variant="outlined">
+                <Button
+                  style={{
+                    marginRight: "10px",
+                  }}
+                  variant="outlined"
+                >
                   <IoIosCreate />
                 </Button>
               </Link>
+              <Button
+                onClick={() => setShowModalConfirmRole(true)}
+                variant="outlined"
+              >
+                <MdAutoDelete />
+              </Button>
             </Box>
           </Box>
 
@@ -146,6 +180,13 @@ const WorkerDetail = () => {
           </Box>
         </Box>
       )}
+      <ConfirmDialog
+        isOpen={showModalConfirmRole}
+        onClose={() => setShowModalConfirmRole(false)}
+        onClickConfirm={handleAcceptRole}
+        title="Bạn có chắc chắn hạ role cho người dùng này?"
+        text="Người dùng sẽ không thể thực hiện các thao tác quản lý nếu hạ role"
+      />
     </Box>
   );
 };

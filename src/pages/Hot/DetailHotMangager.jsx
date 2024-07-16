@@ -41,6 +41,7 @@ const DetailHotMangager = () => {
   const [imageData, setImageData] = useState([]);
   const [images, setImages] = useState([]);
   const [check, setCheck] = useState(false);
+  const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
 
   const handleOnChangeImages = async (e) => {
     const imagesUpload = Array.from(e.target.files);
@@ -336,7 +337,7 @@ const DetailHotMangager = () => {
           }}
           variant="outlined"
           onClick={() =>
-            deleteTheme(id, basicInformation?.isDeleted ? 0 : 1)
+            setShowModalConfirmDelete(true)
           }
         >
           <MdDelete />
@@ -458,6 +459,13 @@ const DetailHotMangager = () => {
             onClickConfirm={handleSubmitPostData}
             title="Cập nhật bìa"
             text="Bạn có chắc chắn muốn cập nhật bìa này không?"
+          />
+          <ConfirmDialog
+            isOpen={showModalConfirmDelete}
+            onClose={() => setShowModalConfirmDelete(false)}
+            onClickConfirm={() => deleteTheme(id)}
+            title="Xóa bài viết"
+            text="Bạn có chắc chắn muốn xóa bài viết này không?"
           />
         </Box>
       ) : (
